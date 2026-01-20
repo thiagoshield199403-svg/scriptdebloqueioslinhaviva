@@ -174,7 +174,7 @@ button.secundario {
 
 <div class="linha-2">
 <div><label>Responsável:</label><input id="responsavel"></div>
-<div><label>Equipe</label><input id="equipe"></div>
+<div><label>Equipe:</label><input id="equipe"></div>
 </div>
 
 <div class="linha-3">
@@ -214,12 +214,12 @@ button.secundario {
 <input id="dataHora" readonly>
 
 <div class="linha-3">
-<div><label>Operador</label><input id="operador"></div>
-<div><label>Telefone</label><input id="telefone"></div>
-<div><label>Ramal</label><input id="ramal"></div>
+<div><label>Operador:</label><input id="operador"></div>
+<div><label>Telefone:</label><input id="telefone"></div>
+<div><label>Ramal:</label><input id="ramal"></div>
 </div>
 
-<label>Atuação realizada via</label>
+<label>Atuação realizada via:</label>
 <div class="opcoes">
 <input type="radio" name="atuacao" id="celular">
 <label for="celular" class="card">Celular</label>
@@ -229,7 +229,7 @@ button.secundario {
 </div>
 
 <div class="linha-2">
-<div><label>CL Reincidente</label><select id="reincidente"><option>Não</option><option>Sim</option></select></div>
+<div><label>CL Reincidente:</label><select id="reincidente"><option>Não</option><option>Sim</option></select></div>
 <div><label>Como foi a ligação?</label>
 <select id="ligacao">
 <option>Ligação com sucesso</option>
@@ -244,12 +244,12 @@ button.secundario {
 </div>
 
 <div class="linha-3">
-<div><label>Situação</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
+<div><label>Situação:</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
 <div><label>CJ Crítico?</label><select id="cj"><option>Não</option><option>Sim</option></select></div>
 <div><label>Risco de Vida?</label><select id="risco"><option>Não</option><option>Sim</option></select></div>
 </div>
 
-<label>Observações</label>
+<label>Observações:</label>
 <textarea id="observacoes"></textarea>
 
 <button onclick="gerarTexto()">Gerar Texto Ocorrência</button>
@@ -306,7 +306,7 @@ Self-healing: ${selfhealing.value}
 Desativou SH: ${desativou.value}
 Referência: ${referencia.value}
 Serviço: ${servico.value}
-Observação: ${obsRel.value||"Sem observações"}`;
+Observação: ${obsRel.value||""}`;
  resultado.value=t;
  navigator.clipboard.writeText(t);
  showToast("Relatório copiado com sucesso!");
@@ -338,6 +338,7 @@ function limparCallback(){
 
 </body>
 </html>
+
 
 
 
