@@ -2,129 +2,209 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Script de Bloqueios para LV</title>
+<title>SCRIPT DE BLOQUEIOS PARA LV</title>
 
 <style>
 body {
     font-family: Arial, sans-serif;
-    background:
-      linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-      url("fundo.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: #e9eef3;
     padding: 20px;
     margin: 0;
 }
+
+/* ====== ABAS ====== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    padding: 10px 22px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: #ccc;
+    border-radius: 6px;
+}
+
+.tab-btn.active {
+    background: #0b5394;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ====== CONTAINER PADRÃO ====== */
 .container {
     background: #ffffff;
     padding: 20px;
-    max-width: 600px;
+    max-width: 560px;
     margin: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
 h2 {
     text-align: center;
-    color: #1c4587;
+    color: #0b5394;
 }
+
 label {
     font-weight: bold;
     margin-top: 10px;
     display: block;
 }
+
 input, select, textarea, button {
     width: 100%;
     padding: 8px;
-    margin-top: 6px;
+    margin-top: 8px;
 }
+
 textarea {
     height: 120px;
 }
+
 button {
     font-weight: bold;
     cursor: pointer;
-    background: #1c4587;
+    background: #0b5394;
     color: #fff;
     border: none;
-    border-radius: 4px;
-    margin-top: 10px;
+    border-radius: 5px;
 }
-button:last-of-type {
-    background: #777;
+
+button.secundario {
+    background: #999;
+    margin-top: 5px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- ====== BOTÕES DAS ABAS ====== -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="openTab('obs', this)">Registro de Observações</button>
+  <button class="tab-btn" onclick="openTab('rel', this)">Relatório de Equipes</button>
+</div>
 
-<h2>SCRIPT DE BLOQUEIOS PARA LV</h2>
+<!-- ====== ABA 1 - OBSERVAÇÕES ====== -->
+<div id="obs" class="tab-content active">
+  <div class="container">
 
-<label>Responsável:</label>
-<input type="text" id="responsavel">
+    <h2>Registro de Observações<br>com Histórico</h2>
 
-<label>Equipe:</label>
-<input type="text" id="equipe">
+    <label>Nova observação:</label>
+    <textarea id="obsTexto" placeholder="Digite a observação da ocorrência..."></textarea>
 
-<label>Contato:</label>
-<input type="text" id="contato">
+    <button onclick="adicionarHistorico()">Adicionar ao histórico</button>
+    <button class="secundario" onclick="copiarHistorico()">Copiar todo o histórico</button>
+    <button class="secundario" onclick="limparHistorico()">Limpar tudo</button>
 
-<label>Viatura:</label>
-<input type="text" id="viatura">
+    <label>Histórico de observações:</label>
+    <textarea id="historico" readonly></textarea>
 
-<label>Rádio:</label>
-<select id="radio">
-    <option>Sim</option>
-    <option>Não</option>
-</select>
+  </div>
+</div>
 
-<label>Teste de Rádio:</label>
-<select id="testeRadio">
-    <option>Sim</option>
-    <option>Não</option>
-</select>
+<!-- ====== ABA 2 - RELATÓRIO ====== -->
+<div id="rel" class="tab-content">
+  <div class="container">
 
-<label>Referência Elétrica:</label>
-<input type="text" id="referencia">
+    <h2>Relatório de Equipes</h2>
 
-<label>Self-healing:</label>
-<select id="selfhealing">
-    <option>Sim</option>
-    <option>Não</option>
-</select>
+    <label>Responsável:</label>
+    <input id="responsavel">
 
-<label>Desativou Self-healing:</label>
-<select id="desativou">
-    <option>Sim</option>
-    <option>Não</option>
-</select>
+    <label>Equipe:</label>
+    <input id="equipe">
 
-<label>Serviço:</label>
-<input type="text" id="servico">
+    <label>Contato:</label>
+    <input id="contato">
 
-<label>Observação (opcional):</label>
-<textarea id="observacao"></textarea>
+    <label>Viatura:</label>
+    <input id="viatura">
 
-<button onclick="gerarRelatorio()">Gerar e Copiar Script</button>
-<button onclick="limparCampos()">Limpar Tudo</button>
+    <label>Rádio:</label>
+    <select id="radio"><option>Sim</option><option>Não</option></select>
 
-<label>Script Gerado:</label>
-<textarea id="resultado" readonly></textarea>
+    <label>Teste de Rádio:</label>
+    <select id="testeRadio"><option>Sim</option><option>Não</option></select>
 
+    <label>Referência Elétrica:</label>
+    <input id="referencia">
+
+    <label>Self-healing:</label>
+    <select id="selfhealing"><option>Sim</option><option>Não</option></select>
+
+    <label>Desativou Self-healing:</label>
+    <select id="desativou"><option>Sim</option><option>Não</option></select>
+
+    <label>Serviço:</label>
+    <input id="servico">
+
+    <label>Observação (opcional):</label>
+    <textarea id="obsRel"></textarea>
+
+    <button onclick="gerarRelatorio()">Gerar e Copiar Relatório</button>
+    <button class="secundario" onclick="limparRelatorio()">Limpar Tudo</button>
+
+    <label>Relatório Gerado:</label>
+    <textarea id="resultado" readonly></textarea>
+
+  </div>
 </div>
 
 <script>
+/* ====== ABAS ====== */
+function openTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ====== OBSERVAÇÕES ====== */
+function horaAtual() {
+  const d = new Date();
+  return d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}) + 'H';
+}
+
+function adicionarHistorico() {
+  const txt = obsTexto.value.trim();
+  if (!txt) return alert("Digite a observação.");
+  historico.value += (historico.value ? "\n" : "") + `# ${horaAtual()} ${txt}`;
+  obsTexto.value = "";
+}
+
+function copiarHistorico() {
+  navigator.clipboard.writeText(historico.value);
+  alert("Histórico copiado!");
+}
+
+function limparHistorico() {
+  if (confirm("Limpar histórico?")) {
+    obsTexto.value = "";
+    historico.value = "";
+  }
+}
+
+/* ====== RELATÓRIO ====== */
 function dataHoraAtual() {
-    const agora = new Date();
-    return agora.toLocaleDateString("pt-BR") + " " + agora.toLocaleTimeString("pt-BR");
+  return new Date().toLocaleString("pt-BR");
 }
 
 function gerarRelatorio() {
-
-const relatorio =
+  const texto =
 `Data/Hora: ${dataHoraAtual()}
 Responsável: ${responsavel.value}
 Equipe: ${equipe.value}
@@ -136,23 +216,18 @@ Referência Elétrica: ${referencia.value}
 Self-healing: ${selfhealing.value}
 Desativou Self-healing: ${desativou.value}
 Serviço: ${servico.value}
-Observação: ${observacao.value || "Sem observações."}`;
+Observação: ${obsRel.value || "Sem observações."}`;
 
-resultado.value = relatorio;
-resultado.select();
-document.execCommand("copy");
-
-alert("Script copiado com sucesso!");
+  resultado.value = texto;
+  navigator.clipboard.writeText(texto);
+  alert("Relatório copiado!");
 }
 
-function limparCampos() {
-    document.querySelectorAll("input, textarea").forEach(campo => campo.value = "");
-    document.querySelectorAll("select").forEach(sel => sel.selectedIndex = 0);
-    resultado.value = "";
+function limparRelatorio() {
+  document.querySelectorAll('#rel input, #rel textarea').forEach(e => e.value = "");
+  document.querySelectorAll('#rel select').forEach(e => e.selectedIndex = 0);
 }
 </script>
 
 </body>
 </html>
-
-
