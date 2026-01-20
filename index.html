@@ -11,20 +11,33 @@ body {
       linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
       url("fundo.jpg");
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     background-attachment: fixed;
     padding: 20px;
     margin: 0;
 }
-/* ====== ABAS ====== */
+
+/* ===== MENSAGEM TOPO ===== */
+#toast {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2e7d32;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: none;
+    z-index: 9999;
+}
+
+/* ===== ABAS ===== */
 .tabs {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
-
 .tab-btn {
     padding: 10px 22px;
     border: none;
@@ -33,30 +46,26 @@ body {
     background: #ccc;
     border-radius: 6px;
 }
-
 .tab-btn.active {
     background: #0b5394;
     color: #fff;
 }
-
 .tab-content {
     display: none;
 }
-
 .tab-content.active {
     display: block;
 }
 
-/* ====== CONTAINER PADRÃO ====== */
+/* ===== CONTAINER ===== */
 .container {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(4px);
-
+    background: rgba(255,255,255,0.9);
     padding: 20px;
-    max-width: 560px;
+    max-width: 760px;
     margin: auto;
     border-radius: 14px;
 }
+
 h2 {
     text-align: center;
     color: #0b5394;
@@ -64,178 +73,268 @@ h2 {
 
 label {
     font-weight: bold;
-    margin-top: 10px;
     display: block;
+    margin-top: 10px;
 }
 
 input, select, textarea, button {
     width: 100%;
-    padding: 8px;
-    margin-top: 8px;
+    padding: 7px;
+    margin-top: 4px;
 }
 
 textarea {
-    height: 120px;
+    height: 90px;
 }
 
-button {
-    font-weight: bold;
+#historico {
+    height: 270px;
+}
+
+/* ===== GRID ===== */
+.linha-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.linha-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+/* ===== CALLBACK ===== */
+.opcoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+.opcoes input {
+    display: none;
+}
+.card {
+    border: 2px solid #ccc;
+    padding: 8px 14px;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: bold;
+}
+.opcoes input:checked + .card {
+    background: #0b5394;
+    color: #fff;
+}
+
+/* ===== BOTÕES ===== */
+button {
+    margin-top: 10px;
     background: #0b5394;
     color: #fff;
     border: none;
     border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
 }
-
 button.secundario {
-    background: #999;
-    margin-top: 5px;
+    background: #777;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ====== BOTÕES DAS ABAS ====== -->
+<div id="toast">Texto copiado com sucesso!</div>
+
 <div class="tabs">
-  <button class="tab-btn active" onclick="openTab('obs', this)">Registro de Observações</button>
-  <button class="tab-btn" onclick="openTab('rel', this)">Relatório de Equipes</button>
+  <button class="tab-btn active" onclick="openTab('obs',this)">📝 OCORRÊNCIAS / HISTÓRICO</button>
+  <button class="tab-btn" onclick="openTab('rel',this)">📋 BLOQUEIO – LINHA VIVA</button>
+  <button class="tab-btn" onclick="openTab('callback',this)">📞 CALLBACK</button>
 </div>
 
-<!-- ====== ABA 1 - OBSERVAÇÕES ====== -->
+<!-- ============ OCORRÊNCIAS ============ -->
 <div id="obs" class="tab-content active">
-  <div class="container">
+<div class="container">
+<h2>OCORRÊNCIAS</h2>
 
-    <h2>Registro de Observações<br>com Histórico</h2>
+<label>Nova ocorrência</label>
+<textarea id="obsTexto"></textarea>
 
-    <label>Nova observação:</label>
-    <textarea id="obsTexto" placeholder="Digite a observação da ocorrência..."></textarea>
+<button onclick="adicionarHistorico()">Adicionar</button>
+<button class="secundario" onclick="copiarHistorico()">Copiar Histórico</button>
+<button class="secundario" onclick="limparHistorico()">Limpar</button>
 
-    <button onclick="adicionarHistorico()">Adicionar ao histórico</button>
-    <button class="secundario" onclick="copiarHistorico()">Copiar todo o histórico</button>
-    <button class="secundario" onclick="limparHistorico()">Limpar tudo</button>
-
-    <label>Histórico de observações:</label>
-    <textarea id="historico" readonly></textarea>
-
-  </div>
+<label>Histórico de ocorrências</label>
+<textarea id="historico" readonly></textarea>
+</div>
 </div>
 
-<!-- ====== ABA 2 - RELATÓRIO ====== -->
+<!-- ============ BLOQUEIO LV ============ -->
 <div id="rel" class="tab-content">
-  <div class="container">
+<div class="container">
+<h2>SCRIPT DE BLOQUEIO PARA EQUIPES LINHA VIVA</h2>
 
-    <h2>Relatório de Equipes</h2>
+<div class="linha-2">
+<div><label>Responsável</label><input id="responsavel"></div>
+<div><label>Equipe</label><input id="equipe"></div>
+</div>
 
-    <label>Responsável:</label>
-    <input id="responsavel">
+<div class="linha-3">
+<div><label>Contato</label><input id="contato"></div>
+<div><label>Viatura</label><input id="viatura"></div>
+<div><label>Rádio</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
+</div>
 
-    <label>Equipe:</label>
-    <input id="equipe">
+<div class="linha-3">
+<div><label>Teste de Rádio</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
+<div><label>Self-healing</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
+<div><label>Desativou SH</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
+</div>
 
-    <label>Contato:</label>
-    <input id="contato">
+<div class="linha-2">
+<div><label>Referência Elétrica</label><input id="referencia"></div>
+<div><label>Serviço</label><input id="servico"></div>
+</div>
 
-    <label>Viatura:</label>
-    <input id="viatura">
+<label>Observação</label>
+<textarea id="obsRel"></textarea>
 
-    <label>Rádio:</label>
-    <select id="radio"><option>Sim</option><option>Não</option></select>
+<button onclick="gerarRelatorio()">Gerar e Copiar</button>
+<button class="secundario" onclick="limparRelatorio()">Limpar</button>
 
-    <label>Teste de Rádio:</label>
-    <select id="testeRadio"><option>Sim</option><option>Não</option></select>
+<label>Relatório Gerado</label>
+<textarea id="resultado" readonly></textarea>
+</div>
+</div>
 
-    <label>Referência Elétrica:</label>
-    <input id="referencia">
+<!-- ============ CALLBACK ============ -->
+<div id="callback" class="tab-content">
+<div class="container">
+<h2>CALLBACK</h2>
 
-    <label>Self-healing:</label>
-    <select id="selfhealing"><option>Sim</option><option>Não</option></select>
+<label>Data / Hora</label>
+<input id="dataHora" readonly>
 
-    <label>Desativou Self-healing:</label>
-    <select id="desativou"><option>Sim</option><option>Não</option></select>
+<div class="linha-3">
+<div><label>Operador</label><input id="operador"></div>
+<div><label>Telefone</label><input id="telefone"></div>
+<div><label>Ramal</label><input id="ramal"></div>
+</div>
 
-    <label>Serviço:</label>
-    <input id="servico">
+<label>Atuação realizada via</label>
+<div class="opcoes">
+<input type="radio" name="atuacao" id="celular">
+<label for="celular" class="card">Celular</label>
 
-    <label>Observação (opcional):</label>
-    <textarea id="obsRel"></textarea>
+<input type="radio" name="atuacao" id="ramalRadio">
+<label for="ramalRadio" class="card">Ramal</label>
+</div>
 
-    <button onclick="gerarRelatorio()">Gerar e Copiar Relatório</button>
-    <button class="secundario" onclick="limparRelatorio()">Limpar Tudo</button>
+<div class="linha-2">
+<div><label>CL Reincidente</label><select id="reincidente"><option>Não</option><option>Sim</option></select></div>
+<div><label>Como foi a ligação?</label>
+<select id="ligacao">
+<option>Ligação com sucesso</option>
+<option>Caixa postal</option>
+<option>Não chama</option>
+<option>Telefone incorreto</option>
+<option>Cliente desligou</option>
+<option>Telefone não cadastrado</option>
+<option>Outros</option>
+</select>
+</div>
+</div>
 
-    <label>Relatório Gerado:</label>
-    <textarea id="resultado" readonly></textarea>
+<div class="linha-3">
+<div><label>Situação</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
+<div><label>CJ Crítico?</label><select id="cj"><option>Não</option><option>Sim</option></select></div>
+<div><label>Risco de Vida?</label><select id="risco"><option>Não</option><option>Sim</option></select></div>
+</div>
 
-  </div>
+<label>Observações</label>
+<textarea id="observacoes"></textarea>
+
+<button onclick="gerarTexto()">Gerar Texto Ocorrência</button>
+<button class="secundario" onclick="limparCallback()">Limpar</button>
+
+<label>Texto Gerado</label>
+<textarea id="resultadoCallback" readonly></textarea>
+</div>
 </div>
 
 <script>
-/* ====== ABAS ====== */
-function openTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
+function showToast(msg){
+ const t=document.getElementById("toast");
+ t.innerText=msg;
+ t.style.display="block";
+ setTimeout(()=>t.style.display="none",2000);
 }
 
-/* ====== OBSERVAÇÕES ====== */
-function horaAtual() {
-  const d = new Date();
-  return d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}) + 'H';
+function openTab(id,btn){
+ document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+ document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ btn.classList.add('active');
 }
 
-function adicionarHistorico() {
-  const txt = obsTexto.value.trim();
-  if (!txt) return alert("Digite a observação.");
-  historico.value += (historico.value ? "\n" : "") + `# ${horaAtual()} ${txt}`;
-  obsTexto.value = "";
+/* OCORRÊNCIAS */
+function horaAtual(){
+ return new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'H';
+}
+function adicionarHistorico(){
+ if(!obsTexto.value.trim()) return;
+ historico.value+=(historico.value?"\n":"")+"# "+horaAtual()+" "+obsTexto.value;
+ obsTexto.value="";
+}
+function copiarHistorico(){
+ navigator.clipboard.writeText(historico.value);
+ showToast("Histórico copiado com sucesso!");
+}
+function limparHistorico(){
+ historico.value="";
+ obsTexto.value="";
 }
 
-function copiarHistorico() {
-  navigator.clipboard.writeText(historico.value);
-  alert("Histórico copiado!");
-}
-
-function limparHistorico() {
-  if (confirm("Limpar histórico?")) {
-    obsTexto.value = "";
-    historico.value = "";
-  }
-}
-
-/* ====== RELATÓRIO ====== */
-function dataHoraAtual() {
-  return new Date().toLocaleString("pt-BR");
-}
-
-function gerarRelatorio() {
-  const texto =
-`Data/Hora: ${dataHoraAtual()}
+/* RELATÓRIO */
+function gerarRelatorio(){
+ const t=`Data/Hora: ${new Date().toLocaleString("pt-BR")}
 Responsável: ${responsavel.value}
 Equipe: ${equipe.value}
 Contato: ${contato.value}
 Viatura: ${viatura.value}
 Rádio: ${radio.value}
-Teste de Rádio: ${testeRadio.value}
-Referência Elétrica: ${referencia.value}
+Teste Rádio: ${testeRadio.value}
 Self-healing: ${selfhealing.value}
-Desativou Self-healing: ${desativou.value}
+Desativou SH: ${desativou.value}
+Referência: ${referencia.value}
 Serviço: ${servico.value}
-Observação: ${obsRel.value || "Sem observações."}`;
-
-  resultado.value = texto;
-  navigator.clipboard.writeText(texto);
-  alert("Relatório copiado!");
+Observação: ${obsRel.value||"Sem observações"}`;
+ resultado.value=t;
+ navigator.clipboard.writeText(t);
+ showToast("Relatório copiado com sucesso!");
+}
+function limparRelatorio(){
+ document.querySelectorAll('#rel input,#rel textarea').forEach(e=>e.value="");
 }
 
-function limparRelatorio() {
-  document.querySelectorAll('#rel input, #rel textarea').forEach(e => e.value = "");
-  document.querySelectorAll('#rel select').forEach(e => e.selectedIndex = 0);
+/* CALLBACK */
+function atualizarDataHora(){
+ dataHora.value=new Date().toLocaleString("pt-BR");
+}
+atualizarDataHora();
+
+function gerarTexto(){
+ atualizarDataHora();
+ const atuacao = celular.checked ? telefone.value : ramal.value;
+ const t=`Data/Hora: ${dataHora.value} # Operador: ${operador.value} # Atuação: ${atuacao} # CL Reincidente: ${reincidente.value} # Ligação: ${ligacao.value} # Situação: ${situacao.value} # CJ Crítico: ${cj.value} # Risco de Vida: ${risco.value} # Observações: ${observacoes.value||"Sem observações"}`;
+ resultadoCallback.value=t;
+ navigator.clipboard.writeText(t);
+ showToast("Texto de callback copiado!");
+}
+function limparCallback(){
+ document.querySelectorAll('#callback input,#callback textarea').forEach(e=>e.value="");
+ document.querySelectorAll('#callback select').forEach(e=>e.selectedIndex=0);
+ atualizarDataHora();
 }
 </script>
 
 </body>
 </html>
-
-
-
