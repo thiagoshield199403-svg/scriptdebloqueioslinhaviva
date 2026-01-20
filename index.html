@@ -233,7 +233,7 @@ button.secundario {
 <div><label>Como foi a ligação?</label>
 <select id="ligacao">
 <option>Ligação com sucesso</option>
-<option>Ligação Caixa postal</option>
+<option>Caixa postal</option>
 <option>Não chama</option>
 <option>Telefone incorreto</option>
 <option>Cliente desligou</option>
@@ -250,7 +250,7 @@ button.secundario {
 </div>
 
 <label>Observações:</label>
-<textarea id=""></textarea>
+<textarea id="">observações</textarea>
 
 <button onclick="gerarTexto()">Gerar Texto Ocorrência</button>
 <button class="secundario" onclick="limparCallback()">Limpar</button>
@@ -324,7 +324,7 @@ atualizarDataHora();
 function gerarTexto(){
  atualizarDataHora();
  const atuacao = celular.checked ? telefone.value : ramal.value;
- const t=`Data/Hora: ${dataHora.value} # Operador: ${operador.value} # Atuação via: ${atuacao} # CL Reincidente: ${reincidente.value} # Ligação: ${ligacao.value} # Situação: ${situacao.value} # CJ Crítico: ${cj.value} # Risco de Vida: ${risco.value} # Observações: ${observacoes.value||"Sem observações"}`;
+ const t=`Data/Hora: ${dataHora.value} # Operador: ${operador.value} # Atuação: ${atuacao} # CL Reincidente: ${reincidente.value} # Ligação: ${ligacao.value} # Situação: ${situacao.value} # CJ Crítico: ${cj.value} # Risco de Vida: ${risco.value} # Observações: ${observacoes.value||"Sem observações"}`;
  resultadoCallback.value=t;
  navigator.clipboard.writeText(t);
  showToast("Texto de callback copiado!");
@@ -338,6 +338,7 @@ function limparCallback(){
 
 </body>
 </html>
+
 
 
 
