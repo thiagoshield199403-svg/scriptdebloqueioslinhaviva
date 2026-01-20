@@ -155,14 +155,14 @@ button.secundario {
 <div class="container">
 <h2>OBSERVAÇÕES OCORRÊNCIAS RELEVANTES</h2>
 
-<label>Nova ocorrência</label>
+<label>Nova observação:</label>
 <textarea id="obsTexto"></textarea>
 
 <button onclick="adicionarHistorico()">Adicionar</button>
 <button class="secundario" onclick="copiarHistorico()">Copiar Histórico</button>
 <button class="secundario" onclick="limparHistorico()">Limpar</button>
 
-<label>Histórico de ocorrências</label>
+<label>Histórico de observações:</label>
 <textarea id="historico" readonly></textarea>
 </div>
 </div>
@@ -173,28 +173,28 @@ button.secundario {
 <h2>SCRIPT DE BLOQUEIO PARA EQUIPES LINHA VIVA</h2>
 
 <div class="linha-2">
-<div><label>Responsável</label><input id="responsavel"></div>
+<div><label>Responsável:</label><input id="responsavel"></div>
 <div><label>Equipe</label><input id="equipe"></div>
 </div>
 
 <div class="linha-3">
-<div><label>Contato</label><input id="contato"></div>
-<div><label>Viatura</label><input id="viatura"></div>
-<div><label>Rádio</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
+<div><label>Contato:</label><input id="contato"></div>
+<div><label>Viatura:</label><input id="viatura"></div>
+<div><label>Rádio:</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
 </div>
 
 <div class="linha-3">
-<div><label>Teste de Rádio</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
-<div><label>Self-healing</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
-<div><label>Desativou SH</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
+<div><label>Teste de Rádio:</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
+<div><label>Self-healing:</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
+<div><label>Desativou SH:</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
 </div>
 
 <div class="linha-2">
-<div><label>Referência Elétrica</label><input id="referencia"></div>
-<div><label>Serviço</label><input id="servico"></div>
+<div><label>Referência Elétrica:</label><input id="referencia"></div>
+<div><label>Serviço:</label><input id="servico"></div>
 </div>
 
-<label>Observação</label>
+<label>Observação:</label>
 <textarea id="obsRel"></textarea>
 
 <button onclick="gerarRelatorio()">Gerar e Copiar</button>
@@ -338,5 +338,6 @@ function limparCallback(){
 
 </body>
 </html>
+
 
 
