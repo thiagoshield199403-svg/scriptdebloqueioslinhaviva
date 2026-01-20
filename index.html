@@ -83,35 +83,16 @@ input, select, textarea, button {
     margin-top: 4px;
 }
 
-textarea {
-    height: 90px;
-}
-
-#historico {
-    height: 270px;
-}
+textarea { height: 90px; }
+#historico { height: 270px; }
 
 /* ===== GRID ===== */
-.linha-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-.linha-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-}
+.linha-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.linha-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
 
 /* ===== CALLBACK ===== */
-.opcoes {
-    display: flex;
-    gap: 10px;
-    margin-top: 5px;
-}
-.opcoes input {
-    display: none;
-}
+.opcoes { display: flex; gap: 10px; margin-top: 5px; }
+.opcoes input { display: none; }
 .card {
     border: 2px solid #ccc;
     padding: 8px 14px;
@@ -134,9 +115,7 @@ button {
     font-weight: bold;
     cursor: pointer;
 }
-button.secundario {
-    background: #777;
-}
+button.secundario { background: #777; }
 </style>
 </head>
 
@@ -145,7 +124,7 @@ button.secundario {
 <div id="toast">Texto copiado com sucesso!</div>
 
 <div class="tabs">
-  <button class="tab-btn active" onclick="openTab('obs',this)">📝 OBSERVAÇÕES / RELEVANTES</button>
+  <button class="tab-btn active" onclick="openTab('obs',this)">📝 OBSERVAÇÕES / OCORRÊNCIAS</button>
   <button class="tab-btn" onclick="openTab('rel',this)">📋 BLOQUEIO – LINHA VIVA</button>
   <button class="tab-btn" onclick="openTab('callback',this)">📞 CALLBACK</button>
 </div>
@@ -155,14 +134,14 @@ button.secundario {
 <div class="container">
 <h2>OBSERVAÇÕES OCORRÊNCIAS RELEVANTES</h2>
 
-<label>Nova observação:</label>
+<label>Nova observação</label>
 <textarea id="obsTexto"></textarea>
 
 <button onclick="adicionarHistorico()">Adicionar</button>
 <button class="secundario" onclick="copiarHistorico()">Copiar Histórico</button>
 <button class="secundario" onclick="limparHistorico()">Limpar</button>
 
-<label>Histórico de observações:</label>
+<label>Histórico</label>
 <textarea id="historico" readonly></textarea>
 </div>
 </div>
@@ -173,28 +152,28 @@ button.secundario {
 <h2>SCRIPT DE BLOQUEIO PARA EQUIPES LINHA VIVA</h2>
 
 <div class="linha-2">
-<div><label>Responsável:</label><input id="responsavel"></div>
-<div><label>Equipe:</label><input id="equipe"></div>
+<div><label>Responsável</label><input id="responsavel"></div>
+<div><label>Equipe</label><input id="equipe"></div>
 </div>
 
 <div class="linha-3">
-<div><label>Contato:</label><input id="contato"></div>
-<div><label>Viatura:</label><input id="viatura"></div>
-<div><label>Rádio:</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
+<div><label>Contato</label><input id="contato"></div>
+<div><label>Viatura</label><input id="viatura"></div>
+<div><label>Rádio</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
 </div>
 
 <div class="linha-3">
-<div><label>Teste de Rádio:</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
-<div><label>Self-healing:</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
-<div><label>Desativou SH:</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
+<div><label>Teste de Rádio</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
+<div><label>Self-healing</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
+<div><label>Desativou SH</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
 </div>
 
 <div class="linha-2">
-<div><label>Referência Elétrica:</label><input id="referencia"></div>
-<div><label>Serviço:</label><input id="servico"></div>
+<div><label>Referência Elétrica</label><input id="referencia"></div>
+<div><label>Serviço</label><input id="servico"></div>
 </div>
 
-<label>Observação:</label>
+<label>Observação</label>
 <textarea id="obsRel"></textarea>
 
 <button onclick="gerarRelatorio()">Gerar e Copiar</button>
@@ -214,22 +193,22 @@ button.secundario {
 <input id="dataHora" readonly>
 
 <div class="linha-3">
-<div><label>Operador:</label><input id="operador"></div>
-<div><label>Telefone:</label><input id="telefone"></div>
-<div><label>Ramal:</label><input id="ramal"></div>
+<div><label>Operador</label><input id="operador"></div>
+<div><label>Telefone</label><input id="telefone"></div>
+<div><label>Ramal</label><input id="ramal"></div>
 </div>
 
-<label>Atuação realizada via:</label>
+<label>Atuação realizada via</label>
 <div class="opcoes">
-<input type="radio" name="Atuacao" id="celular">
+<input type="radio" name="atuacao" id="celular">
 <label for="celular" class="card">Celular</label>
 
-<input type="radio" name="Atuacao" id="ramalRadio">
+<input type="radio" name="atuacao" id="ramalRadio">
 <label for="ramalRadio" class="card">Ramal</label>
 </div>
 
 <div class="linha-2">
-<div><label>CL Reincidente:</label><select id="reincidente"><option>Não</option><option>Sim</option></select></div>
+<div><label>CL Reincidente</label><select id="reincidente"><option>Não</option><option>Sim</option></select></div>
 <div><label>Como foi a ligação?</label>
 <select id="ligacao">
 <option>Ligação com sucesso</option>
@@ -244,13 +223,13 @@ button.secundario {
 </div>
 
 <div class="linha-3">
-<div><label>Situação:</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
+<div><label>Situação</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
 <div><label>CJ Crítico?</label><select id="cj"><option>Não</option><option>Sim</option></select></div>
 <div><label>Risco de Vida?</label><select id="risco"><option>Não</option><option>Sim</option></select></div>
 </div>
 
-<label>Observações:</label>
-<textarea id="">observações</textarea>
+<label>Observações</label>
+<textarea id="observacoes"></textarea>
 
 <button onclick="gerarTexto()">Gerar Texto Ocorrência</button>
 <button class="secundario" onclick="limparCallback()">Limpar</button>
@@ -327,7 +306,7 @@ function gerarTexto(){
  const t=`Data/Hora: ${dataHora.value} # Operador: ${operador.value} # Atuação: ${atuacao} # CL Reincidente: ${reincidente.value} # Ligação: ${ligacao.value} # Situação: ${situacao.value} # CJ Crítico: ${cj.value} # Risco de Vida: ${risco.value} # Observações: ${observacoes.value||"Sem observações"}`;
  resultadoCallback.value=t;
  navigator.clipboard.writeText(t);
- showToast("Texto de callback copiado!");
+ showToast("Texto de callback copiado com sucesso!");
 }
 function limparCallback(){
  document.querySelectorAll('#callback input,#callback textarea').forEach(e=>e.value="");
@@ -338,10 +317,3 @@ function limparCallback(){
 
 </body>
 </html>
-
-
-
-
-
-
-
