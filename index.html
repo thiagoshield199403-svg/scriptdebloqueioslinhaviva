@@ -2,320 +2,400 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>SCRIPT AUTOMATIZADO COI</title>
+<title>Controle Diário – Equipes de Campo</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background:
-      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-      url("fundo.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    padding: 20px;
-    margin: 0;
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url("fundo.jpg");
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-/* ===== MENSAGEM TOPO ===== */
-#toast {
-    position: fixed;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #2e7d32;
-    color: #fff;
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-weight: bold;
-    display: none;
-    z-index: 9999;
+.container{
+  background:#fff;
+  margin:20px auto;
+  padding:15px;
+  max-width:1200px;
+  border-radius:10px;
 }
 
-/* ===== ABAS ===== */
-.tabs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-.tab-btn {
-    padding: 10px 22px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    background: #ccc;
-    border-radius: 6px;
-}
-.tab-btn.active {
-    background: #0b5394;
-    color: #fff;
-}
-.tab-content {
-    display: none;
-}
-.tab-content.active {
-    display: block;
+h2{text-align:center;margin-top:0}
+
+.form-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+  gap:8px;
 }
 
-/* ===== CONTAINER ===== */
-.container {
-    background: rgba(255,255,255,0.9);
-    padding: 20px;
-    max-width: 760px;
-    margin: auto;
-    border-radius: 14px;
+input,select,textarea,button{
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:14px;
 }
 
-h2 {
-    text-align: center;
-    color: #0b5394;
+textarea{resize:vertical}
+
+.botoes{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 0;
 }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
+button{
+  background:#1976d2;
+  color:#fff;
+  border:none;
+  cursor:pointer;
 }
 
-input, select, textarea, button {
-    width: 100%;
-    padding: 7px;
-    margin-top: 4px;
+button:hover{opacity:.85}
+.btn-danger{background:#c62828}
+.btn-sec{background:#455a64}
+
+#map{
+  height:250px;
+  margin-top:10px;
+  border-radius:8px;
 }
 
-textarea { height: 90px; }
-#historico { height: 270px; }
-
-/* ===== GRID ===== */
-.linha-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.linha-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-
-/* ===== CALLBACK ===== */
-.opcoes { display: flex; gap: 10px; margin-top: 5px; }
-.opcoes input { display: none; }
-.card {
-    border: 2px solid #ccc;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-.opcoes input:checked + .card {
-    background: #0b5394;
-    color: #fff;
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
 }
 
-/* ===== BOTÕES ===== */
-button {
-    margin-top: 10px;
-    background: #0b5394;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
+th,td{
+  border:1px solid #ccc;
+  padding:6px;
+  text-align:center;
+  font-size:13px;
 }
-button.secundario { background: #777; }
+
+th{background:#eee}
+
+.filtros{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+
+.resumo{
+  margin-top:8px;
+  font-weight:bold;
+}
+
+.alerta{
+  font-size:18px;
+  animation: piscar 1s infinite;
+}
+
+.alerta.vermelho{color:red}
+.alerta.amarelo{color:#fbc02d}
+
+@keyframes piscar{
+  0%{opacity:1}
+  50%{opacity:.3}
+  100%{opacity:1}
+}
+
+/* =====================================================
+   🎯 VIDA NAS CAIXAS (SEM MEXER EM PX OU LAYOUT)
+   ===================================================== */
+
+input, select, textarea {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 500;
+  color: #263238;
+  letter-spacing: 0.2px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9e9e9e;
+  font-weight: 400;
+}
+
+select {
+  background-color: #fafafa;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1976d2;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(25,118,210,0.15);
+}
+
+textarea {
+  line-height: 1.4;
+}
 </style>
 </head>
 
 <body>
-
-<div id="toast">Texto copiado com sucesso!</div>
-
-<div class="tabs">
-  <button class="tab-btn active" onclick="openTab('obs',this)">📝 OBSERVAÇÕES / OCORRÊNCIAS</button>
-  <button class="tab-btn" onclick="openTab('rel',this)">📋 BLOQUEIO – LINHA VIVA</button>
-  <button class="tab-btn" onclick="openTab('callback',this)">📞 CALLBACK</button>
-</div>
-
-<!-- ============ OCORRÊNCIAS ============ -->
-<div id="obs" class="tab-content active">
 <div class="container">
-<h2>OBSERVAÇÕES OCORRÊNCIAS RELEVANTES</h2>
+<h2>Controle Diário de Equipes de Campo</h2>
 
-<label>Nova observação</label>
-<textarea id="obsTexto"></textarea>
+<div class="form-grid">
+  <input id="equipe" placeholder="Equipe">
+  <input id="integrantes" placeholder="Integrantes">
+  <input id="telefone" placeholder="Telefone">
+  <input id="viatura" placeholder="Viatura">
 
-<button onclick="adicionarHistorico()">Adicionar</button>
-<button class="secundario" onclick="copiarHistorico()">Copiar Histórico</button>
-<button class="secundario" onclick="limparHistorico()">Limpar</button>
+  <select id="radio">
+    <option value="SIM" selected>Rádio SIM</option>
+    <option value="NÃO">Rádio NÃO</option>
+  </select>
 
-<label>Histórico</label>
-<textarea id="historico" readonly></textarea>
-</div>
-</div>
+  <select id="tipo">
+    <option value="DUPLADA" selected>DUPLADA</option>
+    <option value="SOLO">SOLO</option>
+  </select>
 
-<!-- ============ BLOQUEIO LV ============ -->
-<div id="rel" class="tab-content">
-<div class="container">
-<h2>SCRIPT DE BLOQUEIO PARA EQUIPES LINHA VIVA</h2>
-
-<div class="linha-2">
-<div><label>Responsável</label><input id="responsavel"></div>
-<div><label>Equipe</label><input id="equipe"></div>
-</div>
-
-<div class="linha-3">
-<div><label>Contato</label><input id="contato"></div>
-<div><label>Viatura</label><input id="viatura"></div>
-<div><label>Rádio</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
-</div>
-
-<div class="linha-3">
-<div><label>Teste de Rádio</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
-<div><label>Self-healing</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
-<div><label>Desativou SH</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
+  <select id="regional">
+    <option value="">Selecione a regional</option>
+    <option>ARACAJU</option>
+    <option>SÃO CRISTÓVÃO</option>
+    <option>N. S. DO SOCORRO</option>
+    <option>ITABAIANA</option>
+    <option>LAGARTO</option>
+    <option>N. S. DAS DORES</option>
+    <option>PROPRIÁ</option>
+    <option>MARUIM</option>
+  </select>
 </div>
 
-<div class="linha-2">
-<div><label>Referência Elétrica</label><input id="referencia"></div>
-<div><label>Serviço</label><input id="servico"></div>
+<div class="form-grid" style="margin-top:8px">
+  <textarea id="obs" placeholder="Observações"></textarea>
+
+  <select id="alerta">
+    <option value="">Sem prioridade</option>
+    <option value="⏱️ Religação vencendo 8h">⏱️ Religação vencendo 8h</option>
+    <option value="💰 Comercial – Compensação Alta">💰 Comercial – Compensação Alta</option>
+    <option value="🚨 Risco à Vida">🚨 Risco à Vida</option>
+    <option value="⚡ Falta de Fase">⚡ Falta de Fase</option>
+    <option value="⭐ FE – Cliente VIP">⭐ FE – Cliente VIP</option>
+    <option value="📢 Solicitação da Supervisão">📢 Solicitação da Supervisão</option>
+  </select>
 </div>
 
-<label>Observação</label>
-<textarea id="obsRel"></textarea>
-
-<button onclick="gerarRelatorio()">Gerar e Copiar</button>
-<button class="secundario" onclick="limparRelatorio()">Limpar</button>
-
-<label>Relatório Gerado</label>
-<textarea id="resultado" readonly></textarea>
-</div>
+<div class="botoes">
+  <button onclick="salvar()">Adicionar à Lista</button>
+  <button onclick="limpar()" class="btn-sec">Limpar Campos</button>
+  <button onclick="exportar()">Exportar Excel</button>
+  <button onclick="toggleMapa()">Recolher / Mostrar Mapa</button>
+  <button onclick="limparLista()" class="btn-danger">Limpar Lista</button>
 </div>
 
-<!-- ============ CALLBACK ============ -->
-<div id="callback" class="tab-content">
-<div class="container">
-<h2>CALLBACK</h2>
+<div id="map"></div>
 
-<label>Data / Hora</label>
-<input id="dataHora" readonly>
-
-<div class="linha-3">
-<div><label>Operador</label><input id="operador"></div>
-<div><label>Telefone</label><input id="telefone"></div>
-<div><label>Ramal</label><input id="ramal"></div>
+<div class="filtros">
+  <input id="busca" placeholder="Buscar equipe" onkeyup="render()">
+  <select id="filtroRegional" onchange="render()">
+    <option value="">Todas Regionais</option>
+    <option>ARACAJU</option>
+    <option>SÃO CRISTÓVÃO</option>
+    <option>N. S. DO SOCORRO</option>
+    <option>ITABAIANA</option>
+    <option>LAGARTO</option>
+    <option>N. S. DAS DORES</option>
+    <option>PROPRIÁ</option>
+    <option>MARUIM</option>
+  </select>
 </div>
 
-<label>Atuação realizada via</label>
-<div class="opcoes">
-<input type="radio" name="atuacao" id="celular">
-<label for="celular" class="card">Celular</label>
+<div class="resumo" id="resumo"></div>
 
-<input type="radio" name="atuacao" id="ramalRadio">
-<label for="ramalRadio" class="card">Ramal</label>
+<table>
+<thead>
+<tr>
+<th>Equipe</th>
+<th>Integrantes</th>
+<th>Telefone</th>
+<th>Viatura</th>
+<th>Rádio</th>
+<th>Tipo</th>
+<th>Regional</th>
+<th>Obs</th>
+<th>⚠</th>
+<th>Mapa</th>
+<th>Ações</th>
+</tr>
+</thead>
+<tbody id="tabela"></tbody>
+</table>
 </div>
 
-<div class="linha-2">
-<div><label>CL Reincidente</label><select id="reincidente"><option>Não</option><option>Sim</option></select></div>
-<div><label>Como foi a ligação?</label>
-<select id="ligacao">
-<option>Ligação com sucesso</option>
-<option>Caixa postal</option>
-<option>Não chama</option>
-<option>Telefone incorreto</option>
-<option>Cliente desligou</option>
-<option>Telefone não cadastrado</option>
-<option>Outros</option>
-</select>
-</div>
-</div>
-
-<div class="linha-3">
-<div><label>Situação</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
-<div><label>CJ Crítico?</label><select id="cj"><option>Não</option><option>Sim</option></select></div>
-<div><label>Risco de Vida?</label><select id="risco"><option>Não</option><option>Sim</option></select></div>
-</div>
-
-<label>Observações</label>
-<textarea id="observacoes"></textarea>
-
-<button onclick="gerarTexto()">Gerar Texto Ocorrência</button>
-<button class="secundario" onclick="limparCallback()">Limpar</button>
-
-<label>Texto Gerado</label>
-<textarea id="resultadoCallback" readonly></textarea>
-</div>
-</div>
-
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-function showToast(msg){
- const t=document.getElementById("toast");
- t.innerText=msg;
- t.style.display="block";
- setTimeout(()=>t.style.display="none",2000);
+let dados=JSON.parse(localStorage.getItem("equipes"))||[];
+let edit=null, lat=null,lng=null,markers=[];
+const map=L.map("map").setView([-10.9472,-37.0731],11);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+
+map.on("click",e=>{
+  lat=e.latlng.lat; lng=e.latlng.lng;
+  alert("Localização definida");
+});
+
+function salvar(){
+  if(!equipe.value)return alert("Informe a equipe");
+
+  const obj={
+    equipe:equipe.value.toUpperCase(),
+    integrantes:integrantes.value,
+    telefone:telefone.value,
+    viatura:viatura.value,
+    radio:radio.value,
+    tipo:tipo.value,
+    regional:regional.value,
+    obs:obs.value,
+    alerta:alerta.value,
+    lat,lng
+  };
+
+  if(edit!==null){dados[edit]=obj;edit=null;}
+  else dados.push(obj);
+
+  dados.sort((a,b)=>a.equipe.localeCompare(b.equipe,"pt-BR"));
+  localStorage.setItem("equipes",JSON.stringify(dados));
+  limpar(); render();
 }
 
-function openTab(id,btn){
- document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
- document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- btn.classList.add('active');
+function render(){
+  tabela.innerHTML=""; markers.forEach(m=>map.removeLayer(m)); markers=[];
+  let total=0;
+
+  dados.forEach((d,i)=>{
+    if((!busca.value||d.equipe.includes(busca.value.toUpperCase())) &&
+       (!filtroRegional.value||d.regional===filtroRegional.value)){
+      total++;
+
+      let icone = "";
+      if (d.alerta) {
+        let emoji = d.alerta.match(/^[^\s]+/)[0];
+        let cor = d.alerta.includes("Religação") || d.alerta.includes("Falta")
+          ? "amarelo"
+          : "vermelho";
+
+        icone = `
+          <span class="alerta ${cor}" title="${d.alerta}">
+            ${emoji}
+          </span>`;
+      }
+
+      tabela.innerHTML+=`
+      <tr>
+        <td style="cursor:pointer; color:#1976d2; font-weight:bold" onclick="focarMapa(${i})">
+          ${d.equipe}
+        </td>
+        <td>${d.integrantes||"-"}</td>
+        <td>${d.telefone||"-"}</td>
+        <td>${d.viatura||"-"}</td>
+        <td>${d.radio}</td>
+        <td>${d.tipo}</td>
+        <td>${d.regional||"-"}</td>
+        <td>${d.obs||"-"}</td>
+        <td>${icone}</td>
+        <td>${d.lat?`<a target="_blank" href="https://www.google.com/maps?q=${d.lat},${d.lng}">Ver</a>`:"-"}</td>
+        <td>
+          <button onclick="editar(${i})">✏️</button>
+          <button onclick="remover(${i})" class="btn-danger">🗑️</button>
+        </td>
+      </tr>`;
+
+      if(d.lat){
+        markers.push(L.marker([d.lat,d.lng]).addTo(map).bindPopup(d.equipe));
+      }
+    }
+  });
+  resumo.innerText=`Total de equipes exibidas: ${total}`;
 }
 
-/* OCORRÊNCIAS */
-function horaAtual(){
- return new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'H';
-}
-function adicionarHistorico(){
- if(!obsTexto.value.trim()) return;
- historico.value+=(historico.value?"\n":"")+"# "+horaAtual()+" "+obsTexto.value;
- obsTexto.value="";
-}
-function copiarHistorico(){
- navigator.clipboard.writeText(historico.value);
- showToast("Histórico copiado com sucesso!");
-}
-function limparHistorico(){
- historico.value="";
- obsTexto.value="";
+/* ===============================
+   📍 CENTRALIZAR MAPA
+   =============================== */
+function focarMapa(i){
+  let d = dados[i];
+  if(d.lat && d.lng){
+    map.setView([d.lat, d.lng], 15, { animate: true });
+
+    markers.forEach(m=>{
+      const pos = m.getLatLng();
+      if(pos.lat == d.lat && pos.lng == d.lng){
+        m.openPopup();
+      }
+    });
+  }else{
+    alert("Esta equipe não possui localização definida no mapa.");
+  }
 }
 
-/* RELATÓRIO */
-function gerarRelatorio(){
- const t=`Data/Hora: ${new Date().toLocaleString("pt-BR")}
-Responsável: ${responsavel.value}
-Equipe: ${equipe.value}
-Contato: ${contato.value}
-Viatura: ${viatura.value}
-Rádio: ${radio.value}
-Teste Rádio: ${testeRadio.value}
-Self-healing: ${selfhealing.value}
-Desativou SH: ${desativou.value}
-Referência: ${referencia.value}
-Serviço: ${servico.value}
-Observação: ${obsRel.value||""}`;
- resultado.value=t;
- navigator.clipboard.writeText(t);
- showToast("Relatório copiado com sucesso!");
-}
-function limparRelatorio(){
- document.querySelectorAll('#rel input,#rel textarea').forEach(e=>e.value="");
+function editar(i){
+  let d=dados[i];
+  equipe.value=d.equipe;
+  integrantes.value=d.integrantes;
+  telefone.value=d.telefone;
+  viatura.value=d.viatura;
+  radio.value=d.radio;
+  tipo.value=d.tipo;
+  regional.value=d.regional;
+  obs.value=d.obs;
+  alerta.value=d.alerta;
+  lat=d.lat; lng=d.lng;
+  edit=i;
 }
 
-/* CALLBACK */
-function atualizarDataHora(){
- dataHora.value=new Date().toLocaleString("pt-BR");
+function remover(i){
+  if(confirm("Remover equipe?")){
+    dados.splice(i,1);
+    localStorage.setItem("equipes",JSON.stringify(dados));
+    render();
+  }
 }
-atualizarDataHora();
 
-function gerarTexto(){
- atualizarDataHora();
- const atuacao = celular.checked ? telefone.value : ramal.value;
- const t=`Data/Hora: ${dataHora.value} # Operador: ${operador.value} # Atuação: ${atuacao} # CL Reincidente: ${reincidente.value} # Ligação: ${ligacao.value} # Situação: ${situacao.value} # CJ Crítico: ${cj.value} # Risco de Vida: ${risco.value} # Observações: ${observacoes.value||"Sem observações"}`;
- resultadoCallback.value=t;
- navigator.clipboard.writeText(t);
- showToast("Texto de callback copiado com sucesso!");
+function limpar(){
+  document.querySelectorAll("input,textarea").forEach(e=>e.value="");
+  alerta.value="";
+  regional.value="";
+  lat=lng=null; edit=null;
 }
-function limparCallback(){
- document.querySelectorAll('#callback input,#callback textarea').forEach(e=>e.value="");
- document.querySelectorAll('#callback select').forEach(e=>e.selectedIndex=0);
- atualizarDataHora();
+
+function limparLista(){
+  if(confirm("Limpar TODA a lista?")){
+    dados=[]; localStorage.removeItem("equipes"); render();
+  }
 }
+
+function exportar(){
+  let csv="Equipe;Integrantes;Telefone;Viatura;Rádio;Tipo;Regional;Obs;Alerta\n";
+  dados.forEach(d=>{
+    csv+=`${d.equipe};${d.integrantes};${d.telefone};${d.viatura};${d.radio};${d.tipo};${d.regional};${d.obs};${d.alerta}\n`;
+  });
+  let a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download="equipes.csv"; a.click();
+}
+
+function toggleMapa(){
+  map.getContainer().style.display=
+  map.getContainer().style.display==="none"?"block":"none";
+}
+
+render();
 </script>
-
 </body>
 </html>
-
-
