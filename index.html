@@ -2,120 +2,276 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>SCRIPTS AUTOMATIZADOS</title>
+<title>Sistema Operacional</title>
 
 <style>
-body {
+*{box-sizing:border-box}
+body{
+    margin:0;
     font-family: Arial, sans-serif;
     background:
       linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
       url("fundo.jpg");
     background-size: cover;
     background-attachment: fixed;
-    padding: 20px;
-    margin: 0;
 }
 
-/* ===== MENSAGEM TOPO ===== */
-#toast {
-    position: fixed;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #2e7d32;
-    color: #fff;
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-weight: bold;
-    display: none;
-    z-index: 9999;
+/* ===== LAYOUT ===== */
+.app{
+    display:flex;
+    min-height:100vh;
 }
 
-/* ===== ABAS ===== */
-.tabs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-.tab-btn {
-    padding: 10px 22px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    background: #ccc;
-    border-radius: 6px;
-}
-.tab-btn.active {
-    background: #0b5394;
-    color: #fff;
-}
-.tab-content {
-    display: none;
-}
-.tab-content.active {
-    display: block;
+/* ===== SIDEBAR ===== */
+.sidebar{
+    width:260px;
+    background:
+      linear-gradient(180deg,#0b5394,#062f57);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    padding:0;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.4);
 }
 
-/* ===== CONTAINER ===== */
-.container {
-    background: rgba(255,255,255,0.9);
-    padding: 20px;
-    max-width: 760px;
-    margin: auto;
-    border-radius: 14px;
+/* ===== HEADER ===== */
+.sidebar-header{
+    padding:20px 15px;
+    background:linear-gradient(135deg,#0d63b5,#083b6f);
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    text-align:center;
 }
 
-h2 {
-    text-align: center;
-    color: #0b5394;
+.sidebar-header .icon{
+    font-size:28px;
 }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
+.sidebar-header .title{
+    font-size:18px;
+    font-weight:bold;
+    letter-spacing:1px;
 }
 
-input, select, textarea, button {
-    width: 100%;
-    padding: 7px;
-    margin-top: 4px;
+.sidebar-header .sub{
+    font-size:11px;
+    opacity:0.8;
+    margin-top:4px;
 }
 
-textarea { height: 90px; }
-#historico { height: 270px; }
+/* ===== MENU ===== */
+.menu{
+    padding:15px;
+    flex:1;
+}
+
+.menu button{
+    width:100%;
+    background:rgba(255,255,255,0.05);
+    border:none;
+    color:#fff;
+    padding:14px;
+    text-align:left;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom:10px;
+    transition:all 0.2s ease;
+}
+
+.menu button:hover{
+    background:rgba(255,255,255,0.15);
+    transform:translateX(4px);
+}
+
+.menu button.active{
+    background:#fff;
+    color:#0b5394;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* ===== FOOTER ===== */
+.sidebar-footer{
+    padding:15px;
+    border-top:1px solid rgba(255,255,255,0.2);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(0,0,0,0.2);
+}
+
+.avatar{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#fff;
+    color:#0b5394;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.user-info{
+    font-size:12px;
+}
+.user-info b{
+    display:block;
+    font-size:13px;
+}
+
+
+/* ===== CONTEÚDO ===== */
+.content{
+    flex:1;
+    padding:25px;
+}
+
+.container{
+    background:rgba(255,255,255,0.95);
+    border-radius:14px;
+    padding:20px;
+    max-width:900px;
+    margin:auto;
+}
+
+h2{
+    text-align:center;
+    color:#0b5394;
+}
+
+/* ===== FORM ===== */
+label{font-weight:bold;display:block;margin-top:10px}
+input,select,textarea,button{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+textarea{height:90px}
+#historico{height:260px}
 
 /* ===== GRID ===== */
-.linha-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.linha-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.linha-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.linha-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 
-/* ===== CALLBACK ===== */
-.opcoes { display: flex; gap: 10px; margin-top: 5px; }
-.opcoes input { display: none; }
-.card {
-    border: 2px solid #ccc;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+/* ===== OPÇÕES ===== */
+.opcoes{display:flex;gap:10px;margin-top:5px}
+.opcoes input{display:none}
+.card{
+    border:2px solid #ccc;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
 }
-.opcoes input:checked + .card {
-    background: #0b5394;
-    color: #fff;
+.opcoes input:checked + .card{
+    background:#0b5394;
+    color:#fff;
 }
 
 /* ===== BOTÕES ===== */
-button {
-    margin-top: 10px;
-    background: #0b5394;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
+button{
+    background:#0b5394;
+    color:#fff;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
 }
-button.secundario { background: #777; }
+button.sec{background:#777}
+
+/* ===== MÓDULOS ===== */
+.module{display:none}
+.module.active{display:block}
+
+/* ===== TOAST ===== */
+#toast{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#2e7d32;
+    color:#fff;
+    padding:10px 22px;
+    border-radius:8px;
+    font-weight:bold;
+    display:none;
+    z-index:9999;
+}
+/* ===== FOOTER PREMIUM ===== */
+.premium-footer{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px;
+    border-top:1px solid rgba(255,255,255,0.15);
+    background:linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.15));
+    backdrop-filter: blur(6px);
+}
+
+.status-indicator{
+    width:10px;
+    height:40px;
+    border-radius:6px;
+    background:linear-gradient(180deg,#00ff9c,#00c853);
+    box-shadow:0 0 10px rgba(0,255,156,0.8);
+}
+
+.system-info{
+    display:flex;
+    flex-direction:column;
+    line-height:1.2;
+}
+
+.status-line{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.status-text{
+    font-size:11px;
+    letter-spacing:1.5px;
+    font-weight:bold;
+    color:#00ff9c;
+}
+
+.status-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#00ff9c;
+    box-shadow:0 0 6px rgba(0,255,156,0.9);
+    animation:pulse 1.5s infinite;
+}
+
+.system-name{
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1px;
+    color:#fff;
+    opacity:0.9;
+}
+
+.system-time{
+    font-size:14px;          /* <<< AQUI aumenta o tamanho */
+    opacity:0.9;
+    margin-top:4px;
+    font-family: monospace;
+    letter-spacing:0.5px;
+}
+
+
+@keyframes pulse{
+    0%{transform:scale(1);opacity:1}
+    50%{transform:scale(1.4);opacity:0.5}
+    100%{transform:scale(1);opacity:1}
+}
+
+
+
 </style>
 </head>
 
@@ -123,69 +279,101 @@ button.secundario { background: #777; }
 
 <div id="toast">Texto copiado com sucesso!</div>
 
-<div class="tabs">
-  <button class="tab-btn active" onclick="openTab('obs',this)">📝 OBSERVAÇÕES / OCORRÊNCIAS</button>
-  <button class="tab-btn" onclick="openTab('rel',this)">📋 BLOQUEIO – LINHA VIVA</button>
-  <button class="tab-btn" onclick="openTab('callback',this)">📞 CALLBACK</button>
+<div class="app">
+
+<!-- ===== SIDEBAR ===== -->
+<div class="sidebar">
+
+    <div class="sidebar-header">
+        <div class="icon">⚡</div>
+        <div class="title">COI</div>
+        <div class="sub">Centro Operacional Integrado</div>
+    </div>
+
+ <div class="menu">
+    <button class="active" onclick="openModule('rel',this)">🔒 Script Bloqueios LV</button>
+    <button onclick="openModule('obs',this)">📝 Script Ocorrências</button>
+    <button onclick="openModule('callback',this)">📞 Script Callback</button>
 </div>
 
-<!-- ============ OCORRÊNCIAS ============ -->
-<div id="obs" class="tab-content active">
-<div class="container">
-<h2>OBSERVAÇÕES OCORRÊNCIAS RELEVANTES</h2>
+<div class="sidebar-footer premium-footer">
+    <div class="status-indicator"></div>
 
-<label>Nova observação</label>
+    <div class="system-info">
+        <div class="status-line">
+            <span class="status-text">ONLINE</span>
+            <span class="status-dot"></span>
+        </div>
+
+        <div class="system-name">COI OPERACIONAL</div>
+        <div class="system-time" id="dataHoraSistema"></div>
+    </div>
+</div>
+
+
+</div>
+
+
+<!-- ===== CONTENT ===== -->
+<div class="content">
+
+<!-- OCORRÊNCIAS -->
+<div id="obs" class="module active">
+<div class="container">
+<h2>SCRIPT OBSERVAÇÕES / OCORRÊNCIAS </h2>
+
+<label>Nova observação:</label>
 <textarea id="obsTexto"></textarea>
 
 <button onclick="adicionarHistorico()">Adicionar</button>
-<button class="secundario" onclick="copiarHistorico()">Copiar Histórico</button>
-<button class="secundario" onclick="limparHistorico()">Limpar</button>
+<button class="sec" onclick="copiarHistorico()">Copiar Histórico</button>
+<button class="sec" onclick="limparHistorico()">Limpar</button>
 
-<label>Histórico</label>
+<label>Histórico:</label>
 <textarea id="historico" readonly></textarea>
 </div>
 </div>
 
-<!-- ============ BLOQUEIO LV ============ -->
-<div id="rel" class="tab-content">
+<!-- BLOQUEIO -->
+<div id="rel" class="module">
 <div class="container">
-<h2>SCRIPT DE BLOQUEIO PARA EQUIPES LINHA VIVA</h2>
+<h2>SCRIPT BLOQUEIO – LINHA VIVA</h2>
 
 <div class="linha-2">
-<div><label>Responsável</label><input id="responsavel"></div>
-<div><label>Equipe</label><input id="equipe"></div>
+<div><label>Responsável:</label><input id="responsavel"></div>
+<div><label>Equipe:</label><input id="equipe"></div>
 </div>
 
 <div class="linha-3">
-<div><label>Contato</label><input id="contato"></div>
-<div><label>Viatura</label><input id="viatura"></div>
-<div><label>Rádio</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
+<div><label>Contato:</label><input id="contato"></div>
+<div><label>Viatura:</label><input id="viatura"></div>
+<div><label>Rádio:</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
 </div>
 
 <div class="linha-3">
-<div><label>Teste de Rádio</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
-<div><label>Self-healing</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
-<div><label>Desativou SH</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
+<div><label>Teste Rádio?</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
+<div><label>Self-healing?</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
+<div><label>Desativou SH?</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
 </div>
 
 <div class="linha-2">
-<div><label>Referência Elétrica</label><input id="referencia"></div>
-<div><label>Serviço</label><input id="servico"></div>
+<div><label>Referência:</label><input id="referencia"></div>
+<div><label>Serviço:</label><input id="servico"></div>
 </div>
 
-<label>Observação</label>
+<label>Observação:</label>
 <textarea id="obsRel"></textarea>
 
 <button onclick="gerarRelatorio()">Gerar e Copiar</button>
-<button class="secundario" onclick="limparRelatorio()">Limpar</button>
+<button class="sec" onclick="limparRelatorio()">Limpar</button>
 
-<label>Relatório Gerado</label>
+<label>Relatório</label>
 <textarea id="resultado" readonly></textarea>
 </div>
 </div>
 
-<!-- ============ CALLBACK ============ -->
-<div id="callback" class="tab-content">
+<!-- CALLBACK -->
+<div id="callback" class="module">
 <div class="container">
 <h2>CALLBACK</h2>
 
@@ -193,12 +381,12 @@ button.secundario { background: #777; }
 <input id="dataHora" readonly>
 
 <div class="linha-3">
-<div><label>Operador</label><input id="operador"></div>
-<div><label>Telefone</label><input id="telefone"></div>
-<div><label>Ramal</label><input id="ramal"></div>
+<div><label>Operador:</label><input id="operador"></div>
+<div><label>Telefone:</label><input id="telefone"></div>
+<div><label>Ramal:</label><input id="ramal"></div>
 </div>
 
-<label>Atuação realizada via</label>
+<label>Atuação realizada via:</label>
 <div class="opcoes">
 <input type="radio" name="atuacao" id="celular">
 <label for="celular" class="card">Celular</label>
@@ -208,7 +396,7 @@ button.secundario { background: #777; }
 </div>
 
 <div class="linha-2">
-<div><label>CL Reincidente</label><select id="reincidente"><option>Não</option><option>Sim</option></select></div>
+<div><label>Cliente Reincidente?</label><select id="reincidente"><option>Não</option><option>Sim</option></select></div>
 <div><label>Como foi a ligação?</label>
 <select id="ligacao">
 <option>Ligação com sucesso</option>
@@ -223,8 +411,8 @@ button.secundario { background: #777; }
 </div>
 
 <div class="linha-3">
-<div><label>Situação</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
-<div><label>CJ Crítico?</label><select id="cj"><option>Não</option><option>Sim</option></select></div>
+<div><label>Situação:</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
+<div><label>Conjunto Crítico?</label><select id="cj"><option>Não</option><option>Sim</option></select></div>
 <div><label>Risco de Vida?</label><select id="risco"><option>Não</option><option>Sim</option></select></div>
 </div>
 
@@ -232,10 +420,13 @@ button.secundario { background: #777; }
 <textarea id="observacoes"></textarea>
 
 <button onclick="gerarTexto()">Gerar Texto Ocorrência</button>
-<button class="secundario" onclick="limparCallback()">Limpar</button>
+<button class="sec" onclick="limparCallback()">Limpar</button>
 
 <label>Texto Gerado</label>
 <textarea id="resultadoCallback" readonly></textarea>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -247,9 +438,9 @@ function showToast(msg){
  setTimeout(()=>t.style.display="none",2000);
 }
 
-function openTab(id,btn){
- document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
- document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+function openModule(id,btn){
+ document.querySelectorAll('.module').forEach(m=>m.classList.remove('active'));
+ document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
  document.getElementById(id).classList.add('active');
  btn.classList.add('active');
 }
@@ -272,7 +463,7 @@ function limparHistorico(){
  obsTexto.value="";
 }
 
-/* RELATÓRIO */
+/* BLOQUEIO */
 function gerarRelatorio(){
  const t=`Data/Hora: ${new Date().toLocaleString("pt-BR")}
 Responsável: ${responsavel.value}
@@ -313,8 +504,25 @@ function limparCallback(){
  document.querySelectorAll('#callback select').forEach(e=>e.selectedIndex=0);
  atualizarDataHora();
 }
+
+function atualizarRodape(){
+    const agora = new Date();
+
+    const data = agora.toLocaleDateString("pt-BR");
+    const hora = agora.toLocaleTimeString("pt-BR", {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+
+    document.getElementById("dataHoraSistema").innerText = data + " " + hora;
+}
+
+setInterval(atualizarRodape, 1000);
+atualizarRodape();
+
+
 </script>
 
 </body>
 </html>
-
