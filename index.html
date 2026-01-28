@@ -332,6 +332,61 @@ button.sec{background:#777}
 .menu button.active{
     position:relative;
 }
+/* ===== MICROINTERAÇÕES BOTÕES ===== */
+button{
+    transition: all 0.2s ease;
+}
+
+button:hover{
+    transform: translateY(-2px);
+    box-shadow:0 6px 12px rgba(0,0,0,0.25);
+}
+
+button:active{
+    transform: scale(0.97);
+    box-shadow:0 3px 6px rgba(0,0,0,0.2);
+}
+/* ===== MICROINTERAÇÕES CAMPOS ===== */
+input, select, textarea{
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus{
+    outline:none;
+    border-color:#00ff9c;
+    box-shadow:0 0 0 2px rgba(0,255,156,0.25);
+    transform: scale(1.01);
+}
+/* ===== TRANSIÇÃO DE TELAS ===== */
+.module{
+    animation: fadeInModule 0.35s ease;
+}
+
+@keyframes fadeInModule{
+    from{
+        opacity:0;
+        transform: translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+#toast{
+    animation: toastIn 0.4s ease;
+}
+
+@keyframes toastIn{
+    from{
+        opacity:0;
+        transform: translateY(-10px);
+    }
+    to{
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
 
 </style>
 </head>
@@ -587,6 +642,3 @@ atualizarRodape();
 
 </body>
 </html>
-
-
-
