@@ -637,6 +637,100 @@ input:focus, select:focus, textarea:focus{
   50%{opacity:.3}
   100%{opacity:1}
 }
+.footer-global{
+  position: fixed;
+  bottom: 0;
+  left: 260px; /* largura da sidebar */
+  right: 0;
+  background: rgba(0,0,0,0.6);
+  color: #ffffff;
+  text-align: center;
+  font-size: 11px;
+  padding: 6px;
+  letter-spacing: 1px;
+  z-index: 9999;
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.footer-global{
+  position: fixed;
+  bottom: 0;
+  left: 260px; /* largura da sidebar */
+  right: 0;
+  height: 55px;
+  background: linear-gradient(90deg,#062f57,#0b5394,#062f57);
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  color: #fff;
+  z-index: 9999;
+  box-shadow: 0 -4px 12px rgba(0,0,0,.4);
+  font-family: Arial, sans-serif;
+}
+
+/* LOGO */
+.footer-left{
+  display:flex;
+  align-items:center;
+}
+
+.footer-logo{
+  height: 32px;
+  filter: drop-shadow(0 0 6px rgba(0,255,255,.6));
+}
+
+/* CENTRO */
+.footer-center{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.footer-status{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:1.5px;
+}
+
+.footer-status .dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#00ff9c;
+  box-shadow:0 0 8px rgba(0,255,156,.9);
+  animation:pulse 1.5s infinite;
+}
+
+.status-text{
+  color:#00ff9c;
+}
+
+.footer-msg{
+  font-size:12px;
+  opacity:.9;
+}
+
+/* DIREITA */
+.footer-right{
+  font-family: monospace;
+  font-size:13px;
+  letter-spacing:1px;
+  opacity:.9;
+}
+
+/* ANIMAÇÃO */
+@keyframes pulse{
+  0%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.4);opacity:.4}
+  100%{transform:scale(1);opacity:1}
+}
 
 </style>
 </head>
@@ -1181,7 +1275,8 @@ if(d.alerta){
     cor = "amarelo";
   }
 
-icone = `<span class="alerta ${cor}" title="${d.alerta}">${emoji}</span>`;
+ icone = `<span class="alerta ${cor}" title="${d.alerta}">${emoji}</span>`;
+
 }
 
 
@@ -1468,7 +1563,25 @@ ${p.descricao}`;
 }
 
 </script>
+<div class="footer-global">
+  <div class="footer-left">
+    <img src="Energisa.svg.png" class="footer-logo">
+  </div>
+
+  <div class="footer-center">
+    <div class="footer-status">
+      <span class="dot"></span>
+      <span class="status-text">ONLINE</span>
+    </div>
+
+    <div class="footer-msg">
+      🔒 Sistema de uso interno operacional • COI SERGIPE
+    </div>
+  </div>
+
+<div class="footer-right" id="footer-hora">DEUS seja Louvado</div>
+
+</div>
 
 </body>
 </html>
-
