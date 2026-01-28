@@ -270,6 +270,28 @@ button.sec{background:#777}
     100%{transform:scale(1);opacity:1}
 }
 
+/* ===== ENERGISA HEADER ===== */
+.energisa-header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px 10px;
+}
+
+.energisa-logo{
+    max-width:160px;
+    height:auto;
+    margin-bottom:8px;
+    filter: drop-shadow(0 0 6px rgba(0,0,0,0.4));
+}
+
+.energisa-sub{
+    font-size:11px;
+    letter-spacing:1px;
+    opacity:0.85;
+    color:#fff;
+}
 
 
 </style>
@@ -284,11 +306,11 @@ button.sec{background:#777}
 <!-- ===== SIDEBAR ===== -->
 <div class="sidebar">
 
-    <div class="sidebar-header">
-        <div class="icon">⚡</div>
-        <div class="title">COI</div>
-        <div class="sub">Centro Operacional Integrado</div>
-    </div>
+  <div class="sidebar-header energisa-header">
+    <img src="Energisa.svg.png" class="energisa-logo" alt="Energisa">
+    <div class="energisa-sub">Centro Operacional Integrado</div>
+</div>
+
 
  <div class="menu">
     <button class="active" onclick="openModule('rel',this)">🔒 Script Bloqueios LV</button>
