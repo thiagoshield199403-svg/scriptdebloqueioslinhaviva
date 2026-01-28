@@ -386,7 +386,257 @@ input:focus, select:focus, textarea:focus{
         transform: translateY(0);
     }
 }
+/* ===== ISOLAMENTO DO SISTEMA DE EQUIPES ===== */
 
+.equipes-sistema .container{
+  max-width:1200px;
+}
+
+.equipes-sistema .form-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+  gap:8px;
+}
+
+.equipes-sistema .form-grid-6{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  gap:8px;
+}
+
+.equipes-sistema .botoes{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 0;
+}
+
+.equipes-sistema button{
+  width:auto !important;
+}
+
+.equipes-sistema input,
+.equipes-sistema select,
+.equipes-sistema textarea{
+  width:100%;
+}
+
+/* ===== MAPAS ===== */
+.equipes-sistema .mapas-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap:10px;
+  margin-top:10px;
+}
+
+.equipes-sistema .mapa-card{
+  position: relative;
+  height: 160px;
+  border-radius:10px;
+  overflow:hidden;
+  cursor:pointer;
+  box-shadow:0 3px 8px rgba(0,0,0,.25);
+  transition:.3s;
+  background:#000;
+}
+
+.equipes-sistema .mapa-card img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#fff;
+}
+
+/* ===== TABELA ===== */
+.equipes-sistema table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+.equipes-sistema th,
+.equipes-sistema td{
+  border:1px solid #ccc;
+  padding:6px;
+  text-align:center;
+  font-size:13px;
+}
+
+.equipes-sistema th{
+  background:#eee;
+}
+/* ===== EFEITOS EQUIPES ===== */
+.equipes-sistema button{
+  transition: all .2s ease;
+}
+
+.equipes-sistema button:hover{
+  transform: translateY(-2px);
+  box-shadow:0 6px 12px rgba(0,0,0,.25);
+}
+
+.equipes-sistema .mapa-card{
+  transition:.3s;
+}
+
+.equipes-sistema .mapa-card:hover{
+  transform: scale(1.05);
+  box-shadow:0 8px 18px rgba(0,0,0,.35);
+}
+
+.equipes-sistema input:focus,
+.equipes-sistema select:focus,
+.equipes-sistema textarea:focus{
+  border-color:#00ff9c;
+  box-shadow:0 0 0 2px rgba(0,255,156,0.25);
+}
+/* ===== MODAL MAPA (FIX DEFINITIVO) ===== */
+.modal-mapa{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+.modal-mapa img{
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: 10px;
+  background: #fff;
+  animation: zoomIn .25s ease;
+}
+
+@keyframes zoomIn{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+/* ===== TOGGLE MAPA ===== */
+#mapas-container.hidden{
+  display:none;
+}
+/* ===== FILTROS EQUIPES ===== */
+.eq-filtros{
+  display:grid;
+  grid-template-columns: 1fr 220px auto;
+  gap:10px;
+  align-items:center;
+  margin-top:12px;
+}
+
+#eq_resumo{
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+/* Responsivo */
+@media(max-width:900px){
+  .eq-filtros{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #eq_resumo{
+    grid-column: 1 / -1;
+  }
+}
+
+/* ===== FORM EQUIPES 2 LINHAS FIXAS ===== */
+.eq-linha1{
+  display:grid;
+  grid-template-columns: 
+    1.2fr  /* equipe */
+    1.2fr  /* integrantes */
+    1fr    /* telefone */
+    1fr    /* viatura */
+    0.8fr  /* radio */
+    0.9fr  /* tipo */
+    1.2fr; /* regional */
+  gap:8px;
+}
+
+.eq-linha2{
+  display:grid;
+  grid-template-columns: 2.5fr 1.5fr;
+  gap:8px;
+  margin-top:8px;
+}
+/* ===== ALTURA COMPACTA LINHA 2 ===== */
+.eq-linha2 textarea{
+  height:48px;     /* antes era grande */
+  resize:none;     /* trava redimensionamento */
+}
+
+.eq-linha2 select{
+  height:48px;
+}
+/* ===== ALERTAS VISUAIS ===== */
+.alerta{
+  font-size:18px;
+  animation: piscar 1s infinite;
+}
+
+.alerta.vermelho{ color:#c62828; }
+.alerta.amarelo{ color:#f9a825; }
+
+@keyframes piscar{
+  0%{opacity:1}
+  50%{opacity:.3}
+  100%{opacity:1}
+}
+/* ===== PRIORIDADE PENDÊNCIAS ===== */
+.prio-normal{
+  color:#2e7d32;        /* VERDE */
+  font-weight:800;
+}
+
+.prio-alta{
+  color:#f9a825;        /* AMARELO */
+  font-weight:900;
+  animation: alertaPiscar 1s infinite;
+}
+
+.prio-critica{
+  color:#c62828;        /* VERMELHO */
+  font-weight:900;
+  animation: alertaPiscar 0.7s infinite;
+}
+
+/* ===== STATUS / VENCIMENTO ===== */
+.status-ok{
+  color:#f9a825;        /* AMARELO */
+  font-weight:800;
+}
+
+.status-vencido{
+  color:#c62828;        /* VERMELHO */
+  font-weight:900;
+  animation: alertaPiscar 1s infinite;
+}
+
+/* ===== ANIMAÇÃO GLOBAL ===== */
+@keyframes alertaPiscar{
+  0%{opacity:1}
+  50%{opacity:.3}
+  100%{opacity:1}
+}
+
+
+/* ===== STATUS / VENCIMENTO ===== */
+.status-vencido{
+  color:#c62828;
+  font-weight:900;
+  animation: piscar 1s infinite;
+}
+
+/* ===== ANIMAÇÃO ===== */
+@keyframes piscar{
+  0%{opacity:1}
+  50%{opacity:.3}
+  100%{opacity:1}
+}
 
 </style>
 </head>
@@ -406,11 +656,13 @@ input:focus, select:focus, textarea:focus{
 </div>
 
 
- <div class="menu">
+<div class="menu">
     <button class="active" onclick="openModule('rel',this)">🔒 Script Bloqueios LV</button>
     <button onclick="openModule('obs',this)">📝 Script Ocorrências</button>
     <button onclick="openModule('callback',this)">📞 Script Callback</button>
+    <button onclick="openModule('equipes',this)">👷 Gestão de Equipes</button>
 </div>
+
 
 <div class="sidebar-footer premium-footer">
     <div class="status-indicator"></div>
@@ -457,7 +709,7 @@ input:focus, select:focus, textarea:focus{
 
 <div class="linha-2">
 <div><label>Responsável:</label><input id="responsavel"></div>
-<div><label>Equipe:</label><input id="equipe"></div>
+<div><label>Equipe:</label><input id="bloq_equipe"></div>
 </div>
 
 <div class="linha-3">
@@ -542,9 +794,223 @@ input:focus, select:focus, textarea:focus{
 <textarea id="resultadoCallback" readonly></textarea>
 </div>
 </div>
+<!-- EQUIPES DE CAMPO -->
+<!-- EQUIPES DE CAMPO -->
+<div id="equipes" class="module equipes-sistema">
+<div class="container">
+
+<h2>Controle Diário de Equipes de Campo</h2>
+
+<div id="moduloEquipes">
+
+<!-- LINHA 1 -->
+<div class="eq-linha1">
+  <input id="eq_equipe" placeholder="Equipe">
+  <input id="eq_integrantes" placeholder="Integrantes">
+  <input id="eq_telefone" placeholder="Telefone">
+  <input id="eq_viatura" placeholder="Viatura">
+
+  <select id="eq_radio">
+    <option value="SIM">Rádio SIM</option>
+    <option value="NÃO">Rádio NÃO</option>
+  </select>
+
+  <select id="eq_tipo">
+    <option value="DUPLADA">DUPLADA</option>
+    <option value="SOLO">SOLO</option>
+  </select>
+
+  <select id="eq_regional">
+    <option value="">Selecione a regional</option>
+    <option>ARACAJU</option>
+    <option>SÃO CRISTÓVÃO</option>
+    <option>N. S. DO SOCORRO</option>
+    <option>ITABAIANA</option>
+    <option>LAGARTO</option>
+    <option>N. S. DAS DORES</option>
+    <option>PROPRIÁ</option>
+    <option>MARUIM</option>
+  </select>
+</div>
+
+<!-- LINHA 2 -->
+<div class="eq-linha2">
+  <textarea id="eq_obs" placeholder="Observações"></textarea>
+
+  <select id="eq_alerta">
+    <option value="">Sem prioridade</option>
+    <option value="⏱️ Religação vencendo 8h">⏱️ Religação vencendo 8h</option>
+    <option value="💰 Comercial – Compensação Alta">💰 Comercial – Compensação Alta</option>
+    <option value="🚨 Risco à Vida">🚨 Risco à Vida</option>
+    <option value="⚡ Falta de Fase">⚡ Falta de Fase</option>
+    <option value="⭐ FE – Cliente VIP">⭐ FE – Cliente VIP</option>
+    <option value="📢 Solicitação da Supervisão">📢 Solicitação da Supervisão</option>
+  </select>
+</div>
+
+
+<div class="botoes">
+  <button onclick="eq_salvar()">Adicionar à Lista</button>
+  <button onclick="eq_limpar()" class="btn-sec">Limpar Campos</button>
+  <button onclick="eq_exportar()">Exportar Excel</button>
+  <button onclick="eq_toggleMapa()">Recolher / Mostrar Mapa</button>
+  <button onclick="eq_abrirPendencias()">🔧 Pendências</button>
+  <button onclick="eq_limparLista()" class="btn-danger">Limpar Lista</button>
+</div>
+
+<!-- MAPAS -->
+<div id="mapas-container">
+  <div class="mapas-grid">
+    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa1.jpg')">
+      <img src="mapas/mapa1.jpg">
+      <span>Regional Itabaiana</span>
+    </div>
+
+    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa2.jpg')">
+      <img src="mapas/mapa2.jpg">
+      <span>Regional Lagarto</span>
+    </div>
+
+    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa3.jpg')">
+      <img src="mapas/mapa3.jpg">
+      <span>Regional Glória</span>
+    </div>
+
+    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa4.jpg')">
+      <img src="mapas/mapa4.jpg">
+      <span>Regional Propriá</span>
+    </div>
+
+    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa5.jpg')">
+      <img src="mapas/mapa5.jpg">
+      <span>Regional Maruim</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL MAPA -->
+<div id="modal-mapa" class="modal-mapa" onclick="eq_fecharMapa(event)">
+  <img id="modal-img" onclick="event.stopPropagation()">
+</div>
+
+
+<!-- FILTROS -->
+<div class="eq-filtros">
+  <input id="eq_busca" placeholder="Buscar equipe" onkeyup="eq_render()">
+
+  <select id="eq_filtroRegional" onchange="eq_render()">
+    <option value="">Todas Regionais</option>
+    <option>ARACAJU</option>
+    <option>SÃO CRISTÓVÃO</option>
+    <option>N. S. DO SOCORRO</option>
+    <option>ITABAIANA</option>
+    <option>LAGARTO</option>
+    <option>N. S. DAS DORES</option>
+    <option>PROPRIÁ</option>
+    <option>MARUIM</option>
+  </select>
+
+  <div id="eq_resumo"></div>
+</div>
+
+
+<table>
+<thead>
+<tr>
+<th>Equipe</th>
+<th>Integrantes</th>
+<th>Telefone</th>
+<th>Viatura</th>
+<th>Rádio</th>
+<th>Tipo</th>
+<th>Regional</th>
+<th>Obs</th>
+<th>⚠</th>
+<th>Ações</th>
+</tr>
+</thead>
+<tbody id="eq_tabela"></tbody>
+</table>
+
+</div>
+
+<!-- ================= PENDÊNCIAS ================= -->
+<div id="moduloPendencias" style="display:none">
+
+<h2>Pendências Operacionais</h2>
+
+<div class="form-grid-6">
+  <input id="p_equipe" placeholder="OS / Ocorrência">
+  <select id="p_regional">
+    <option value="">Regional</option>
+    <option>ARACAJU</option>
+    <option>SÃO CRISTÓVÃO</option>
+    <option>N. S. DO SOCORRO</option>
+    <option>ITABAIANA</option>
+    <option>LAGARTO</option>
+    <option>N. S. DAS DORES</option>
+    <option>PROPRIÁ</option>
+    <option>MARUIM</option>
+  </select>
+  <select id="p_tipo">
+    <option value="">Tipo</option>
+    <option>Material</option>
+    <option>Veículo</option>
+    <option>Logística</option>
+    <option>Operacional</option>
+    <option>Crítica</option>
+  </select>
+  <select id="p_prioridade">
+    <option value="NORMAL">Normal</option>
+    <option value="ALTA">Alta</option>
+    <option value="CRÍTICA">Crítica</option>
+  </select>
+  <select id="p_status">
+    <option>PENDENTE</option>
+    <option>EM ANDAMENTO</option>
+    <option>RESOLVIDO</option>
+    <option>TRANSFERIDO</option>
+  </select>
+  <input type="date" id="p_vencimento">
+</div>
+
+<div class="form-grid" style="margin-top:8px">
+  <textarea id="p_descricao" placeholder="Descrição da pendência"></textarea>
+</div>
+
+<div class="botoes">
+  <button onclick="eq_salvarPendencia()">Adicionar Pendência</button>
+  <button onclick="eq_limparPendencia()" class="btn-sec">Limpar Campos</button>
+  <button onclick="eq_gerarRelatorioPendencias()">Gerar Relatório do Dia</button>
+  <button onclick="eq_limparListaPendencias()" class="btn-danger">Limpar Lista</button>
+  <button onclick="eq_voltarEquipes()" class="btn-sec">⬅ Voltar</button>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>OS</th>
+<th>Regional</th>
+<th>Tipo</th>
+<th>Descrição</th>
+<th>Prioridade</th>
+<th>Status</th>
+<th>Vencimento</th>
+<th>Ações</th>
+</tr>
+</thead>
+<tbody id="tabelaPendencias"></tbody>
+</table>
+
+</div>
 
 </div>
 </div>
+
+</div>
+</div>
+
 
 <script>
 function showToast(msg){
@@ -583,10 +1049,10 @@ function limparHistorico(){
 function gerarRelatorio(){
  const t=`Data/Hora: ${new Date().toLocaleString("pt-BR")}
 Responsável: ${responsavel.value}
-Equipe: ${equipe.value}
-Contato: ${contato.value}
-Viatura: ${viatura.value}
-Rádio: ${radio.value}
+Equipe: ${bloq_equipe.value}
+Contato: ${eq_telefone.value}
+Viatura: ${eq_viatura.value}
+Rádio: ${eq_radio.value}
 Teste Rádio: ${testeRadio.value}
 Self-healing: ${selfhealing.value}
 Desativou SH: ${desativou.value}
@@ -636,7 +1102,370 @@ function atualizarRodape(){
 
 setInterval(atualizarRodape, 1000);
 atualizarRodape();
+/* ================================
+   MÓDULO EQUIPES (ISOLADO)
+================================ */
 
+let eq_dados = JSON.parse(localStorage.getItem("equipes")) || [];
+let eq_pendencias = JSON.parse(localStorage.getItem("pendencias")) || [];
+let eq_edit = null;
+let eq_editPend = null;
+
+/* ===== MAPAS ===== */
+function eq_abrirMapa(src){
+  const modal = document.getElementById("modal-mapa");
+  const img = document.getElementById("modal-img");
+
+  img.src = src;
+  modal.style.display = "flex";
+}
+
+function eq_fecharMapa(e){
+  // só fecha se clicar no fundo escuro
+  if(e.target.id === "modal-mapa"){
+    document.getElementById("modal-mapa").style.display = "none";
+  }
+}
+
+
+/* ===== EQUIPES ===== */
+function eq_salvar(){
+  if(!eq_equipe.value.trim()){
+    alert("Informe a equipe");
+    return;
+  }
+
+  const obj = {
+    equipe: eq_equipe.value.toUpperCase(),
+    integrantes: eq_integrantes.value.toUpperCase(),
+    telefone: eq_telefone.value,
+    viatura: eq_viatura.value,
+    radio: eq_radio.value,
+    tipo: eq_tipo.value,
+    regional: eq_regional.value,
+    obs: eq_obs.value,
+    alerta: eq_alerta.value
+  };
+
+  if(eq_edit !== null){
+    eq_dados[eq_edit] = obj;
+    eq_edit = null;
+  } else {
+    eq_dados.push(obj);
+  }
+
+  localStorage.setItem("equipes", JSON.stringify(eq_dados));
+  eq_limpar();
+  eq_render();
+}
+
+function eq_render(){
+  eq_tabela.innerHTML = "";
+  let total = 0;
+
+  eq_dados.forEach((d,i)=>{
+    if((!eq_busca.value || d.equipe.includes(eq_busca.value.toUpperCase())) &&
+       (!eq_filtroRegional.value || d.regional === eq_filtroRegional.value)){
+
+      total++;
+
+let icone = "";
+if(d.alerta){
+  let emoji = d.alerta.match(/^[^\s]+/)[0]; // pega o emoji
+  let cor = "vermelho";
+
+  if(
+    d.alerta.includes("Religação") ||
+    d.alerta.includes("Falta")
+  ){
+    cor = "amarelo";
+  }
+
+  icone = `<span class="alerta ${cor}">${emoji}</span>`;
+}
+
+
+  eq_tabela.innerHTML += `
+<tr>
+  <td>${d.equipe}</td>
+  <td>${d.integrantes || "-"}</td>
+  <td>${d.telefone || "-"}</td>
+  <td>${d.viatura || "-"}</td>
+  <td>${d.radio}</td>
+  <td>${d.tipo}</td>
+  <td>${d.regional || "-"}</td>
+  <td>${d.obs || "-"}</td>
+  <td>${icone}</td>
+  <td>
+    <button onclick="eq_copiarEquipe(${i})" class="btn-icone btn-sec">📋</button>
+    <button onclick="eq_editar(${i})" class="btn-icone btn-editar">✏️</button>
+    <button onclick="eq_remover(${i})" class="btn-icone btn-excluir">🗑️</button>
+  </td>
+</tr>
+`;
+    }
+  });
+
+  eq_resumo.innerText = `Total de equipes exibidas: ${total}`;
+}
+
+function eq_editar(i){
+  const d = eq_dados[i];
+  eq_equipe.value = d.equipe;
+  eq_integrantes.value = d.integrantes;
+  eq_telefone.value = d.telefone;
+  eq_viatura.value = d.viatura;
+  eq_radio.value = d.radio;
+  eq_tipo.value = d.tipo;
+  eq_regional.value = d.regional;
+  eq_obs.value = d.obs;
+  eq_alerta.value = d.alerta;
+  eq_edit = i;
+}
+
+function eq_remover(i){
+  if(confirm("Remover equipe?")){
+    eq_dados.splice(i,1);
+    localStorage.setItem("equipes", JSON.stringify(eq_dados));
+    eq_render();
+  }
+}
+
+function eq_limpar(){
+  eq_equipe.value="";
+  eq_integrantes.value="";
+  eq_telefone.value="";
+  eq_viatura.value="";
+  eq_obs.value="";
+  eq_alerta.value="";
+  eq_regional.value="";
+  eq_edit = null;
+}
+
+function eq_limparLista(){
+  if(confirm("Deseja limpar toda a lista?")){
+    eq_dados = [];
+    localStorage.removeItem("equipes");
+    eq_render();
+  }
+}
+
+function eq_exportar(){
+  let csv="Equipe;Integrantes;Telefone;Viatura;Rádio;Tipo;Regional;Obs;Alerta\n";
+  eq_dados.forEach(d=>{
+    csv+=`${d.equipe};${d.integrantes};${d.telefone};${d.viatura};${d.radio};${d.tipo};${d.regional};${d.obs};${d.alerta}\n`;
+  });
+  let a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download="equipes.csv";
+  a.click();
+}
+
+/* ===== PENDÊNCIAS ===== */
+function eq_abrirPendencias(){
+  document.getElementById("moduloEquipes").style.display="none";
+  document.getElementById("moduloPendencias").style.display="block";
+  eq_renderPendencias();
+}
+
+function eq_voltarEquipes(){
+  document.getElementById("moduloPendencias").style.display="none";
+  document.getElementById("moduloEquipes").style.display="block";
+}
+
+function eq_salvarPendencia(){
+  if(!p_equipe.value || !p_descricao.value){
+    alert("Informe OS/Ocorrência e descrição");
+    return;
+  }
+
+  const obj={
+    equipe:p_equipe.value.toUpperCase(),
+    regional:p_regional.value,
+    tipo:p_tipo.value,
+    prioridade:p_prioridade.value,
+    status:p_status.value,
+    descricao:p_descricao.value,
+    vencimento:p_vencimento.value
+  };
+
+  if(eq_editPend!==null){
+    eq_pendencias[eq_editPend]=obj;
+    eq_editPend=null;
+  }else{
+    eq_pendencias.push(obj);
+  }
+
+  localStorage.setItem("pendencias",JSON.stringify(eq_pendencias));
+  eq_limparPendencia();
+  eq_renderPendencias();
+}
+
+function eq_renderPendencias(){
+  tabelaPendencias.innerHTML="";
+
+  const hoje = new Date();
+  hoje.setHours(0,0,0,0);
+
+  eq_pendencias.forEach((p,i)=>{
+
+    /* ===== DATA ===== */
+    let dataBR = "-";
+    let statusClasse = "";
+    let dataClasse = "";
+
+    if(p.vencimento){
+      const dataObj = new Date(p.vencimento + "T00:00:00");
+      dataBR = dataObj.toLocaleDateString("pt-BR");
+
+      if(dataObj < hoje){
+        // vencido
+        statusClasse = "status-vencido";
+        dataClasse = "status-vencido";
+      }else{
+        // ainda não venceu
+        statusClasse = "status-ok";   // amarelo
+        dataClasse = "status-ok";     // amarelo
+      }
+    }
+
+    /* ===== PRIORIDADE ===== */
+    let classePrio = "prio-normal";
+    if(p.prioridade === "ALTA") classePrio = "prio-alta";
+    if(p.prioridade === "CRÍTICA") classePrio = "prio-critica";
+
+    tabelaPendencias.innerHTML += `
+    <tr>
+      <td>${p.equipe}</td>
+      <td>${p.regional||"-"}</td>
+      <td>${p.tipo||"-"}</td>
+      <td style="text-align:left">${p.descricao}</td>
+      <td class="${classePrio}">${p.prioridade}</td>
+      <td class="${statusClasse}">${p.status}</td>
+      <td class="${dataClasse}">${dataBR}</td>
+      <td>
+        <button class="btn-icone btn-sec" onclick="eq_copiarPendencia(${i})">📋</button>
+        <button class="btn-icone btn-editar" onclick="eq_editarPendencia(${i})">✏️</button>
+        <button class="btn-icone btn-excluir" onclick="eq_removerPendencia(${i})">🗑️</button>
+      </td>
+    </tr>`;
+  });
+}
+
+
+
+function eq_editarPendencia(i){
+  const p=eq_pendencias[i];
+  p_equipe.value=p.equipe;
+  p_regional.value=p.regional;
+  p_tipo.value=p.tipo;
+  p_prioridade.value=p.prioridade;
+  p_status.value=p.status;
+  p_descricao.value=p.descricao;
+  p_vencimento.value=p.vencimento;
+  eq_editPend=i;
+}
+
+function eq_removerPendencia(i){
+  if(confirm("Remover pendência?")){
+    eq_pendencias.splice(i,1);
+    localStorage.setItem("pendencias",JSON.stringify(eq_pendencias));
+    eq_renderPendencias();
+  }
+}
+
+function eq_limparPendencia(){
+  p_equipe.value="";
+  p_descricao.value="";
+  p_regional.value="";
+  p_tipo.value="";
+  p_prioridade.value="NORMAL";
+  p_status.value="PENDENTE";
+  p_vencimento.value="";
+  eq_editPend=null;
+}
+
+function eq_limparListaPendencias(){
+  if(confirm("Limpar todas as pendências?")){
+    eq_pendencias=[];
+    localStorage.removeItem("pendencias");
+    eq_renderPendencias();
+  }
+}
+
+function eq_gerarRelatorioPendencias(){
+  if(eq_pendencias.length===0){
+    alert("Nenhuma pendência registrada");
+    return;
+  }
+
+  let texto="🚨 PENDÊNCIAS DO DIA\n\n";
+  eq_pendencias.forEach(p=>{
+    texto+=`🧾 ${p.equipe} | ${p.regional||"-"} | ${p.tipo||"-"}
+📝 ${p.descricao}
+📅 Venc: ${p.vencimento||"-"}\n\n`;
+  });
+
+  navigator.clipboard.writeText(texto);
+  alert("Relatório copiado!");
+}
+
+/* INIT */
+eq_render();
+function eq_toggleMapa(){
+  const mapas = document.getElementById("mapas-container");
+
+  if(!mapas) return;
+
+  mapas.classList.toggle("hidden");
+}
+function eq_copiarEquipe(i){
+  const d = eq_dados[i];
+
+  const texto = `📋 EQUIPE DE CAMPO
+
+👥 Equipe: ${d.equipe}
+👤 Integrantes: ${d.integrantes || "-"}
+📞 Telefone: ${d.telefone || "-"}
+🚐 Viatura: ${d.viatura || "-"}
+📡 Rádio: ${d.radio || "-"}
+🔁 Tipo: ${d.tipo || "-"}
+📍 Regional: ${d.regional || "-"}
+📝 Obs: ${d.obs || "-"}`;
+
+  navigator.clipboard.writeText(texto);
+  showToast("Dados da equipe copiados 📋");
+}
+
+function eq_copiarPendencia(i){
+  const p = eq_pendencias[i];
+
+  if(!p){
+    console.error("Pendência não encontrada:", i);
+    return;
+  }
+
+  const texto = 
+`🚨 PENDÊNCIA OPERACIONAL
+
+🧾 OS/Ocorrência: ${p.equipe}
+📍 Regional: ${p.regional || "-"}
+📦 Tipo: ${p.tipo || "-"}
+⚠ Prioridade: ${p.prioridade}
+📌 Status: ${p.status}
+📅 Vencimento: ${p.vencimento ? new Date(p.vencimento+"T00:00:00").toLocaleDateString("pt-BR") : "-"}
+📝 Descrição:
+${p.descricao}`;
+
+  navigator.clipboard.writeText(texto)
+    .then(() => {
+      showToast("Pendência copiada 📋");
+    })
+    .catch(err => {
+      console.error("Erro ao copiar pendência:", err);
+      alert("Erro ao copiar pendência");
+    });
+}
 
 </script>
 
