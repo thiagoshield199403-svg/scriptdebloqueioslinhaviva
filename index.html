@@ -302,6 +302,36 @@ button.sec{background:#777}
     50%{filter:drop-shadow(0 0 14px rgba(0,255,255,0.7))}
     100%{filter:drop-shadow(0 0 4px rgba(0,255,255,0.3))}
 }
+/* ===== MICROINTERAÇÕES MENU ===== */
+.menu button{
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu button::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:#00ff9c;
+    opacity:0;
+    transition:0.3s;
+}
+
+.menu button:hover::before{
+    opacity:1;
+}
+
+.menu button:hover{
+    transform: translateX(6px);
+}
+
+.menu button.active{
+    position:relative;
+}
 
 </style>
 </head>
@@ -557,5 +587,6 @@ atualizarRodape();
 
 </body>
 </html>
+
 
 
