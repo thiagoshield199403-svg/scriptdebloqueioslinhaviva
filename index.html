@@ -774,6 +774,15 @@ input:focus, select:focus, textarea:focus{
     height:70px;
 }
 
+.linha-4-rel{
+  display:grid;
+  grid-template-columns: 
+    1.4fr  /* Responsável */
+    1.2fr  /* Equipe */
+    1.2fr  /* Contato */
+    0.8fr; /* Viatura (menor) */
+  gap:10px;
+}
 
 </style>
 </head>
@@ -829,7 +838,7 @@ input:focus, select:focus, textarea:focus{
 <!-- OCORRÊNCIAS -->
 <div id="obs" class="module">
 <div class="container">
-<h2>SCRIPT OBSERVAÇÕES / OCORRÊNCIAS </h2>
+<h2>SCRIPT HORA AUTOMÁTICA /OBSERVAÇÕES DE OCORRÊNCIAS </h2>
 
 <label>Nova observação:</label>
 <textarea id="obsTexto"></textarea>
@@ -848,36 +857,116 @@ input:focus, select:focus, textarea:focus{
 <div class="container">
 <h2>SCRIPT BLOQUEIO – LINHA VIVA</h2>
 
-<div class="linha-2">
-<div><label>Responsável:</label><input id="responsavel"></div>
-<div><label>Equipe:</label><input id="bloq_equipe"></div>
+<!-- LINHA 1 -->
+<div class="linha-4-rel">
+  <div>
+    <label>Responsável:</label>
+    <input id="responsavel">
+  </div>
+
+  <div>
+    <label>Equipe:</label>
+    <input id="bloq_equipe">
+  </div>
+
+  <div>
+    <label>Contato:</label>
+    <input id="contato">
+  </div>
+
+  <div>
+    <label>Viatura:</label>
+    <input id="viatura">
+  </div>
 </div>
 
+
+<!-- LINHA 2 -->
 <div class="linha-3">
-<div><label>Contato:</label><input id="contato"></div>
-<div><label>Viatura:</label><input id="viatura"></div>
-<div><label>Rádio:</label><select id="radio"><option>Sim</option><option>Não</option></select></div>
+  <div>
+    <label>Rádio:</label>
+    <select id="radio">
+      <option>Sim</option>
+      <option>Não</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Teste Rádio?</label>
+    <select id="testeRadio">
+      <option>Sim</option>
+      <option>Não</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Referência Elétrica:</label>
+    <input id="referencia">
+  </div>
 </div>
 
+<!-- LINHA 3 -->
 <div class="linha-3">
-<div><label>Teste Rádio?</label><select id="testeRadio"><option>Sim</option><option>Não</option></select></div>
-<div><label>Self-healing?</label><select id="selfhealing"><option>Sim</option><option>Não</option></select></div>
-<div><label>Desativou SH?</label><select id="desativou"><option>Sim</option><option>Não</option></select></div>
+  <div>
+    <label>Tipo de Condutor</label>
+    <select id="tipoCondutor">
+      <option value="">Selecione</option>
+      <option>4 AWG C/ ALMA</option>
+      <option>4 AWG S/ ALMA</option>
+      <option>2 AWG</option>
+      <option>1/0</option>
+      <option>2/0 </option>
+      <option>4/0</option>
+      <option>336</option>
+      <option>Outros</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Área de Maresia?</label>
+    <select id="maresia">
+      <option>Não</option>
+      <option>Sim</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Self-healing?</label>
+    <select id="selfhealing">
+      <option>Sim</option>
+      <option>Não</option>
+    </select>
+  </div>
 </div>
 
-<div class="linha-2">
-<div><label>Referência:</label><input id="referencia"></div>
-<div><label>Serviço:</label><input id="servico"></div>
+<!-- LINHA 4 -->
+<div class="linha-3">
+  <div>
+    <label>Desativou Self-healing</label>
+    <select id="desativou">
+      <option>Sim</option>
+      <option>Não</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Tipo do Serviço:</label>
+    <input id="servico">
+  </div>
+
+  <div>
+    <label>Observação:</label>
+    <input id="obsRel">
+  </div>
 </div>
 
-<label>Observação:</label>
-<textarea id="obsRel"></textarea>
-
+<!-- BOTÕES -->
 <button onclick="gerarRelatorio()">Gerar e Copiar</button>
 <button class="sec" onclick="limparRelatorio()">Limpar</button>
 
-<label>Relatório</label>
+<label>Relatório:</label>
 <textarea id="resultado" readonly></textarea>
+
 </div>
 </div>
 
@@ -886,7 +975,7 @@ input:focus, select:focus, textarea:focus{
 <div class="container">
 <h2>CALLBACK</h2>
 
-<label>Data / Hora</label>
+<label>Data / Hora:</label>
 <input id="dataHora" readonly>
 
 <div class="linha-3">
@@ -1459,19 +1548,20 @@ function limparHistorico(){
 
 /* BLOQUEIO */
 function gerarRelatorio(){
- const t=`Data/Hora: ${new Date().toLocaleString("pt-BR")}
+ const t = `Data/Hora: ${new Date().toLocaleString("pt-BR")}
 Responsável: ${responsavel.value}
 Equipe: ${bloq_equipe.value}
-Contato: ${eq_telefone.value}
-Viatura: ${eq_viatura.value}
-Rádio: ${eq_radio.value}
+Contato: ${contato.value}
+Viatura: ${viatura.value}
+Rádio: ${radio.value}
 Teste Rádio: ${testeRadio.value}
 Self-healing: ${selfhealing.value}
 Desativou SH: ${desativou.value}
 Referência: ${referencia.value}
 Serviço: ${servico.value}
-Observação: ${obsRel.value||""}`;
- resultado.value=t;
+Observação: ${obsRel.value || ""}`;
+
+ resultado.value = t;
  navigator.clipboard.writeText(t);
  showToast("Relatório copiado com sucesso!");
 }
