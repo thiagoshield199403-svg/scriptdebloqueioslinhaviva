@@ -1548,23 +1548,33 @@ function limparHistorico(){
 
 /* BLOQUEIO */
 function gerarRelatorio(){
- const t = `Data/Hora: ${new Date().toLocaleString("pt-BR")}
-Responsável: ${responsavel.value}
-Equipe: ${bloq_equipe.value}
-Contato: ${contato.value}
-Viatura: ${viatura.value}
-Rádio: ${radio.value}
-Teste Rádio: ${testeRadio.value}
-Self-healing: ${selfhealing.value}
-Desativou SH: ${desativou.value}
-Referência: ${referencia.value}
-Serviço: ${servico.value}
-Observação: ${obsRel.value || ""}`;
+
+ const hora = new Date().toLocaleTimeString("pt-BR", {
+   hour: '2-digit',
+   minute: '2-digit'
+ });
+
+ const t = 
+`# ${hora} | ` +
+`RESP: ${responsavel.value || "-"} | ` +
+`EQP: ${bloq_equipe.value || "-"} | ` +
+`CONT: ${contato.value || "-"} | ` +
+`VIAT: ${viatura.value || "-"} | ` +
+`RADIO: ${radio.value || "-"} | ` +
+`TESTE RADIO: ${testeRadio.value || "-"} | ` +
+`REF.ELETRICA: ${referencia.value || "-"} | ` +
+`CONDUTOR: ${tipoCondutor.value || "-"} | ` +
+`MARESIA: ${maresia.value || "-"} | ` +
+`SELF-HEALING: ${selfhealing.value || "-"} | ` +
+`DESATIVOU SH: ${desativou.value || "-"} | ` +
+`SERVIÇO: ${servico.value || "-"} | ` +
+`OBS: ${obsRel.value || "-"}`;
 
  resultado.value = t;
  navigator.clipboard.writeText(t);
- showToast("Relatório copiado com sucesso!");
+ showToast("Relatório copiado!");
 }
+
 function limparRelatorio(){
  document.querySelectorAll('#rel input,#rel textarea').forEach(e=>e.value="");
 }
