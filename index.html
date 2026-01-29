@@ -732,6 +732,7 @@ input:focus, select:focus, textarea:focus{
   100%{transform:scale(1);opacity:1}
 }
 
+
 </style>
 </head>
 
@@ -755,6 +756,8 @@ input:focus, select:focus, textarea:focus{
     <button onclick="openModule('obs',this)">📝 Script Ocorrências</button>
     <button onclick="openModule('callback',this)">📞 Script Callback</button>
     <button onclick="openModule('equipes',this)">👷 Gestão de Equipes</button>
+    <button onclick="openModule('ss',this)">🧾 Preenchimento de SS</button>
+
 </div>
 
 
@@ -1002,7 +1005,6 @@ input:focus, select:focus, textarea:focus{
     <option>ITABAIANA</option>
     <option>LAGARTO</option>
     <option>N. S. DAS DORES</option>
-    <option>N. S. DA GLÓRIA</option>
     <option>PROPRIÁ</option>
     <option>MARUIM</option>
   </select>
@@ -1104,7 +1106,114 @@ input:focus, select:focus, textarea:focus{
 </div>
 </div>
 
+<!-- PREENCIMENTO DE SS -->
+<div id="ss" class="module">
+  <div class="container">
+    <h2>PREENCHIMENTO DE SS</h2>
+
+    <div class="linha-3">
+      <div>
+        <label>POLO / REGIONAL</label>
+        <select id="ss_regional">
+          <option value="">Selecione</option>
+          <option>ARACAJU</option>
+          <option>N.S SOCORRO</option>
+          <option>SÃO CRISTÓVÃO</option>
+          <option>ITABAIANA</option>
+          <option>LAGARTO</option>
+          <option>N.S GLÓRIA</option>
+          <option>N.S DORES</option>
+          <option>PROPRIÁ</option>
+          <option>MARUIM</option>
+        </select>
+      </div>
+
+      <div>
+        <label>ABRANGÊNCIA</label>
+        <select id="ss_abrangencia">
+          <option value="">Selecione</option>
+          <option value="T1">T1 - ALIMENTADOR</option>
+          <option value="T2">T2 - RELIGADOR</option>
+          <option value="T3">T3 - CHAVE SECCIONADORA</option>
+        </select>
+      </div>
+
+      <div>
+        <label>TIPO DE EQUIPE</label>
+        <select id="ss_equipe">
+          <option value="">Selecione</option>
+          <option>LINHA MORTA</option>
+          <option>LINHA VIVA</option>
+          <option>EQUIPE PODA</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="linha-3">
+      <div>
+        <label>ACESSO PARA CAMINHÃO</label>
+        <select id="ss_acesso">
+          <option value="">Selecione</option>
+          <option>COM ACESSO</option>
+          <option>SEM ACESSO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>CHAVE REFERÊNCIA</label>
+        <select id="ss_ref">
+          <option value="">Selecione</option>
+          <option value="CF">CF - CHAVE FUSÍVEL</option>
+          <option value="CS">CS - CHAVE FACA</option>
+          <option value="TD">TD - TRANSFORMADOR DE DISTRIBUIÇÃO</option>
+          <option value="RD">RD - RELIGADOR DE DISTRIBUIÇÃO</option>
+          <option value="RT">RT - REGULADOR DE TENSÃO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>N° CHAVE </label>
+        <input id="ss_num" type="number" inputmode="numeric" pattern="[0-9]*">
+
+      </div>
+    </div>
+
+    <div class="linha-3">
+      <div>
+        <label>ID:</label>
+        <input id="ss_id" type="number" inputmode="numeric" pattern="[0-9]*">
+
+      </div>
+
+      <div>
+        <label>DESCRIÇÃO DO SERVIÇO:</label>
+        <input id="ss_servico">
+      </div>
+
+      <div>
+        <label>COORDENADAS:</label>
+        <input id="ss_coord">
+      </div>
+    </div>
+
+    <label>ENDEREÇO DO SERVIÇO:</label>
+    <input id="ss_endereco">
+
+    <label>OBSERVAÇÕES RELEVANTES:</label>
+    <textarea id="ss_obs"></textarea>
+
+    <div class="linha-3">
+      <button onclick="gerarSSWhats()">📲 Gerar Relatório WhatsApp</button>
+      <button onclick="gerarSSPadrao()">🧾 Gerar Relatório SS</button>
+      <button class="sec" onclick="limparSS()">🆕 Novo Script</button>
+    </div>
+
+    <label>Resultado</label>
+    <textarea id="ss_resultado" readonly></textarea>
+
+  </div>
 </div>
+
 </div>
 
 
@@ -1563,6 +1672,51 @@ ${p.descricao}`;
       alert("Erro ao copiar pendência");
     });
 }
+/* =========================
+   PREENCIMENTO DE SS
+========================= */
+
+function gerarSSWhats(){
+  const ref = ss_ref.value && ss_num.value ? `${ss_ref.value} ${ss_num.value}` : "-";
+  const id = ss_id.value ? `ID: ${ss_id.value}` : "-";
+
+  const texto =
+`🧾 SS
+
+REGIONAL: ${ss_regional.value || "-"}
+ABRANGÊNCIA: ${ss_abrangencia.value || "-"}
+EQUIPE: ${ss_equipe.value || "-"}
+ACESSO: ${ss_acesso.value || "-"}
+REF.ELÉTRICA: ${ref}
+
+${id}
+SERVIÇO: ${ss_servico.value || "-"}
+ENDEREÇO: ${ss_endereco.value || "-"}
+COORD: ${ss_coord.value || "-"}
+OBS: ${ss_obs.value || "-"}`;
+
+  ss_resultado.value = texto;
+  navigator.clipboard.writeText(texto);
+  showToast("Relatório WhatsApp copiado 📲");
+}
+
+function gerarSSPadrao(){
+  const ref = ss_ref.value && ss_num.value ? `${ss_ref.value} ${ss_num.value}` : "-";
+  const id = ss_id.value ? `ID:${ss_id.value}` : "-";
+
+  const texto =
+`REGIONAL:${ss_regional.value || "-"} | ABRANGÊNCIA:${ss_abrangencia.value || "-"} | EQUIPE:${ss_equipe.value || "-"} | ACESSO:${ss_acesso.value || "-"} | REF.ELÉTRICA:${ref} | ${id} | SERVIÇO:${ss_servico.value || "-"} | ENDEREÇO:${ss_endereco.value || "-"} | COORD:${ss_coord.value || "-"} | OBS:${ss_obs.value || "-"}`;
+
+  ss_resultado.value = texto;
+  navigator.clipboard.writeText(texto);
+  showToast("Relatório SS copiado 🧾");
+}
+
+function limparSS(){
+  document.querySelectorAll('#ss input, #ss textarea').forEach(e=>e.value="");
+  document.querySelectorAll('#ss select').forEach(e=>e.selectedIndex=0);
+  ss_resultado.value="";
+}
 
 </script>
 <div class="footer-global">
@@ -1587,4 +1741,3 @@ ${p.descricao}`;
 
 </body>
 </html>
-
