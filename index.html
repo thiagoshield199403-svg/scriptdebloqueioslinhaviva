@@ -741,6 +741,40 @@ input:focus, select:focus, textarea:focus{
   100%{transform:scale(1);opacity:1}
 }
 
+/* ===== CALLBACK COMPACTO ===== */
+.callback-linha{
+    display:grid;
+    grid-template-columns: auto 1fr 2fr;
+    gap:12px;
+    align-items:end;
+    margin-top:10px;
+}
+
+.atuacao-box{
+    display:flex;
+    flex-direction:column;
+}
+
+.opcoes.compact{
+    gap:6px;
+}
+
+.opcoes.compact .card{
+    padding:6px 10px;
+    font-size:12px;
+}
+
+/* Reduz alturas gerais do callback */
+#callback input,
+#callback select{
+    height:36px;
+    padding:6px 8px;
+    font-size:13px;
+}
+
+#callback textarea{
+    height:70px;
+}
 
 </style>
 </head>
@@ -1749,5 +1783,6 @@ function limparSS(){
 
 </body>
 </html>
+
 
 
