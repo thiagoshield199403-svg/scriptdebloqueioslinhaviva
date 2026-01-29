@@ -799,6 +799,8 @@ input:focus, select:focus, textarea:focus{
     <button onclick="openModule('callback',this)">📞 Script Callback</button>
     <button onclick="openModule('equipes',this)">👷 Gestão de Equipes</button>
     <button onclick="openModule('ss',this)">🧾 Preenchimento de SS</button>
+    <button onclick="openModule('sinergia',this)">⚙️ Script Mais Sinergia</button>
+
 
 </div>
 
@@ -1269,7 +1271,157 @@ input:focus, select:focus, textarea:focus{
   </div>
 </div>
 
+<!-- MAIS SINERGIA -->
+<div id="sinergia" class="module">
+  <div class="container">
+    <h2>SCRIPT MAIS SINERGIA</h2>
+
+    <label>RD</label>
+    <input id="sg_rd" placeholder="Ex: 001013587">
+
+    <div class="linha-3">
+      <div>
+        <label>Religador conectado no TP ou BT?</label>
+        <select id="sg_tpbt">
+          <option value="">Selecione</option>
+          <option>TP</option>
+          <option>BT</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Ramal de serviço e conexões</label>
+        <select id="sg_ramal">
+          <option value="">Selecione</option>
+          <option>OK</option>
+          <option>PROBLEMA</option>
+        </select>
+      </div>
+
+      <div>
+        <label>DPS</label>
+        <select id="sg_dps">
+          <option value="">Selecione</option>
+          <option>ÍNTEGRO</option>
+          <option>DANIFICADO</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="linha-3">
+      <div>
+        <label>Tensão CA no disjuntor</label>
+        <select id="sg_tensao_ca">
+          <option value="">Selecione</option>
+          <option>OK</option>
+          <option>SEM TENSÃO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Disjuntor armado</label>
+        <select id="sg_disj">
+          <option value="">Selecione</option>
+          <option>SIM</option>
+          <option>NÃO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Alarme bateria antes da perda</label>
+        <select id="sg_alarme">
+          <option value="">Selecione</option>
+          <option>SIM</option>
+          <option>NÃO</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="linha-3">
+      <div>
+        <label>Tensão da bateria (V)</label>
+        <input id="sg_bateria" placeholder="Ex: 12.4">
+      </div>
+
+      <div>
+        <label>Painel do religador</label>
+        <select id="sg_painel">
+          <option value="">Selecione</option>
+          <option>FUNCIONANDO</option>
+          <option>SEM FUNCIONAMENTO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Modem / Rádio</label>
+        <select id="sg_modem">
+          <option value="">Selecione</option>
+          <option>LIGADO</option>
+          <option>DESLIGADO</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="linha-3">
+      <div>
+        <label>Antena GPRS / Rádio</label>
+        <select id="sg_antena">
+          <option value="">Selecione</option>
+          <option>INSTALADA</option>
+          <option>NÃO INSTALADA</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Sinais de curto-circuito</label>
+        <select id="sg_curto">
+          <option value="">Selecione</option>
+          <option>SIM</option>
+          <option>NÃO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Tanque</label>
+        <select id="sg_tanque">
+          <option value="">Selecione</option>
+          <option>OK</option>
+          <option>DETERIORADO</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="linha-3">
+      <div>
+        <label>Cubículo</label>
+        <select id="sg_cubiculo">
+          <option value="">Selecione</option>
+          <option>OK</option>
+          <option>DETERIORADO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Cordão umbilical</label>
+        <select id="sg_cordao">
+          <option value="">Selecione</option>
+          <option>OK</option>
+          <option>DETERIORADO</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="linha-3">
+      <button onclick="gerarSinergia()">⚙️ Gerar Script</button>
+      <button class="sec" onclick="limparSinergia()">🆕 Novo Script</button>
+    </div>
+
+    <label>Resultado</label>
+    <textarea id="sg_resultado" readonly></textarea>
+
+  </div>
 </div>
+
 
 
 <script>
@@ -1772,6 +1924,36 @@ function limparSS(){
   document.querySelectorAll('#ss select').forEach(e=>e.selectedIndex=0);
   ss_resultado.value="";
 }
+function gerarSinergia(){
+  const rd = sg_rd.value ? `RD ${sg_rd.value}` : "RD -";
+
+  const texto =
+`${rd}
+TP/BT: ${sg_tpbt.value || "-"}
+Ramal/Conexões: ${sg_ramal.value || "-"}
+DPS: ${sg_dps.value || "-"}
+Tensão CA disjuntor: ${sg_tensao_ca.value || "-"}
+Disjuntor armado: ${sg_disj.value || "-"}
+Alarme bateria antes da perda: ${sg_alarme.value || "-"}
+Tensão bateria: ${sg_bateria.value ? sg_bateria.value + "V" : "-"}
+Painel religador: ${sg_painel.value || "-"}
+Modem/Rádio: ${sg_modem.value || "-"}
+Antena: ${sg_antena.value || "-"}
+Sinais de curto: ${sg_curto.value || "-"}
+Tanque: ${sg_tanque.value || "-"}
+Cubículo: ${sg_cubiculo.value || "-"}
+Cordão umbilical: ${sg_cordao.value || "-"}`;
+
+  sg_resultado.value = texto;
+  navigator.clipboard.writeText(texto);
+  showToast("Script Mais Sinergia copiado ⚙️");
+}
+
+function limparSinergia(){
+  document.querySelectorAll('#sinergia input, #sinergia textarea').forEach(e=>e.value="");
+  document.querySelectorAll('#sinergia select').forEach(e=>e.selectedIndex=0);
+  sg_resultado.value="";
+}
 
 </script>
 <div class="footer-global">
@@ -1796,4 +1978,3 @@ function limparSS(){
 
 </body>
 </html>
-
