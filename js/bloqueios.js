@@ -13,11 +13,11 @@ function gerarRelatorio(){
 `# ${hora} | ` +
 `RESP: ${responsavel.value || "-"} | ` +
 `EQP: ${bloq_equipe.value || "-"} | ` +
-`CONT: ${contato.value || "-"} | ` +
-`VIAT: ${viatura.value || "-"} | ` +
-`RADIO: ${radio.value || "-"} | ` +
-`TESTE RADIO: ${testeRadio.value || "-"} | ` +
-`REF.ELETRICA: ${referencia.value || "-"} | ` +
+`TEL: ${contato.value || "-"} | ` +
+`VIATURA: ${viatura.value || "-"} | ` +
+`RÁDIO: ${radio.value || "-"} | ` +
+`TESTE RÁDIO: ${testeRadio.value || "-"} | ` +
+`REF: ${referencia.value || "-"} | ` +
 `CONDUTOR: ${tipoCondutor.value || "-"} | ` +
 `MARESIA: ${maresia.value || "-"} | ` +
 `SELF-HEALING: ${selfhealing.value || "-"} | ` +
@@ -34,3 +34,4 @@ function limparRelatorio(){
   document.querySelectorAll('#rel input,#rel textarea')
     .forEach(e => e.value = "");
 }
+
