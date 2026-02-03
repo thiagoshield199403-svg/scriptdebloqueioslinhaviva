@@ -1,6 +1,7 @@
 /* =========================
    BLOQUEIO – LINHA VIVA
 ========================= */
+console.log("BLOQUEIOS.JS CARREGADO NOVO");
 
 function gerarRelatorio(){
 
@@ -34,4 +35,5 @@ function limparRelatorio(){
   document.querySelectorAll('#rel input,#rel textarea')
     .forEach(e => e.value = "");
 }
+
 
