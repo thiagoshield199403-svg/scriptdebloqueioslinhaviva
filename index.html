@@ -809,6 +809,7 @@ input:focus, select:focus, textarea:focus{
     <button onclick="openModule('equipes',this)">👷 Gestão de Equipes</button>
     <button onclick="openModule('ss',this)">🧾 Preenchimento de SS</button>
     <button onclick="openModule('sinergia',this)">⚙️ Script Mais Sinergia</button>
+    <button onclick="openModule('desarme',this)">🚨 Script Desarme</button>
 
 
 </div>
@@ -1510,7 +1511,135 @@ input:focus, select:focus, textarea:focus{
 
   </div>
 </div>
+<!-- SCRIPT DESARME -->
+<div id="desarme" class="module">
+  <div class="container">
+    <h2>SCRIPT DESARME</h2>
 
+    <!-- LINHA 1 : ATIVO + DATA + UC -->
+    <div class="linha-3">
+      <div>
+        <label>Ativo</label>
+        <div class="linha-2">
+          <select id="ds_ativo_tipo">
+            <option value="RD">RD</option>
+            <option value="CF">CF</option>
+            <option value="FR">FR</option>
+            <option value="CS">CS</option>
+            <option value="SEC">SEC</option>
+          </select>
+          <input id="ds_ativo_num" placeholder="180-548376">
+        </div>
+      </div>
+
+      <div>
+        <label>Data / Hora</label>
+        <input type="datetime-local" id="ds_datahora" step="1">
+      </div>
+
+      <div>
+        <label>UC Atingidas</label>
+        <input id="ds_uc" placeholder="1.229">
+      </div>
+    </div>
+
+    <!-- LINHA 2 : REDE -->
+    <div class="linha-3">
+      <div>
+        <label>Subestação</label>
+        <select id="ds_subestacao">
+          <option value="">Selecione</option>
+          <option>SMD</option>
+          <option>LGT</option>
+          <option>PVD</option>
+          <option>MTA</option>
+          <option>CMD</option>
+          <option>ITB</option>
+          <option>CJB</option>
+          <option>FRP</option>
+          <option>MTB</option>
+          <option>NSG</option>
+          <option>NSD</option>
+          <option>MRI</option>
+          <option>PRP</option>
+          <option>CRT</option>
+          <option>CRP</option>
+          <option>ARJ</option>
+          <option>SCT</option>
+          <option>GRU</option>
+          <option>CNT</option>
+          <option>MSQ</option>
+          <option>CBT</option>
+          <option>ATL</option>
+          <option>PRT</option>
+          <option>URB</option>
+
+        </select>
+      </div>
+
+      <div>
+        <label>Alimentador</label>
+        <input id="ds_alimentador" placeholder="01F5">
+      </div>
+
+      <div>
+        <label>Condições Climáticas</label>
+        <select id="ds_clima">
+          <option>Normal</option>
+          <option>Chuva</option>
+          <option>Chuva forte</option>
+          <option>Descargas Atmosféricas</option>
+          <option>Nublado</option>
+          <option>Ventos fortes</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- LINHA 3 -->
+    <div class="linha-2">
+      <div>
+        <label>Situação Atual</label>
+        <select id="ds_situacao">
+          <option>Equipe(s) do DEOP acionada(s)</option>
+          <option>Equipe(s) inspecionando o circuito</option>
+          <option>Equipe(s) no local</option>
+          <option>Equipe da CAUT acionada</option>
+          <option>Equipe da CAUT no local</option>
+          <option>Equipe do DCMD acionada</option>
+          <option>Equipe do DCMD no local</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Observação</label>
+        <select id="ds_obs">
+          <option>Desarme sem sucesso no 1º ciclo de religamento.</option>
+          <option>Desarme sem sucesso no 2º ciclo de religamento.</option>
+          <option>Desarme com sucesso no 1º ciclo (sem perda de cargas).</option>
+          <option>Desarme com sucesso no 2º ciclo (sem perda de cargas).</option>
+          <option>Abertura emergencial – condutor partido.</option>
+          <option>Abertura emergencial – poste abalroado.</option>
+          <option>Abertura emergencial – acidente com terceiros.</option>
+          <option>Abertura emergencial – jumper provisório.</option>
+          <option>Abertura emergencial – árvore na rede.</option>
+          <option>Abertura emergencial – objeto estranho.</option>
+          <option>Abertura emergencial – animal na rede.</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="linha-2">
+      <button onclick="gerarDesarme()">🚨 Gerar Script</button>
+      <button class="sec" onclick="limparDesarme()">🆕 Limpar</button>
+    </div>
+
+    <!-- RESULTADO -->
+    <label>Resultado</label>
+    <textarea id="ds_resultado" readonly></textarea>
+
+  </div>
+</div>
 
 
 <script>
@@ -1577,6 +1706,7 @@ atualizarRodape();
 <script src="js/pendencias.js"></script>
 <script src="js/ss.js"></script>
 <script src="js/sinergia.js"></script>
+<script src="js/desarme.js"></script>
 
 </body>
 </html>
