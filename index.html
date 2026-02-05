@@ -783,6 +783,11 @@ input:focus, select:focus, textarea:focus{
     0.8fr; /* Viatura (menor) */
   gap:10px;
 }
+.linha-5-rel{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
 
 </style>
 </head>
@@ -809,7 +814,10 @@ input:focus, select:focus, textarea:focus{
     <button onclick="openModule('equipes',this)">👷 Gestão de Equipes</button>
     <button onclick="openModule('ss',this)">🧾 Preenchimento de SS</button>
     <button onclick="openModule('sinergia',this)">⚙️ Script Mais Sinergia</button>
-    <button onclick="openModule('desarme',this)">🚨 Script Informações Desarme</button>
+    <button onclick="openModule('desarme',this)">🚨 Script Desarme</button>
+    <button onclick="openModule('trafo',this)">🔁 Substituição de Trafo(TESTE)</button>
+
+
 
 
 </div>
@@ -1641,6 +1649,225 @@ input:focus, select:focus, textarea:focus{
   </div>
 </div>
 
+<!-- 🧰 SUBSTITUIÇÃO DE TRANSFORMADOR -->
+<div id="trafo" class="module">
+  <div class="container">
+    <h2>🧰 SUBSTITUIÇÃO DE TRANSFORMADOR</h2>
+
+    <!-- LINHA 1 – CONTEXTO -->
+    <div class="linha-4-rel">
+      <div>
+        <label>Motivo</label>
+        <select id="tf_motivo">
+          <option>Falta de fase</option>
+          <option>Sobrecarga</option>
+          <option>Furto</option>
+          <option>Trafo queimado</option>
+          <option>Vazamento de óleo</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Ocorrência</label>
+        <input id="tf_ocorrencia">
+      </div>
+
+      <div>
+        <label>Regional</label>
+        <select id="tf_regional">
+          <option value="">Selecione</option>
+          <option>ARACAJU</option>
+          <option>SÃO CRISTÓVÃO</option>
+          <option>ITABAIANA</option>
+          <option>LAGARTO</option>
+          <option>N.S GLÓRIA</option>
+          <option>PROPRIÁ</option>
+          <option>MARUIM</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Operador</label>
+        <input id="tf_operador">
+      </div>
+    </div>
+
+    <!-- LINHA 2 – LOCALIZAÇÃO -->
+    <div class="linha-4-rel">
+      <div>
+        <label>Endereço</label>
+        <input id="tf_endereco">
+      </div>
+
+      <div>
+        <label>Coordenadas</label>
+        <input id="tf_coord" placeholder="-10.9472,-37.0731">
+      </div>
+
+      <div>
+        <label>Nº Transformador</label>
+        <input id="tf_trafo">
+      </div>
+
+      <div>
+        <label>Potência</label>
+        <input id="tf_potencia">
+      </div>
+    </div>
+
+    <!-- LINHA 3 – CARACTERÍSTICAS DO TRAFO -->
+    <div class="linha-5-rel">
+      <div>
+        <label>Classe</label>
+        <select id="tf_classe">
+          <option value="">Selecione</option>
+          <option>Monofásico</option>
+          <option>Bifásico</option>
+          <option>Trifásico</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Tensão Sec.</label>
+        <select id="tf_tensao_sec">
+          <option>127/220</option>
+          <option>220/380</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Tipo de Cabo</label>
+        <select id="tf_tipo_cabo">
+          <option value="">Selecione</option>
+          <option>4 AWG S/ALMA</option>
+          <option>4 AWG C/ALMA</option>
+          <option>2 AWG</option>
+          <option>1/0</option>
+          <option>2/0</option>
+          <option>4/0</option>
+          <option>336</option>
+          <option>Outros</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Carregamento (%)</label>
+        <input id="tf_carregamento">
+      </div>
+
+      <div>
+        <label>Total Clientes</label>
+        <input id="tf_total_clientes">
+      </div>
+    </div>
+
+    <!-- LINHA 4 – IMPACTO / PROTEÇÕES -->
+    <div class="linha-4-rel">
+      <div>
+        <label>Clientes Desenergizados?</label>
+        <select id="tf_clientes_des">
+          <option>SIM</option>
+          <option>NÃO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Para-raio MT?</label>
+        <select id="tf_pr_mt">
+          <option>SIM</option>
+          <option selected>NÃO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Para-raio BT?</label>
+        <select id="tf_pr_bt">
+          <option>SIM</option>
+          <option selected>NÃO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Aterramento?</label>
+        <select id="tf_aterramento">
+          <option>SIM</option>
+          <option selected>NÃO</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- LINHA 5 – CONDIÇÕES / AÇÕES -->
+    <!-- LINHA – CONDIÇÕES / AÇÕES -->
+<div class="linha-4-rel">
+
+  <div>
+    <label>Corrosão Atmosf.?</label>
+    <select id="tf_corrosao">
+      <option>SIM</option>
+      <option selected>NÃO</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Circuito transferido?</label>
+    <select id="tf_transferido">
+      <option>SIM</option>
+      <option selected>NÃO</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Possui GLV?</label>
+    <select id="tf_glv">
+      <option>SIM</option>
+      <option selected>NÃO</option>
+    </select>
+  </div>
+
+  <div>
+    <label>GLV extraído?</label>
+    <select id="tf_glv_extraido">
+      <option>SIM</option>
+      <option selected>NÃO</option>
+    </select>
+  </div>
+
+</div>
+
+
+    <!-- LINHA 6 – FINALIZAÇÃO -->
+    <div class="linha-4-rel">
+      <div>
+        <label>GLV extraído?</label>
+        <select id="tf_glv_extraido">
+          <option>SIM</option>
+          <option selected>NÃO</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Materiais Necessários:</label>
+        <textarea id="tf_materiais" style="height:60px"></textarea>
+      </div>
+
+      <div>
+        <label>Observações:</label>
+        <textarea id="tf_obs" style="height:60px"></textarea>
+      </div>
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="linha-3">
+      <button onclick="gerarTrafoWhatsApp()">📱 Gerar script WhatsApp</button>
+      <button onclick="gerarTrafoSGD()">🧾 Gerar script SS</button>
+      <button class="sec" onclick="limparTrafo()">🆕 Novo Relatório</button>
+    </div>
+
+    <label>Resultado:</label>
+    <textarea id="tf_resultado" readonly></textarea>
+  </div>
+</div>
+
 
 <script>
 function showToast(msg){
@@ -1700,15 +1927,14 @@ atualizarRodape();
 </div>
 <script src="js/core.js"></script>
 <script src="js/ocorrencias.js"></script>
-<script src="js/bloqueios.js?v=2"></script>
+<script src="js/bloqueios.js"></script>
 <script src="js/callback.js"></script>
 <script src="js/equipes.js"></script>
 <script src="js/pendencias.js"></script>
 <script src="js/ss.js"></script>
 <script src="js/sinergia.js"></script>
 <script src="js/desarme.js"></script>
+<script src="js/trafo.js"></script>
 
 </body>
 </html>
-
-
