@@ -499,6 +499,8 @@ input:focus, select:focus, textarea:focus{
   border-color:#00ff9c;
   box-shadow:0 0 0 2px rgba(0,255,156,0.25);
 }
+
+
 /* ===== MODAL MAPA (FIX DEFINITIVO) ===== */
 .modal-mapa{
   position: fixed;
@@ -788,6 +790,141 @@ input:focus, select:focus, textarea:focus{
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 }
+/* ===== BOTÃO UTILITÁRIOS COI ===== */
+.btn-utilitarios{
+  background: linear-gradient(135deg,#ffffff,#e6f2ff);
+  color:#0b5394;
+  border:none;
+  padding:10px 22px;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:1px;
+  cursor:pointer;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  box-shadow:
+    0 0 0 2px rgba(0,255,156,0.6),
+    0 6px 14px rgba(0,0,0,0.45);
+
+  animation: utilPulse 1.6s infinite;
+  transition: all .25s ease;
+}
+
+.btn-utilitarios:hover{
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    0 0 0 3px rgba(0,255,156,0.9),
+    0 10px 20px rgba(0,0,0,0.6);
+}
+
+.btn-utilitarios:active{
+  transform: scale(0.97);
+}
+
+/* Pulso de sistema ativo */
+@keyframes utilPulse{
+  0%{box-shadow:0 0 0 2px rgba(0,255,156,.4),0 6px 14px rgba(0,0,0,.45)}
+  50%{box-shadow:0 0 0 4px rgba(0,255,156,.9),0 8px 18px rgba(0,0,0,.6)}
+  100%{box-shadow:0 0 0 2px rgba(0,255,156,.4),0 6px 14px rgba(0,0,0,.45)}
+}
+/* ===== MAPAS REGIONAIS ===== */
+.mapas-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap:16px;
+  margin-top:20px;
+}
+
+.mapa-card{
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,.25);
+  transition:.25s;
+  text-align:center;
+}
+
+.mapa-card:hover{
+  transform:scale(1.05);
+  box-shadow:0 8px 18px rgba(0,0,0,.35);
+}
+
+.mapa-card img{
+  width:100%;
+  height:140px;
+  object-fit:contain;
+  background:#f5f5f5;
+}
+
+.mapa-card span{
+  display:block;
+  padding:8px;
+  font-weight:bold;
+  font-size:13px;
+  color:#0b5394;
+}
+/* ===== MODAL MAPA ===== */
+.modal-mapa{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:99999;
+}
+
+.modal-mapa img{
+  max-width:95%;
+  max-height:95%;
+  border-radius:10px;
+  background:#fff;
+  animation:zoomIn .25s ease;
+}
+
+@keyframes zoomIn{
+  from{transform:scale(.85);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+/* ===== SUBSTITUIÇÃO DE POSTE – MODO COMPACTO ===== */
+
+#substituicao_poste label{
+  font-size:12px;
+  margin-top:6px;
+}
+
+#substituicao_poste input,
+#substituicao_poste select{
+  height:30px;
+  padding:4px 6px;
+  font-size:12px;
+}
+
+#substituicao_poste textarea{
+  height:70px;
+  font-size:12px;
+  padding:6px;
+}
+
+#substituicao_poste .linha-5-rel,
+#substituicao_poste .linha-4-rel,
+#substituicao_poste .linha-3{
+  gap:6px;
+  margin-bottom:6px;
+}
+
+#substituicao_poste h2{
+  font-size:18px;
+  margin-bottom:10px;
+}
+select:invalid{
+  border:2px solid #c62828;
+  background:#fff5f5;
+}
 
 </style>
 </head>
@@ -815,7 +952,9 @@ input:focus, select:focus, textarea:focus{
     <button onclick="openModule('ss',this)">🧾 Preenchimento de SS</button>
     <button onclick="openModule('sinergia',this)">⚙️ Script Mais Sinergia</button>
     <button onclick="openModule('desarme',this)">🚨 Script Desarme</button>
-    <button onclick="openModule('trafo',this)">🔁 Substituição de Trafo(TESTE)</button>
+    <button onclick="openModule('trafo',this)">🔁 Substituição de Trafo</button>
+    <button onclick="openModule('substituicao_poste', this)">🛠️ Substituição de Poste</button>
+
 
 
 
@@ -843,6 +982,86 @@ input:focus, select:focus, textarea:focus{
 
 <!-- ===== CONTENT ===== -->
 <div class="content">
+  <!-- ===== UTILITÁRIOS COI ===== -->
+<div id="utilitarios" class="module">
+  <div class="container">
+
+    <h2>UTILITÁRIOS COI</h2>
+
+    <p style="text-align:center; margin-top:-10px; margin-bottom:20px; color:#555;">
+      Ferramentas de apoio operacional
+    </p>
+
+    <div style="
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:16px;
+    ">
+
+  <button style="height:80px;font-size:16px;"
+        onclick="openModule('mapas_regionais', this)">
+  🗺️ Mapas da Regional
+</button>
+
+      <button style="height:80px;font-size:16px;">
+        📘 Manual de Religador
+      </button>
+
+      <button style="height:80px;font-size:16px;">
+        📑 Normas e Procedimentos
+      </button>
+
+      <button style="height:80px;font-size:16px;">
+        ⚙️ Outras Ferramentas
+      </button>
+
+    </div>
+
+  </div>
+</div>
+<!-- ===== MAPAS REGIONAIS ===== -->
+<div id="mapas_regionais" class="module">
+  <div class="container">
+    <button 
+  onclick="voltarUtilitarios()" 
+  class="btn-voltar-utilitarios">
+  ⬅ Voltar aos Utilitários
+</button>
+
+    <h2>🗺️ Mapas das Regionais</h2>
+
+    <div class="mapas-grid">
+
+  <div class="mapa-card" onclick="abrirMapa('mapas/mapa1.jpg')">
+    <img src="mapas/mapa1.jpg" alt="Mapa Regional Itabaiana">
+    <span>Regional Itabaiana</span>
+  </div>
+
+  <div class="mapa-card" onclick="abrirMapa('mapas/mapa2.jpg')">
+    <img src="mapas/mapa2.jpg" alt="Mapa Regional Lagarto">
+    <span>Regional Lagarto</span>
+  </div>
+
+  <div class="mapa-card" onclick="abrirMapa('mapas/mapa3.jpg')">
+    <img src="mapas/mapa3.jpg" alt="Mapa Regional Glória">
+    <span>Regional Glória</span>
+  </div>
+
+  <div class="mapa-card" onclick="abrirMapa('mapas/mapa4.jpg')">
+    <img src="mapas/mapa4.jpg" alt="Mapa Regional Propriá">
+    <span>Regional Propriá</span>
+  </div>
+
+  <div class="mapa-card" onclick="abrirMapa('mapas/mapa5.jpg')">
+    <img src="mapas/mapa5.jpg" alt="Mapa Regional Maruim">
+    <span>Regional Maruim</span>
+  </div>
+
+</div>
+
+  </div>
+</div>
+
 
 <!-- OCORRÊNCIAS -->
 <div id="obs" class="module">
@@ -1114,38 +1333,34 @@ input:focus, select:focus, textarea:focus{
 <!-- MAPAS -->
 <div id="mapas-container">
   <div class="mapas-grid">
-    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa1.jpg')">
-      <img src="mapas/mapa1.jpg">
-      <span>Regional Itabaiana</span>
-    </div>
+<div class="mapa-card" onclick="abrirMapa('mapas/mapa1.jpg')">
+  <img src="mapas/mapa1.jpg">
+  <span>Regional Itabaiana</span>
+</div>
 
-    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa2.jpg')">
-      <img src="mapas/mapa2.jpg">
-      <span>Regional Lagarto</span>
-    </div>
+<div class="mapa-card" onclick="abrirMapa('mapas/mapa2.jpg')">
+  <img src="mapas/mapa2.jpg">
+  <span>Regional Lagarto</span>
+</div>
 
-    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa3.jpg')">
-      <img src="mapas/mapa3.jpg">
-      <span>Regional Glória</span>
-    </div>
+<div class="mapa-card" onclick="abrirMapa('mapas/mapa3.jpg')">
+  <img src="mapas/mapa3.jpg">
+  <span>Regional Glória</span>
+</div>
 
-    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa4.jpg')">
-      <img src="mapas/mapa4.jpg">
-      <span>Regional Propriá</span>
-    </div>
+<div class="mapa-card" onclick="abrirMapa('mapas/mapa4.jpg')">
+  <img src="mapas/mapa4.jpg">
+  <span>Regional Propriá</span>
+</div>
 
-    <div class="mapa-card" onclick="eq_abrirMapa('mapas/mapa5.jpg')">
-      <img src="mapas/mapa5.jpg">
-      <span>Regional Maruim</span>
-    </div>
+<div class="mapa-card" onclick="abrirMapa('mapas/mapa5.jpg')">
+  <img src="mapas/mapa5.jpg">
+  <span>Regional Maruim</span>
+</div>
+
   </div>
 </div>
 
-
-<!-- MODAL MAPA -->
-<div id="modal-mapa" class="modal-mapa" onclick="eq_fecharMapa(event)">
-  <img id="modal-img" onclick="event.stopPropagation()">
-</div>
 
 
 <!-- FILTROS -->
@@ -1868,20 +2083,260 @@ input:focus, select:focus, textarea:focus{
   </div>
 </div>
 
+<div id="substituicao_poste" class="module">
+  <div class="container">
+
+    <h2>🛠️ SUBSTITUIÇÃO DE POSTE</h2>
+
+    <!-- LINHA 1 -->
+    <div class="linha-5-rel">
+      <div><label>Operador:</label><input id="sp_operador"></div>
+      <div><label>Nº Ocorrência:</label><input id="sp_ocorrencia"></div>
+
+      <div>
+        <label>Tipo de Poste:</label>
+        <select id="sp_tipo_poste">
+          <option value="" selected disabled>Selecione</option>
+          <option>POSTE BT</option>
+          <option>POSTE MT</option>
+          <option>POSTE BT/MT</option>
+        </select>
+      </div>
+
+      <div><label>ID do Poste:</label><input id="sp_id_poste"></div>
+
+      <div>
+        <label>Causa:</label>
+        <select id="sp_causa">
+          <option value="" selected disabled>Selecione</option>
+          <option>Abarroado</option>
+          <option>Fletido</option>
+          <option>Quebrado</option>
+          <option>Fora de prumo</option>
+          <option>Ferragens expostas</option>
+        </select>
+      </div>
+    </div>
+
+ <!-- LINHA 2 -->
+<div class="linha-5-rel">
+
+  <div>
+    <label>Tipo / Altura / Esforço:</label>
+    <input id="sp_altura">
+  </div>
+
+  <div>
+    <label>Chave de Referência:</label>
+    <select id="sp_chave_ref">
+      <option value="" selected disabled>Selecione</option>
+      <option>CF</option>
+      <option>CS</option>
+      <option>TD</option>
+      <option>RD</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Nº da Chave:</label>
+    <input id="sp_num_chave">
+  </div>
+
+  <div>
+    <label>Acesso para Caminhão?</label>
+    <select id="sp_acesso">
+      <option value="" selected disabled>Selecione</option>
+      <option>BOM</option>
+      <option>RUIM</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Cordoalha Telemar?</label>
+    <select id="sp_cordoalha">
+      <option value="" selected disabled>Selecione</option>
+      <option>SIM</option>
+      <option>NÃO</option>
+    </select>
+  </div>
+
+</div>
+
+
+    <!-- LINHA 3 -->
+    <div class="linha-4-rel">
+      <div>
+        <label>Polo / Regional:</label>
+        <select id="sp_regional">
+          <option value="" selected disabled>Selecione</option>
+          <option>ARACAJU</option>
+          <option>N.S SOCORRO</option>
+          <option>BARRA DOS COQUEIROS</option>
+          <option>ITABAIANA</option>
+          <option>LAGARTO</option>
+          <option>SÃO CRISTÓVÃO</option>
+          <option>N.S GLÓRIA</option>
+          <option>N.S DORES</option>
+          <option>PROPRIÁ</option>
+          <option>MARUIM</option>
+        </select>
+      </div>
+
+      <div><label>Cidade / Bairro / Povoado:</label><input id="sp_bairro"></div>
+      <div><label>Ponto de Referência:</label><input id="sp_referencia"></div>
+      <div><label>Coordenadas:</label><input id="sp_coord"></div>
+    </div>
+
+    <!-- LINHA 4 -->
+    <div class="linha-3">
+      <div><label>Tipo Estrutura MT</label><input id="sp_est_mt"></div>
+      <div>
+        <label>Tipo Rede MT</label>
+        <select id="sp_rede_mt">
+          <option value="" selected disabled>Selecione</option>
+          <option>Convencional</option>
+          <option>Compacta</option>
+        </select>
+      </div>
+      <div>
+        <label>Bitola MT</label>
+        <select id="sp_bitola_mt">
+          <option value="" selected disabled>Selecione</option>
+          <option>4 AWG S/ALMA</option>
+          <option>4 AWG C/ALMA</option>
+          <option>2 AWG</option>
+          <option>1/0</option>
+          <option>2/0</option>
+          <option>4/0</option>
+          <option>336</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- LINHA 5 -->
+    <div class="linha-3">
+      <div><label>Tipo Estrutura BT</label><input id="sp_est_bt"></div>
+      <div>
+        <label>Tipo Rede BT</label>
+        <select id="sp_rede_bt">
+          <option value="" selected disabled>Selecione</option>
+          <option>Convencional</option>
+          <option>Multiplex</option>
+        </select>
+      </div>
+      <div>
+        <label>Bitola BT</label>
+        <select id="sp_bitola_bt">
+          <option value="" selected disabled>Selecione</option>
+          <option>4 AWG</option>
+          <option>2 AWG</option>
+          <option>25 mm²</option>
+          <option>35 mm²</option>
+          <option>50 mm²</option>
+          <option>70 mm²</option>
+          <option>120 mm²</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- LINHA 6 -->
+    <div class="linha-4-rel">
+      <div><label>Causado por veículo?</label><select id="sp_veiculo"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+      <div><label>Acionada Polícia / SAMU?</label><select id="sp_policia"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+      <div><label>Vítima?</label><select id="sp_vitima"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+      <div><label>Foto da placa?</label><select id="sp_foto_placa"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+    </div>
+
+    <!-- LINHA 7 -->
+    <div class="linha-4-rel">
+      <div><label>Foto doc. condutor?</label><select id="sp_doc"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+      <div><label>Endereço / telefone?</label><select id="sp_end"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+      <div><label>Foto veículo / danos?</label><select id="sp_danos"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+      <div><label>Câmeras no local?</label><select id="sp_camera"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+    </div>
+
+    <!-- LINHA 8 -->
+    <div class="linha-4-rel">
+      <div><label>Nº Medidor UC c/ câmera</label><input id="sp_medidor"></div>
+      <div><label>Veículo / Cor / Placa</label><input id="sp_veiculo_desc"></div>
+      <div><label>Veículo empresa / órgão?</label><select id="sp_empresa"><option value="" selected disabled>Selecione</option>
+<option>SIM</option><option>NÃO</option></select></div>
+      <div><label>Qual?</label><input id="sp_qual"></div>
+    </div>
+
+    <!-- LINHA 9 -->
+    <div class="linha-3">
+      <textarea id="sp_obs_condutor" placeholder="Observações sobre o condutor"></textarea>
+      <textarea id="sp_materiais" placeholder="Materiais necessários"></textarea>
+      <textarea id="sp_obs_gerais" placeholder="Observações relevantes"></textarea>
+    </div>
+
+    <!-- BOTÕES -->
+    <div class="linha-3">
+      <button onclick="gerarPosteWhats()">📲 Gerar texto WhatsApp</button>
+      <button onclick="gerarPosteSS()">🧾 Gerar texto SS</button>
+      <button class="sec" onclick="limparPoste()">🆕 Novo</button>
+    </div>
+
+    <label>Script Gerado</label>
+    <textarea id="sp_resultado" readonly></textarea>
+
+  </div>
+</div>
+
 
 <script>
 function showToast(msg){
- const t=document.getElementById("toast");
- t.innerText=msg;
- t.style.display="block";
- setTimeout(()=>t.style.display="none",2000);
+  const t=document.getElementById("toast");
+  t.innerText=msg;
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",2000);
 }
 
 function openModule(id,btn){
- document.querySelectorAll('.module').forEach(m=>m.classList.remove('active'));
- document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- btn.classList.add('active');
+  document.querySelectorAll('.module')
+    .forEach(m=>m.classList.remove('active'));
+
+  document.querySelectorAll('.menu button')
+    .forEach(b=>b.classList.remove('active'));
+
+  document.getElementById(id).classList.add('active');
+
+  if(btn){
+    btn.classList.add('active');
+  }
+}
+
+function atualizarRodape(){
+  const agora = new Date();
+  const data = agora.toLocaleDateString("pt-BR");
+  const hora = agora.toLocaleTimeString("pt-BR", {
+    hour:'2-digit',
+    minute:'2-digit',
+    second:'2-digit'
+  });
+  document.getElementById("dataHoraSistema").innerText =
+    data + " " + hora;
+}
+
+setInterval(atualizarRodape,1000);
+atualizarRodape();
+
+/* 🔙 PASSO 3 — FUNÇÃO VOLTAR AOS UTILITÁRIOS */
+function voltarUtilitarios(){
+  document.querySelectorAll('.module')
+    .forEach(m=>m.classList.remove('active'));
+
+  document.getElementById('utilitarios')
+    .classList.add('active');
 }
 
 
@@ -1922,7 +2377,12 @@ atualizarRodape();
     </div>
   </div>
 
-<div class="footer-right" id="footer-hora">DEUS seja Louvado</div>
+<div class="footer-right">
+  <button onclick="openModule('utilitarios', this)" class="btn-utilitarios">
+    🧰 UTILITÁRIOS COI
+  </button>
+</div>
+
 
 </div>
 <script src="js/core.js"></script>
@@ -1935,7 +2395,33 @@ atualizarRodape();
 <script src="js/sinergia.js"></script>
 <script src="js/desarme.js"></script>
 <script src="js/trafo.js"></script>
+<script src="js/utilitarios.js"></script>
+<script src="js/substituicao_poste.js"></script>
+
+
+<script>
+function abrirMapa(src){
+  const modal = document.getElementById("modal-mapa");
+  const img   = document.getElementById("modal-img");
+
+  img.src = src;
+  modal.style.display = "flex";
+}
+
+function fecharMapa(e){
+  if(e.target.id === "modal-mapa"){
+    document.getElementById("modal-mapa").style.display = "none";
+  }
+}
+</script>
+
+
+<!-- MODAL MAPA -->
+<div id="modal-mapa" class="modal-mapa" onclick="fecharMapa(event)">
+  <img id="modal-img" alt="Mapa ampliado" onclick="event.stopPropagation()">
+</div>
 
 </body>
 </html>
+
 
