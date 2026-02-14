@@ -198,8 +198,8 @@ function gerarPosteSS(){
   texto += `Causado por Veículo:${causado}\n`;
 
   if(causado === "SIM"){
-    texto += `Polícia:${v("sp_policia")} | Vitima:${v("sp_vitima")} | Foto_Placa:${v("sp_foto_placa")}\n`;
-    texto += `Documento Condutor:${v("sp_doc")} | End_Tel:${v("sp_end")} | Foto_Danos:${v("sp_danos")}\n`;
+    texto += `Polícia:${v("sp_policia")} | Vitima:${v("sp_vitima")} | Foto Placa:${v("sp_foto_placa")}\n`;
+    texto += `Documento Condutor:${v("sp_doc")} | End_Tel:${v("sp_end")} | Foto Danos:${v("sp_danos")}\n`;
     texto += `câmeras:${v("sp_camera")} | Medidor c/câmera:${v("sp_medidor")}\n`;
     texto += `Veículo:${v("sp_veiculo_desc")} | Empresa:${v("sp_empresa")} ${v("sp_qual")}\n`;
     texto += `Obs Condutor:${v("sp_obs_condutor")}\n`;
@@ -229,6 +229,7 @@ function limparPoste(){
   aplicarRegraPoste();
   aplicarRegraVeiculo();
 }
+
 
 
 
