@@ -178,7 +178,7 @@ function gerarPosteSS(){
   const tipo = v("sp_tipo_poste");
   const causado = v("sp_veiculo");
 
-  let texto = "#SUBSTITUICAO DE POSTE\n";
+  let texto = "#SUBSTITUIÇÃO DE POSTE\n";
 
   texto += `Operador:${v("sp_operador")} | Ocorrencia:${v("sp_ocorrencia")}\n`;
   texto += `ID:${v("sp_id_poste")} | Tipo:${tipo}\n`;
@@ -229,4 +229,5 @@ function limparPoste(){
   aplicarRegraPoste();
   aplicarRegraVeiculo();
 }
+
 
