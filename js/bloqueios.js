@@ -12,19 +12,19 @@ function gerarRelatorio(){
 
   const t = 
 `# ${hora} | ` +
-`RESP: ${responsavel.value || "-"} | ` +
-`EQP: ${bloq_equipe.value || "-"} | ` +
-`TEL: ${contato.value || "-"} | ` +
-`VIATURA: ${viatura.value || "-"} | ` +
-`RÁDIO: ${radio.value || "-"} | ` +
-`TESTE RÁDIO: ${testeRadio.value || "-"} | ` +
-`REF: ${referencia.value || "-"} | ` +
-`CONDUTOR: ${tipoCondutor.value || "-"} | ` +
-`MARESIA: ${maresia.value || "-"} | ` +
-`SELF-HEALING: ${selfhealing.value || "-"} | ` +
-`DESATIVOU SH: ${desativou.value || "-"} | ` +
-`SERVIÇO: ${servico.value || "-"} | ` +
-`OBS: ${obsRel.value || "-"}`;
+`Resp: ${responsavel.value || "-"} | ` +
+`Equipe: ${bloq_equipe.value || "-"} | ` +
+`Tel: ${contato.value || "-"} | ` +
+`Viatura: ${viatura.value || "-"} | ` +
+`Rádio: ${radio.value || "-"} | ` +
+`Teste Rádio: ${testeRadio.value || "-"} | ` +
+`Ref: ${referencia.value || "-"} | ` +
+`Condutor: ${tipoCondutor.value || "-"} | ` +
+`Maresia: ${maresia.value || "-"} | ` +
+`Self-Healing: ${selfhealing.value || "-"} | ` +
+`Desativou Self: ${desativou.value || "-"} | ` +
+`Serviço: ${servico.value || "-"} | ` +
+`Obs: ${obsRel.value || "-"}`;
 
   resultado.value = t;
   navigator.clipboard.writeText(t);
@@ -35,5 +35,6 @@ function limparRelatorio(){
   document.querySelectorAll('#rel input,#rel textarea')
     .forEach(e => e.value = "");
 }
+
 
 
