@@ -178,34 +178,34 @@ function gerarPosteSS(){
   const tipo = v("sp_tipo_poste");
   const causado = v("sp_veiculo");
 
-  let texto = "#SUBSTITUICAO_DE_POSTE\n";
+  let texto = "#SUBSTITUICAO DE POSTE\n";
 
   texto += `Operador:${v("sp_operador")} | Ocorrencia:${v("sp_ocorrencia")}\n`;
   texto += `ID:${v("sp_id_poste")} | Tipo:${tipo}\n`;
   texto += `Causa:${v("sp_causa")} | Acesso:${v("sp_acesso")} | Cordoalha_Telem ar:${v("sp_cordoalha")}\n`;
   texto += `Regional:${v("sp_regional")} | Local:${v("sp_bairro")}\n`;
-  texto += `Referencia:${v("sp_referencia")} | Coordenadas:${v("sp_coord")}\n`;
-  texto += `Tipo_Altura_Esforco:${v("sp_altura")} | Chave:${v("sp_chave_ref")} ${v("sp_num_chave")}\n`;
+  texto += `referência:${v("sp_referencia")} | Coordenadas:${v("sp_coord")}\n`;
+  texto += `Tipo/Altura/Esforço:${v("sp_altura")} | Chave:${v("sp_chave_ref")} ${v("sp_num_chave")}\n`;
 
   if(tipo !== "POSTE BT"){
-    texto += `Estrutura_MT:${v("sp_est_mt")} | Rede_MT:${v("sp_rede_mt")} | Bitola_MT:${v("sp_bitola_mt")}\n`;
+    texto += `Estrutura MT:${v("sp_est_mt")} | Rede MT:${v("sp_rede_mt")} | Bitola MT:${v("sp_bitola_mt")}\n`;
   }
 
   if(tipo !== "POSTE MT"){
-    texto += `Estrutura_BT:${v("sp_est_bt")} | Rede_BT:${v("sp_rede_bt")} | Bitola_BT:${v("sp_bitola_bt")}\n`;
+    texto += `Estrutura BT:${v("sp_est_bt")} | Rede BT:${v("sp_rede_bt")} | Bitola BT:${v("sp_bitola_bt")}\n`;
   }
 
-  texto += `Causado_por_Veiculo:${causado}\n`;
+  texto += `Causado por Veículo:${causado}\n`;
 
   if(causado === "SIM"){
-    texto += `Policia:${v("sp_policia")} | Vitima:${v("sp_vitima")} | Foto_Placa:${v("sp_foto_placa")}\n`;
-    texto += `Doc_Condutor:${v("sp_doc")} | End_Tel:${v("sp_end")} | Foto_Danos:${v("sp_danos")}\n`;
-    texto += `Cameras:${v("sp_camera")} | Medidor:${v("sp_medidor")}\n`;
-    texto += `Veiculo:${v("sp_veiculo_desc")} | Empresa:${v("sp_empresa")} ${v("sp_qual")}\n`;
-    texto += `Obs_Condutor:${v("sp_obs_condutor")}\n`;
+    texto += `Polícia:${v("sp_policia")} | Vitima:${v("sp_vitima")} | Foto_Placa:${v("sp_foto_placa")}\n`;
+    texto += `Documento Condutor:${v("sp_doc")} | End_Tel:${v("sp_end")} | Foto_Danos:${v("sp_danos")}\n`;
+    texto += `câmeras:${v("sp_camera")} | Medidor c/câmera:${v("sp_medidor")}\n`;
+    texto += `Veículo:${v("sp_veiculo_desc")} | Empresa:${v("sp_empresa")} ${v("sp_qual")}\n`;
+    texto += `Obs Condutor:${v("sp_obs_condutor")}\n`;
   }
 
-  texto += `Materiais:${v("sp_materiais")} | Observacoes:${v("sp_obs_gerais")}`;
+  texto += `Matériais:${v("sp_materiais")} | Observacoes:${v("sp_obs_gerais")}`;
 
   document.getElementById("sp_resultado").value = texto;
 
@@ -229,3 +229,4 @@ function limparPoste(){
   aplicarRegraPoste();
   aplicarRegraVeiculo();
 }
+
