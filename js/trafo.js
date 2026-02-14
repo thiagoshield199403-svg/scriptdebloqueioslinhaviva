@@ -52,28 +52,28 @@ function gerarTrafoSGD(){
   const texto =
 
 `Motivo:${v("tf_motivo")}
-#Ocorrencia:${v("tf_ocorrencia")}
+#Ocorrência:${v("tf_ocorrencia")}
 #Regional:${v("tf_regional")}
 #Operador:${v("tf_operador")}
-#Endereco:${v("tf_endereco")}
+#Endereço:${v("tf_endereco")}
 #Coordenadas:${v("tf_coord")}
 #Trafo:${v("tf_trafo")}
-#Potencia:${v("tf_potencia")}
+#Potência:${v("tf_potencia")}
 #Classe:${v("tf_classe")}
-#Tensao_Secundaria:${v("tf_tensao_sec")}
-#Tipo_Cabo:${v("tf_tipo_cabo")}
-#Carregamento_Trafo:${v("tf_carregamento")}
-#Clientes_Desenergizados:${v("tf_clientes_des")}
-#Total_Clientes:${v("tf_total_clientes")}
-#ParaRaio_MT:${v("tf_pr_mt")}
-#ParaRaio_BT:${v("tf_pr_bt")}
+#Tensão Secundária:${v("tf_tensao_sec")}
+#Tipo Cabo:${v("tf_tipo_cabo")}
+#Carregamento Trafo:${v("tf_carregamento")}
+#Clientes Desenergizados:${v("tf_clientes_des")}
+#Total Clientes:${v("tf_total_clientes")}
+#ParaRaio MT:${v("tf_pr_mt")}
+#ParaRaio BT:${v("tf_pr_bt")}
 #Aterramento:${v("tf_aterramento")}
-#Corrosao_Atmosferica:${v("tf_corrosao")}
-#CircuitoTransferido:${v("tf_transferido")}
-#Possu_GLV:${v("tf_glv")}
-#GL Extraido:${v("tf_glv_extraido")}
-#Materiai Necessarios:${v("tf_materiais")}
-#Observacoes:${v("tf_obs")}`;
+#Corrosão Atmosférica:${v("tf_corrosao")}
+#Circuito Transferido:${v("tf_transferido")}
+#Possui GLV:${v("tf_glv")}
+#GLV Extraido:${v("tf_glv_extraido")}
+#Materiais Necessários:${v("tf_materiais")}
+#Obs:${v("tf_obs")}`;
 
   tf_resultado.value = texto;
   navigator.clipboard.writeText(texto);
