@@ -52,7 +52,7 @@ function gerarTrafoSGD(){
   const texto =
 
 `Motivo:${v("tf_motivo")}
-#Ocorrencia:${v("tf_ocorrencia")}
+#Ocorrência:${v("tf_ocorrencia")}
 #Regional:${v("tf_regional")}
 #Operador:${v("tf_operador")}
 #Endereço:${v("tf_endereco")}
@@ -61,7 +61,7 @@ function gerarTrafoSGD(){
 #Potência:${v("tf_potencia")}
 #Classe:${v("tf_classe")}
 #Tensão Secundária:${v("tf_tensao_sec")}
-#Tipo_Cabo:${v("tf_tipo_cabo")}
+#Tipo Cabo:${v("tf_tipo_cabo")}
 #Carregamento Trafo:${v("tf_carregamento")}
 #Clientes Desenergizados:${v("tf_clientes_des")}
 #Total Clientes:${v("tf_total_clientes")}
