@@ -180,9 +180,9 @@ function gerarPosteSS(){
 
   let texto = "#SUBSTITUIÇÃO DE POSTE\n";
 
-  texto += `Operador:${v("sp_operador")} | Ocorrencia:${v("sp_ocorrencia")}\n`;
+  texto += `Operador:${v("sp_operador")} | Ocorrência::${v("sp_ocorrencia")}\n`;
   texto += `ID:${v("sp_id_poste")} | Tipo:${tipo}\n`;
-  texto += `Causa:${v("sp_causa")} | Acesso:${v("sp_acesso")} | Cordoalha_Telem ar:${v("sp_cordoalha")}\n`;
+  texto += `Causa:${v("sp_causa")} | Acesso:${v("sp_acesso")} | Cordoalha Telemar:${v("sp_cordoalha")}\n`;
   texto += `Regional:${v("sp_regional")} | Local:${v("sp_bairro")}\n`;
   texto += `referência:${v("sp_referencia")} | Coordenadas:${v("sp_coord")}\n`;
   texto += `Tipo/Altura/Esforço:${v("sp_altura")} | Chave:${v("sp_chave_ref")} ${v("sp_num_chave")}\n`;
@@ -229,5 +229,6 @@ function limparPoste(){
   aplicarRegraPoste();
   aplicarRegraVeiculo();
 }
+
 
 
