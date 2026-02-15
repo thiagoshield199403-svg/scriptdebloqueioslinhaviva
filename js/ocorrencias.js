@@ -17,6 +17,7 @@ function adicionarHistorico(){
     "# " + horaAtual() + " " + obsTexto.value;
 
   obsTexto.value = "";
+   navigator.clipboard.writeText(historico.value);
 }
 
 function copiarHistorico(){
@@ -28,3 +29,4 @@ function limparHistorico(){
   historico.value = "";
   obsTexto.value = "";
 }
+
