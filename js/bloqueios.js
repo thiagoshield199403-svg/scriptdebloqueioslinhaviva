@@ -5,36 +5,45 @@ console.log("BLOQUEIOS.JS CARREGADO NOVO");
 
 function gerarRelatorio(){
 
-  const hora = new Date().toLocaleTimeString("pt-BR", {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
+  const resp = document.getElementById("responsavel").value || "-";
+  const eq = document.getElementById("bloq_equipe").value || "-";
+  const tel = document.getElementById("contato").value || "-";
+  const viatura = document.getElementById("viatura").value || "-";
+  const radio = document.getElementById("radio").value || "-";
+  const testeRadio = document.getElementById("testeRadio").value || "-";
+  const referencia = document.getElementById("referencia").value || "-";
+  const tipoCondutor = document.getElementById("tipoCondutor").value || "-";
+  const maresia = document.getElementById("maresia").value || "-";
+  const self = document.getElementById("selfhealing").value || "-";
+  const desativou = document.getElementById("desativou").value || "-";
+  const servico = document.getElementById("servico").value || "-";
+  const obs = document.getElementById("obsRel").value || "-";
 
-  const t = 
-`# ${hora} | ` +
-`Resp: ${responsavel.value || "-"} | ` +
-`Equipe: ${bloq_equipe.value || "-"} | ` +
-`Tel: ${contato.value || "-"} | ` +
-`Viatura: ${viatura.value || "-"} | ` +
-`Rádio: ${radio.value || "-"} | ` +
-`Teste Rádio: ${testeRadio.value || "-"} | ` +
-`Ref: ${referencia.value || "-"} | ` +
-`Condutor: ${tipoCondutor.value || "-"} | ` +
-`Maresia: ${maresia.value || "-"} | ` +
-`Self-Healing: ${selfhealing.value || "-"} | ` +
-`Desativou Self: ${desativou.value || "-"} | ` +
-`Serviço: ${servico.value || "-"} | ` +
-`Obs: ${obsRel.value || "-"}`;
+  const texto =
+`RESPONSÁVEL: ${resp}
+EQUIPE: ${eq}
+CONTATO: ${tel}
+VIATURA: ${viatura}
+RÁDIO: ${radio}
+TESTE RÁDIO: ${testeRadio}
+REFERÊNCIA ELÉTRICA: ${referencia}
+TIPO CONDUTOR: ${tipoCondutor}
+ÁREA DE MARESIA: ${maresia}
+SELF-HEALING: ${self}
+DESATIVOU SELF-HEALING: ${desativou}
+TIPO DO SERVIÇO: ${servico}
+OBSERVAÇÃO: ${obs}`;
 
-  resultado.value = t;
-  navigator.clipboard.writeText(t);
-  showToast("Relatório copiado!");
+  document.getElementById("resultado").value = texto;
+
+  navigator.clipboard.writeText(texto);
+
+  if (typeof showToast === "function") {
+    showToast("Relatório copiado");
+  }
 }
 
 function limparRelatorio(){
   document.querySelectorAll('#rel input,#rel textarea')
     .forEach(e => e.value = "");
 }
-
-
-
