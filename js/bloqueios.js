@@ -6,7 +6,7 @@ console.log("BLOQUEIOS.JS CARREGADO NOVO");
 function gerarRelatorio(){
 
   const resp = document.getElementById("responsavel").value || "-";
-  const eq = document.getElementById("bloq_equipe").value || "-";
+  const eq = document.getElementById("bloq_equipe").value.toUpperCase() || "-";
   const tel = document.getElementById("contato").value || "-";
   const viatura = document.getElementById("viatura").value || "-";
   const radio = document.getElementById("radio").value || "-";
@@ -47,3 +47,4 @@ function limparRelatorio(){
   document.querySelectorAll('#rel input,#rel textarea')
     .forEach(e => e.value = "");
 }
+
