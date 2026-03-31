@@ -928,6 +928,23 @@ select:invalid{
 #bloq_equipe {
   text-transform: uppercase;
 }
+.linha-6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.linha-4-rel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.linha-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
 </style>
 </head>
 
@@ -1881,96 +1898,126 @@ select:invalid{
   </div>
 </div>
 
-<!-- 🧰 SUBSTITUIÇÃO DE TRANSFORMADOR -->
+<!-- ============================= -->
+<!-- 🔁 SUBSTITUIÇÃO DE TRAFO FINAL -->
+<!-- ============================= -->
 <div id="trafo" class="module">
   <div class="container">
-    <h2>🧰 SUBSTITUIÇÃO DE TRANSFORMADOR</h2>
 
-    <!-- LINHA 1 – CONTEXTO -->
-    <div class="linha-4-rel">
-      <div>
-        <label>Motivo</label>
-        <select id="tf_motivo">
-          <option>Falta de fase</option>
-          <option>Sobrecarga</option>
-          <option>Furto</option>
-          <option>Trafo queimado</option>
-          <option>Vazamento de óleo</option>
-        </select>
-      </div>
+<h2>🔁 SUBSTITUIÇÃO DE TRANSFORMADOR</h2>
 
-      <div>
-        <label>Ocorrência</label>
-        <input id="tf_ocorrencia">
-      </div>
+<!-- 🔹 LINHA 1 -->
+<div class="linha-6">
+  <div><label>Operador:</label><input id="tf_operador"></div>
+  <div><label>Ocorrência:</label><input id="tf_ocorrencia"></div>
+  <div><label>N° Trafo:</label><input id="tf_trafo"></div>
+  <div><label>ID:</label><input id="tf_id"></div>
+  <div><label>Motivo:</label>
+    <select id="tf_motivo">
+       <option value="">Selecione</option>
+      <option>Falta de fase</option>
+      <option>Sobrecarga</option>
+      <option>Furto</option>
+      <option>Trafo queimado</option>
+      <option>Vazamento de óleo</option>
+    </select>
+  </div>
+  <div><label>Causa:</label>
+    <select id="tf_causa">
+     <option value="">Selecione</option>
+  <option>Causa não identificada</option>
+  <option>Faltando fase internamente</option>
+  <option>Sobretensão</option>
+  <option>Defeito em transformador particular</option>
+  <option>Subtensão</option>
+  <option>Queimado por pássaro/animal</option>
+  <option>Falha bucha de BT</option>
+  <option>Vazamento de óleo</option>
+  <option>Tanque deteriorado</option>
+  <option>Queimado por descarga atmosférica</option>
+  <option>Faltando neutro</option>
+  <option>Queimado por sobrecarga</option>
+  <option>Queimado por curto na rede</option>
+  <option>Cabo aterramento partido</option>
+  <option>Falha bucha de AT</option>
+    </select>
+  </div>
+</div>
 
-      <div>
-        <label>Regional</label>
-        <select id="tf_regional">
-          <option value="">Selecione</option>
-          <option>ARACAJU</option>
-          <option>SÃO CRISTÓVÃO</option>
-          <option>ITABAIANA</option>
-          <option>LAGARTO</option>
-          <option>N.S GLÓRIA</option>
-          <option>PROPRIÁ</option>
-          <option>MARUIM</option>
-        </select>
-      </div>
+<!-- 🔹 LINHA 2 -->
+<div class="linha-6">
+  <div><label>Regional:</label><select id="tf_regional">
+    <option value="">Selecione</option>
+    <option>ARACAJU</option>
+    <option>SÃO CRISTÓVÃO</option>
+    <option>N.S.SOCORRO</option>
+    <option>ITABAIANA</option>
+    <option>LAGARTO</option>
+    <option>N.S.GLÓRIA </option>
+    <option>N.S.DORES</option>
+    <option>PROPRIÁ</option>
+    <option>MARUIM</option>
+  </select></div>
 
-      <div>
-        <label>Operador</label>
-        <input id="tf_operador">
-      </div>
-    </div>
+  <div><label>Cidade/Povoado:</label><input id="tf_cidade"></div>
+  <div><label>Endereço:</label><input id="tf_endereco"></div>
+  <div><label>Ponto Ref:</label><input id="tf_referencia"></div>
+  <div><label>Coordenadas:</label><input id="tf_coord"></div>
 
-    <!-- LINHA 2 – LOCALIZAÇÃO -->
-    <div class="linha-4-rel">
-      <div>
-        <label>Endereço</label>
-        <input id="tf_endereco">
-      </div>
+  <div><label>Acs.Caminhão?</label>
+    <select id="tf_acesso">
+      <option value="">Selecione</option>
+      <option>BOM</option>
+      <option>RUIM</option>
+      <option>APENAS 4X4</option>
+    </select>
+  </div>
+</div>
 
-      <div>
-        <label>Coordenadas</label>
-        <input id="tf_coord" placeholder="-10.9472,-37.0731">
-      </div>
+<!-- 🔹 LINHA 3 -->
+<div class="linha-6">
+  <div><label>Classe:</label><select id="tf_classe">
+    <option value="">Selecione</option>
+    <option>Monofásico</option>
+    <option>Bifásico</option>
+    <option>Trifásico</option>
+  </select></div>
 
-      <div>
-        <label>Nº Transformador</label>
-        <input id="tf_trafo">
-      </div>
+  <div><label>Potência:</label><input id="tf_potencia"></div>
 
-      <div>
-        <label>Potência</label>
-        <input id="tf_potencia">
-      </div>
-    </div>
+  <div><label>Proprietário:</label>
+    <select id="tf_proprietario">
+      <option value="">Selecione</option>
+      <option>Companhia</option>
+      <option>Particular</option>
+      <option>Incorporação</option>
+    </select>
+  </div>
 
-    <!-- LINHA 3 – CARACTERÍSTICAS DO TRAFO -->
-    <div class="linha-5-rel">
-      <div>
-        <label>Classe</label>
-        <select id="tf_classe">
-          <option value="">Selecione</option>
-          <option>Monofásico</option>
-          <option>Bifásico</option>
-          <option>Trifásico</option>
-        </select>
-      </div>
+  <div><label>Tensão Sec.:</label>
+    <select id="tf_tensao_sec">
+      <option value="">Selecione</option>
+      <option>127/220v</option>
+      <option>220/380v</option>
+    </select>
+  </div>
 
-      <div>
-        <label>Tensão Sec.</label>
-        <select id="tf_tensao_sec">
-          <option>127/220</option>
-          <option>220/380</option>
-        </select>
-      </div>
+  <div><label>Carregamento:</label><input id="tf_carregamento"></div>
+  <div><label>Total Clientes</label><input id="tf_total_clientes"></div>
+</div>
 
-      <div>
-        <label>Bitola rede MT?</label>
-        <select id="tf_tipo_cabo">
-          <option value="">Selecione</option>
+<!-- 🔹 LINHA 4 -->
+<div class="linha-4-rel">
+  <div><label>Local de Corrosão Atm?</label><select id="tf_corrosao"><option value="">Selecione</option><option>SIM</option><option>NÃO</option></select></div>
+  <div><label>Clientes Desenergisado?</label><select id="tf_clientes_des"><option value="">Selecione</option><option>SIM</option><option>NÃO</option></select></div>
+  <div><label>Total Desenergisado:</label><input id="tf_total_des"></div>
+  <div><label>Circuito foi transferido?</label><select id="tf_transferido"><option value="">Selecione</option><option>SIM</option><option>NÃO</option></select></div>
+</div>
+
+<!-- 🔹 LINHA 5 -->
+<div class="linha-6">
+  <div><label>Bitola MT: <select id="sp_bitola_mt">
+          <option value="" selected disabled>Selecione</option>
           <option>4 AWG S/ALMA</option>
           <option>4 AWG C/ALMA</option>
           <option>2 AWG</option>
@@ -1981,116 +2028,35 @@ select:invalid{
           <option>Outros</option>
         </select>
       </div>
-
-      <div>
-        <label>Carregamento (%)</label>
-        <input id="tf_carregamento">
-      </div>
-
-      <div>
-        <label>Total Clientes</label>
-        <input id="tf_total_clientes">
-      </div>
-    </div>
-
-    <!-- LINHA 4 – IMPACTO / PROTEÇÕES -->
-    <div class="linha-4-rel">
-      <div>
-        <label>Clientes Desenergizados?</label>
-        <select id="tf_clientes_des">
-          <option>SIM</option>
-          <option>NÃO</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Para-raio MT?</label>
-        <select id="tf_pr_mt">
-          <option>SIM</option>
-          <option selected>NÃO</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Para-raio BT?</label>
-        <select id="tf_pr_bt">
-          <option>SIM</option>
-          <option selected>NÃO</option>
-        </select>
-      </div>
-
-      <div>
-        <label>Aterramento?</label>
-        <select id="tf_aterramento">
-          <option>SIM</option>
-          <option selected>NÃO</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- LINHA 5 – CONDIÇÕES / AÇÕES -->
-    <!-- LINHA – CONDIÇÕES / AÇÕES -->
-<div class="linha-4-rel">
-
-  <div>
-    <label>Corrosão Atmosf.?</label>
-    <select id="tf_corrosao">
-      <option>SIM</option>
-      <option selected>NÃO</option>
-    </select>
-  </div>
-
-  <div>
-    <label>Circuito transferido?</label>
-    <select id="tf_transferido">
-      <option>SIM</option>
-      <option selected>NÃO</option>
-    </select>
-  </div>
-
-  <div>
-    <label>Possui GLV?</label>
-    <select id="tf_glv">
-      <option>SIM</option>
-      <option selected>NÃO</option>
-    </select>
-  </div>
-
-  <div>
-    <label>GLV extraído?</label>
-    <select id="tf_glv_extraido">
-      <option>SIM</option>
-      <option selected>NÃO</option>
-    </select>
-  </div>
-
+  <div><label>Possui GLV?</label><select id="tf_glv"><option value="">Selecione</option><option>SIM</option><option>NÃO</option></select></div>
+  <div><label>GLV foi extraido?</label><select id="tf_glv_extraido"><option value="">Selecione</option><option>SIM</option><option>NÃO</option></select></div>
+  <div><label>Aterramento?</label><select id="tf_aterramento"><option value="">Selecione</option><option>SIM</option><option>NÃO</option><option>DANIFICADO</option></select></div>
+  <div><label>PRBT?</label><select id="tf_pr_bt"><option value="">Selecione</option><option>SIM</option><option>NÃO</option></select></div>
+  <div><label>PRMT?</label><select id="tf_pr_mt"><option value="">Selecione</option><option>SIM</option><option>NÃO</option></select></div>
 </div>
 
-
- <!-- LINHA 6 – FINALIZAÇÃO -->
+<!-- 🔹 LINHA 6 -->
 <div class="linha-2">
-
   <div>
     <label>Materiais Necessários:</label>
-    <textarea id="tf_materiais" style="height:60px"></textarea>
+    <textarea id="tf_materiais"></textarea>
   </div>
-
   <div>
     <label>Observações:</label>
-    <textarea id="tf_obs" style="height:60px"></textarea>
+    <textarea id="tf_obs"></textarea>
   </div>
-
 </div>
 
-    <!-- BOTÕES -->
-    <div class="linha-3">
-      <button onclick="gerarTrafoWhatsApp()">📱 Gerar script WhatsApp</button>
-      <button onclick="gerarTrafoSGD()">🧾 Gerar script SS</button>
-      <button class="sec" onclick="limparTrafo()">🆕 Novo Relatório</button>
-    </div>
+<!-- 🔹 LINHA 7 -->
+<div class="linha-3">
+  <button onclick="gerarTrafoWhatsApp()">📱 Gerar WhatsApp</button>
+  <button onclick="gerarTrafoSGD()">🧾 Gerar SS</button>
+  <button onclick="limparTrafo()">🆕 Novo</button>
+</div>
 
-    <label>Resultado:</label>
-    <textarea id="tf_resultado" readonly></textarea>
+<label>Resultado</label>
+<textarea id="tf_resultado" readonly></textarea>
+
   </div>
 </div>
 
@@ -2220,6 +2186,7 @@ select:invalid{
           <option>2/0</option>
           <option>4/0</option>
           <option>336</option>
+          <option>Outros</option>
         </select>
       </div>
     </div>
