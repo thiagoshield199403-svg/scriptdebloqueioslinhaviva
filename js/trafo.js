@@ -1,91 +1,258 @@
-/* =========================
-   SUBSTITUIÇÃO DE TRAFO
-========================= */
+/* =========================================
+   SUBSTITUIÇÃO DE TRANSFORMADOR – COMPLETO
+   ========================================= */
 
+/* ===== FUNÇÃO SEGURA ===== */
 function v(id){
-  return document.getElementById(id).value || "NA";
+    const el = document.getElementById(id);
+    if(!el) return "NA";
+    return el.value || "NA";
 }
 
-/* ===== WHATSAPP ===== */
+document.addEventListener("DOMContentLoaded", function(){
+
+    const motivo = document.getElementById("tf_motivo");
+
+    if(motivo){
+        motivo.addEventListener("change", aplicarRegrasTrafo);
+    }
+
+});
+
+/* =========================================
+   REGRAS INTELIGENTES POR MOTIVO
+   ========================================= */
+
+function aplicarRegrasTrafo(){
+
+    limparObrigatoriosTrafo();
+
+    const motivo = v("tf_motivo");
+
+    if(motivo === "Sobrecarga"){
+        obrigar(["tf_carregamento"]);
+    }
+
+    if(motivo === "Falta de fase"){
+        obrigar(["tf_carregamento"]);
+    }
+
+    if(motivo === "Vazamento de óleo"){
+        obrigar(["tf_glv","tf_glv_extraido"]);
+    }
+
+    if(motivo === "Furto"){
+        obrigar(["tf_clientes_des"]);
+    }
+
+}
+
+/* ========================================= */
+
+function obrigar(lista){
+    lista.forEach(id=>{
+        const campo = document.getElementById(id);
+        if(campo){
+            campo.setAttribute("required","true");
+        }
+    });
+}
+
+function limparObrigatoriosTrafo(){
+    document.querySelectorAll("#trafo [required]")
+        .forEach(c=>c.removeAttribute("required"));
+}
+
+/* =========================================
+   GERAÇÃO SCRIPT WHATSAPP (BONITO)
+   ========================================= */
+
 function gerarTrafoWhatsApp(){
 
-  const texto =
-`🚨*Substituição de Transformador*
+    if(!validarTrafo()) return;
 
- *Motivo:* ${v("tf_motivo")}
- *Ocorrência:* ${v("tf_ocorrencia")}
- *Regional:* ${v("tf_regional")}
- *Operador:* ${v("tf_operador")}
+    let texto = montarTextoTrafo(false);
 
-📍 *Endereço:* ${v("tf_endereco")}
-🗺️ *Coordenadas:* ${v("tf_coord")}
+    copiarTexto(texto);
 
-*⚡ DADOS DO TRAFO*
-*Trafo:* ${v("tf_trafo")}
-*Potência:* ${v("tf_potencia")}
-*Classe:* ${v("tf_classe")}
-*Tensão Sec.:* ${v("tf_tensao_sec")}
-*Tipo de Cabo:* ${v("tf_tipo_cabo")}
-*Carregamento:* ${v("tf_carregamento")}%
-*Para-raio MT:* ${v("tf_pr_mt")}
-*Para-raio BT:* ${v("tf_pr_bt")}
-*Aterramento:* ${v("tf_aterramento")}
-*Corrosão atmosférica:* ${v("tf_corrosao")}
-*Possui GLV:* ${v("tf_glv")}
-*GLV extraído:* ${v("tf_glv_extraido")}
-*Circuito transferido:* ${v("tf_transferido")}
+    document.getElementById("tf_resultado").value = texto;
 
-🏠 *Clientes desenergizados:* ${v("tf_clientes_des")}
-👥 *Total clientes:* ${v("tf_total_clientes")}
-
-🧰 *Materiais:* ${v("tf_materiais")}
-📝 *Observações:* ${v("tf_obs")}`;
-
-  tf_resultado.value = texto;
-  navigator.clipboard.writeText(texto);
-  showToast("Script WhatsApp copiado");
+    showToast("WhatsApp gerado e copiado!");
 }
 
-/* ===== SGD / SS ===== */
+/* =========================================
+   GERAÇÃO SCRIPT SS (COM TRACINHO)
+   ========================================= */
+
 function gerarTrafoSGD(){
 
-  const texto =
+    if(!validarTrafo()) return;
 
-`Motivo:${v("tf_motivo")}
--Operador:${v("tf_operador")}
--Ocorrência:${v("tf_ocorrencia")}
--Regional:${v("tf_regional")}
--Endereço:${v("tf_endereco")}
--Coordenadas:${v("tf_coord")}
--Trafo:${v("tf_trafo")}
--Potência:${v("tf_potencia")}
--Classe:${v("tf_classe")}
--Tensão Secundária:${v("tf_tensao_sec")}
--Tipo Cabo:${v("tf_tipo_cabo")}
--Carregamento Trafo:${v("tf_carregamento")}
--Clientes Desenergizados:${v("tf_clientes_des")}
--Total Clientes:${v("tf_total_clientes")}
--ParaRaio MT:${v("tf_pr_mt")}
--ParaRaio BT:${v("tf_pr_bt")}
--Aterramento:${v("tf_aterramento")}
--Corrosão Atmosférica:${v("tf_corrosao")}
--Circuito Transferido:${v("tf_transferido")}
--Possui GLV:${v("tf_glv")}
--GLV Extraido:${v("tf_glv_extraido")}
--Materiais Necessários:${v("tf_materiais")}
--Obs:${v("tf_obs")}`;
+    let texto = montarTextoTrafo(true);
 
-  tf_resultado.value = texto;
-  navigator.clipboard.writeText(texto);
-  showToast("Script SS copiado");
+    copiarTexto(texto); // ✅ AGORA COPIA
+
+    document.getElementById("tf_resultado").value = texto;
+
+    showToast("SS gerado e copiado!");
 }
 
-/* ===== LIMPAR ===== */
+/* =========================================
+   VALIDAÇÃO
+   ========================================= */
+
+function validarTrafo(){
+
+    const obrigatorios = document.querySelectorAll("#trafo [required]");
+    let ok = true;
+
+    obrigatorios.forEach(c=>{
+        if(!c.value){
+            c.style.border = "2px solid red";
+            ok = false;
+        }else{
+            c.style.border = "";
+        }
+    });
+
+    if(!ok){
+        showToast("Preencha os campos obrigatórios!");
+    }
+
+    return ok;
+}
+
+/* =========================================
+   MONTAGEM TEXTO (WHATSAPP + SS)
+   ========================================= */
+
+function montarTextoTrafo(isSS=false){
+
+    /* ========= WHATSAPP COMPLETO (SEM EXTRA) ========= */
+    if(!isSS){
+
+        let txt = `⚡ Substituição de Transformador
+
+👨‍💻 Operador: ${v("tf_operador")}
+📄 Ocorrência: ${v("tf_ocorrencia")}
+🔢 Nº Trafo: ${v("tf_trafo")}
+🆔 ID: ${v("tf_id")}
+
+⚠️ Motivo: ${v("tf_motivo")}
+📌 Causa: ${v("tf_causa")}
+
+📍 Localização
+- Regional: ${v("tf_regional")}
+- Cidade/Povoado: ${v("tf_cidade")}
+- Endereço: ${v("tf_endereco")}
+- Referência: ${v("tf_referencia")}
+- Coordenadas: ${v("tf_coord")}
+- Acesso Caminhão: ${v("tf_acesso")}
+
+🔧 Dados Técnicos
+- Classe: ${v("tf_classe")}
+- Potência: ${v("tf_potencia")}
+- Proprietário: ${v("tf_proprietario")}
+- Tensão Sec: ${v("tf_tensao_sec")}
+- Carregamento: ${v("tf_carregamento")}
+- Bitola MT: ${v("sp_bitola_mt")}
+
+👥 Clientes
+- Total: ${v("tf_total_clientes")}
+- Desenergizados: ${v("tf_clientes_des")}
+- Total Desenergizados: ${v("tf_total_des")}
+- Circuito Interligado: ${v("tf_transferido")}
+
+🛢️ Condições
+- Corrosão Atmosférica: ${v("tf_corrosao")}
+- Possui GLV: ${v("tf_glv")}
+- GLV Extraído: ${v("tf_glv_extraido")}
+- Aterramento: ${v("tf_aterramento")}
+- PRBT: ${v("tf_pr_bt")}
+- PRMT: ${v("tf_pr_mt")}
+
+📦 Materiais
+${v("tf_materiais")}
+
+📝 Observações
+${v("tf_obs")}`;
+
+        return txt;
+    }
+
+    /* ========= SS (PADRÃO TÉCNICO) ========= */
+
+    let linhas = [
+
+`Operador: ${v("tf_operador")}`,
+`Ocorrência: ${v("tf_ocorrencia")}`,
+`N° Transformador: ${v("tf_trafo")}`,
+`ID: ${v("tf_id")}`,
+`Motivo: ${v("tf_motivo")}`,
+`Causa: ${v("tf_causa")}`,
+
+`Regional: ${v("tf_regional")}`,
+`Cidade/Povoado: ${v("tf_cidade")}`,
+`Endereço: ${v("tf_endereco")}`,
+`Referência: ${v("tf_referencia")}`,
+`Coordenadas: ${v("tf_coord")}`,
+`Acesso Caminhão: ${v("tf_acesso")}`,
+
+`Classe: ${v("tf_classe")}`,
+`Potência: ${v("tf_potencia")}`,
+`Proprietário: ${v("tf_proprietario")}`,
+`Tensão Sec: ${v("tf_tensao_sec")}`,
+`Carregamento: ${v("tf_carregamento")}`,
+`Total Clientes: ${v("tf_total_clientes")}`,
+
+`Corrosão Atmosférica: ${v("tf_corrosao")}`,
+`Clientes Desenergizados: ${v("tf_clientes_des")}`,
+`Total Clientes Desenergizados: ${v("tf_total_des")}`,
+`Circuito Interligado: ${v("tf_transferido")}`,
+`Bitola Rede MT: ${v("sp_bitola_mt")}`,
+
+`Possui GLV: ${v("tf_glv")}`,
+`GLV Extraído: ${v("tf_glv_extraido")}`,
+`Cabo Aterramento: ${v("tf_aterramento")}`,
+`PRBT: ${v("tf_pr_bt")}`,
+`PRMT: ${v("tf_pr_mt")}`,
+
+`Materiais: ${v("tf_materiais")}`,
+`Observações: ${v("tf_obs")}`
+
+    ];
+
+    return linhas
+        .map(l => l.trim() ? "- " + l : "")
+        .join("\n");
+}
+
+/* =========================================
+   UTIL
+   ========================================= */
+
+function copiarTexto(texto){
+    navigator.clipboard.writeText(texto)
+        .catch(() => showToast("Erro ao copiar"));
+}
+
+/* =========================================
+   LIMPAR
+   ========================================= */
+
 function limparTrafo(){
-  document.querySelectorAll("#trafo input, #trafo textarea")
-    .forEach(e => e.value = "");
-  document.querySelectorAll("#trafo select")
-    .forEach(e => e.selectedIndex = 0);
-  tf_resultado.value = "";
-}
 
+    document.querySelectorAll("#trafo input, #trafo select, #trafo textarea")
+        .forEach(c=>{
+            if(c.tagName === "SELECT"){
+                c.selectedIndex = 0;
+            }else{
+                c.value = "";
+            }
+            c.style.border = "";
+        });
+
+    document.getElementById("tf_resultado").value = "";
+
+    limparObrigatoriosTrafo();
+}
