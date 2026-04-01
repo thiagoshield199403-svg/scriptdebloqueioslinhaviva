@@ -945,6 +945,93 @@ select:invalid{
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
+
+.linha-sigla {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.linha-sigla label {
+  white-space: nowrap;
+}
+
+.linha-sigla input {
+  flex: 1;
+}
+
+.linha-botoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.linha-botoes button {
+  flex: 1;
+}
+.linha-topo {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 15px;
+  align-items: center;
+}
+
+.linha-botoes button {
+  flex: 1;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.linha-botoes button:first-child {
+  background: #1f5fa9; /* azul forte */
+  color: #fff;
+}
+
+.linha-botoes .sec {
+  background: #6c757d;
+  color: #fff;
+}
+
+.linha-botoes button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+#historico {
+  height: 200px;
+  font-family: monospace;
+  line-height: 1.5;
+  padding: 10px;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.linha-sigla {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.linha-sigla label {
+  white-space: nowrap;
+}
+
+.linha-sigla input {
+  width: 80px !important;
+  min-width: 80px;
+  max-width: 80px;
+  height: 32px;
+
+  flex: unset !important; /* 🔥 ISSO RESOLVE */
+}
+.linha-topo {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 15px;
+  align-items: center;
+}
 </style>
 </head>
 
@@ -1089,17 +1176,30 @@ select:invalid{
 <!-- OCORRÊNCIAS -->
 <div id="obs" class="module">
 <div class="container">
-<h2>SCRIPT HORA AUTOMÁTICA /OBSERVAÇÕES DE OCORRÊNCIAS </h2>
 
-<label>Nova observação:</label>
-<textarea id="obsTexto"></textarea>
+<h2>SCRIPT HORA AUTOMÁTICA / OBSERVAÇÕES DE OCORRÊNCIAS</h2>
 
-<button onclick="adicionarHistorico()">Adicionar</button>
-<button class="sec" onclick="copiarHistorico()">Copiar Histórico</button>
-<button class="sec" onclick="limparHistorico()">Limpar</button>
+<div class="linha-2">
+  <div>
+    <label>Nova observação:</label>
+    <textarea id="obsTexto"></textarea>
+  </div>
+
+ <div class="linha-sigla">
+  <label>Operador (sigla):</label>
+  <input id="obsOperador" placeholder="Ex: tsa4" maxlength="5">
+</div>
+</div>
+
+<div class="linha-botoes">
+  <button onclick="adicionarHistorico()">Adicionar</button>
+  <button class="sec" onclick="copiarHistorico()">Copiar Histórico</button>
+  <button class="sec" onclick="limparHistorico()">Limpar</button>
+</div>
 
 <label>Histórico:</label>
 <textarea id="historico" readonly></textarea>
+
 </div>
 </div>
 
