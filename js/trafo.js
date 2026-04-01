@@ -133,48 +133,48 @@ function montarTextoTrafo(isSS=false){
 
         let txt = `⚡ Substituição de Transformador
 
-👨‍💻 Operador: ${v("tf_operador")}
-📄 Ocorrência: ${v("tf_ocorrencia")}
-🔢 Nº Trafo: ${v("tf_trafo")}
-🆔 ID: ${v("tf_id")}
+👨‍💻 *Operador:* ${v("tf_operador")}
+ *Ocorrência:* ${v("tf_ocorrencia")}
+ *Nº Trafo:* ${v("tf_trafo")}
+ *ID:* ${v("tf_id")}
 
-⚠️ Motivo: ${v("tf_motivo")}
-📌 Causa: ${v("tf_causa")}
+⚠️ *Motivo:* ${v("tf_motivo")}
+📌 *Causa:* ${v("tf_causa")}
 
-📍 Localização
-- Regional: ${v("tf_regional")}
-- Cidade/Povoado: ${v("tf_cidade")}
-- Endereço: ${v("tf_endereco")}
-- Referência: ${v("tf_referencia")}
-- Coordenadas: ${v("tf_coord")}
-- Acesso Caminhão: ${v("tf_acesso")}
+📍 *Localização*
+- *Regional*: ${v("tf_regional")}
+- *Cidade/Povoado*: ${v("tf_cidade")}
+- *Endereço*: ${v("tf_endereco")}
+- *Referência*: ${v("tf_referencia")}
+- *Coordenadas*: ${v("tf_coord")}
+- *Acesso Caminhão*: ${v("tf_acesso")}
 
-🔧 Dados Técnicos
-- Classe: ${v("tf_classe")}
-- Potência: ${v("tf_potencia")}
-- Proprietário: ${v("tf_proprietario")}
-- Tensão Sec: ${v("tf_tensao_sec")}
-- Carregamento: ${v("tf_carregamento")}
-- Bitola MT: ${v("sp_bitola_mt")}
+🔧 *Dados do Transformador*
+- *Classe*: ${v("tf_classe")}
+- *Potência*: ${v("tf_potencia")}
+- *Proprietário*: ${v("tf_proprietario")}
+- *Tensão Sec*: ${v("tf_tensao_sec")}
+- *Carregamento*: ${v("tf_carregamento")}
+- *Trafo p/Corrosão Atmosférica*: ${v("tf_corrosao")}
+- *Aterramento*: ${v("tf_aterramento")}
+- *PRBT*: ${v("tf_pr_bt")}
+- *PRMT*: ${v("tf_pr_mt")}
 
-👥 Clientes
-- Total: ${v("tf_total_clientes")}
-- Desenergizados: ${v("tf_clientes_des")}
-- Total Desenergizados: ${v("tf_total_des")}
-- Circuito Interligado: ${v("tf_transferido")}
+👥 *Clientes Afetados*
+- *Total*: ${v("tf_total_clientes")}
+- *Desenergizados*: ${v("tf_clientes_des")}
+- *Total Desenergizados*: ${v("tf_total_des")}
+- *Circuito foi Interligado?*: ${v("tf_transferido")}
 
-🛢️ Condições
-- Corrosão Atmosférica: ${v("tf_corrosao")}
-- Possui GLV: ${v("tf_glv")}
-- GLV Extraído: ${v("tf_glv_extraido")}
-- Aterramento: ${v("tf_aterramento")}
-- PRBT: ${v("tf_pr_bt")}
-- PRMT: ${v("tf_pr_mt")}
+🛢️ *Condições da Rede*
+- *Bitola MT*: ${v("sp_bitola_mt")}
+- *Possui GLV ?* ${v("tf_glv")}
+- *GLV Extraído ?* ${v("tf_glv_extraido")}
 
-📦 Materiais
+📦 *Materiais Nescessarios:*
 ${v("tf_materiais")}
 
-📝 Observações
+📝 *Observações Relevantes:*
 ${v("tf_obs")}`;
 
         return txt;
@@ -196,26 +196,26 @@ ${v("tf_obs")}`;
 `Endereço: ${v("tf_endereco")}`,
 `Referência: ${v("tf_referencia")}`,
 `Coordenadas: ${v("tf_coord")}`,
-`Acesso Caminhão: ${v("tf_acesso")}`,
+`Acesso Caminhão ? ${v("tf_acesso")}`,
 
 `Classe: ${v("tf_classe")}`,
 `Potência: ${v("tf_potencia")}`,
 `Proprietário: ${v("tf_proprietario")}`,
 `Tensão Sec: ${v("tf_tensao_sec")}`,
 `Carregamento: ${v("tf_carregamento")}`,
-`Total Clientes: ${v("tf_total_clientes")}`,
-
 `Corrosão Atmosférica: ${v("tf_corrosao")}`,
-`Clientes Desenergizados: ${v("tf_clientes_des")}`,
-`Total Clientes Desenergizados: ${v("tf_total_des")}`,
-`Circuito Interligado: ${v("tf_transferido")}`,
-`Bitola Rede MT: ${v("sp_bitola_mt")}`,
-
-`Possui GLV: ${v("tf_glv")}`,
-`GLV Extraído: ${v("tf_glv_extraido")}`,
-`Cabo Aterramento: ${v("tf_aterramento")}`,
+`Possui Aterramento ? ${v("tf_aterramento")}`,
 `PRBT: ${v("tf_pr_bt")}`,
 `PRMT: ${v("tf_pr_mt")}`,
+
+`Total Clientes: ${v("tf_total_clientes")}`,
+`Clientes Desenergizados? ${v("tf_clientes_des")}`,
+`Total Clientes Desenergizados: ${v("tf_total_des")}`,
+`Circuito Interligado? ${v("tf_transferido")}`,
+
+`Bitola Rede MT: ${v("sp_bitola_mt")}`,
+`Possui GLV ? ${v("tf_glv")}`,
+`GLV Extraído ? ${v("tf_glv_extraido")}`,
 
 `Materiais: ${v("tf_materiais")}`,
 `Observações: ${v("tf_obs")}`
