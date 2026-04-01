@@ -1032,6 +1032,94 @@ h2 {
   gap: 15px;
   align-items: center;
 }
+
+-------crronometro 
+
+.painel-crono {
+  background: #000;
+  color: #00ff88;
+  font-size: 90px;
+  font-weight: bold;
+  text-align: center;
+  padding: 25px;
+  border-radius: 12px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 5px;
+  box-shadow:
+    inset 0 0 20px rgba(0,255,100,0.3),
+    0 5px 20px rgba(0,0,0,0.6);
+}
+
+/* ALERTAS */
+.painel-crono.amarelo {
+  color: #ffeb3b;
+}
+
+.painel-crono.vermelho {
+  color: #ff3b3b;
+}
+
+.resultado-tempo {
+  margin-top: 15px;
+  font-size: 26px;
+  text-align: center;
+  font-weight: bold;
+}
+.painel-led {
+  background: #111;
+  color: #d4ff00;
+  font-size: 90px;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  padding: 25px;
+  border-radius: 10px;
+  letter-spacing: 8px;
+
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.9),
+    0 5px 20px rgba(0,0,0,0.7);
+
+  border: 4px solid #222;
+}
+
+/* alerta */
+.painel-led.amarelo {
+  color: #ffe600;
+}
+
+.painel-led.vermelho {
+  color: #ff2b2b;
+}
+/* INPUTS DE HORA */
+#cronometro input[type="time"] {
+  height: 55px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* BOTÃO CALCULAR */
+#cronometro button {
+  height: 55px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* BOTÕES DO CRONÔMETRO */
+#cronometro .linha-3 button {
+  height: 60px;
+  font-size: 18px;
+}
+#cronometro input[type="time"] {
+  background: #000;
+  color: #00ff88;
+  border: 2px solid #222;
+  border-radius: 8px;
+}
+#cronometro .sec {
+  background: #6c757d;
+  color: #fff;
+}
 </style>
 </head>
 
@@ -1060,6 +1148,7 @@ h2 {
     <button onclick="openModule('desarme',this)">🚨 Script Desarme</button>
     <button onclick="openModule('trafo',this)">🔁 Substituição de Trafo </button>
     <button onclick="openModule('substituicao_poste', this)">🛠️ Substituição de Poste</button>
+    <button onclick="openModule('cronometro',this)">⏱️ Cronômetro PICK</button>
 
 
 
@@ -2371,6 +2460,47 @@ h2 {
 </div>
 
 
+<div id="cronometro" class="module">
+  <div class="container">
+
+    <h2>⏱️ CRONÔMETRO </h2>
+
+    <!-- DISPLAY PROFISSIONAL -->
+    <div id="displayCrono" class="painel-led">00:00:00</div>
+
+    <div class="linha-3">
+      <button onclick="iniciarCrono()">▶ Iniciar</button>
+      <button onclick="pararCrono()">⏸ Parar</button>
+      <button onclick="resetarCrono()">🔄 Resetar</button>
+    </div>
+
+    <!-- CALCULADORA -->
+    <h3 style="margin-top:25px;">📊 CALCULADORA TEMPO DE INTERRUPÇÃO</h3>
+
+    <div class="linha-2">
+      <div>
+        <label>ABERTURA</label>
+        <input type="time" step="1" id="hora_abertura">
+      </div>
+
+      <div>
+        <label>FECHAMENTO</label>
+        <input type="time" step="1" id="hora_fechamento">
+      </div>
+    </div>
+    
+<div class="linha-2">
+  <button onclick="calcularTempo()">Calcular Tempo</button>
+  <button class="sec" onclick="limparCalculadora()">🧹 Limpar</button>
+</div>
+
+    <div id="resultadoTempo" class="resultado-tempo">
+      Tempo: 00:00
+    </div>
+
+  </div>
+</div>
+
 <script>
 function showToast(msg){
   const t=document.getElementById("toast");
@@ -2475,6 +2605,7 @@ atualizarRodape();
 <script src="js/trafo.js"></script>
 <script src="js/utilitarios.js"></script>
 <script src="js/substituicao_poste.js"></script>
+<script src="js/cronometro.js"></script>
 
 
 <script>
