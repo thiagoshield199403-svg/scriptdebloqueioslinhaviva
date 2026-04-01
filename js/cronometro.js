@@ -98,6 +98,6 @@ function limparCalculadora(){
 
   const resultado = document.getElementById("resultadoTempo");
 
-  resultado.innerText = "Tempo: 00:00";
+  resultado.innerText = "Tempo em Minutos: 00:00";
   resultado.style.color = "";
 }
