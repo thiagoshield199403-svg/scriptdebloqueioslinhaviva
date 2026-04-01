@@ -10,14 +10,25 @@ function horaAtual(){
 }
 
 function adicionarHistorico(){
+
   if(!obsTexto.value.trim()) return;
 
-  historico.value +=
-    (historico.value ? "\n" : "") +
-    "# " + horaAtual() + " " + obsTexto.value;
+  const operador = document.getElementById("obsOperador")?.value.trim();
+
+  let linha = "";
+
+  if(operador){
+    linha = "#(" + operador + ") às " + horaAtual() + " " + obsTexto.value;
+  } else {
+    linha = "# às " + horaAtual() + " " + obsTexto.value;
+  }
+
+  historico.value += (historico.value ? "\n" : "") + linha;
 
   obsTexto.value = "";
-   navigator.clipboard.writeText(historico.value);
+
+  // copia automático
+  navigator.clipboard.writeText(historico.value);
 }
 
 function copiarHistorico(){
@@ -26,7 +37,6 @@ function copiarHistorico(){
 }
 
 function limparHistorico(){
+  // 🔥 agora limpa SOMENTE o histórico
   historico.value = "";
-  obsTexto.value = "";
 }
-
