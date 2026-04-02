@@ -18,7 +18,7 @@ function adicionarHistorico(){
   let linha = "";
 
   if(operador){
-    linha = "#(" + operador + ") às " + horaAtual() + " " + obsTexto.value;
+    linha = "# (" + operador + ") às " + horaAtual() + " " + obsTexto.value;
   } else {
     linha = "# às " + horaAtual() + " " + obsTexto.value;
   }
