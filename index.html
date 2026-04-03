@@ -1148,6 +1148,7 @@ h2 {
     <button onclick="openModule('desarme',this)">🚨 Script Desarme</button>
     <button onclick="openModule('trafo',this)">🔁 Substituição de Trafo </button>
     <button onclick="openModule('substituicao_poste', this)">🛠️ Substituição de Poste</button>
+    <button onclick="abrirEscala()">📅 Escala COI</button>
     <button onclick="openModule('cronometro',this)">⏱️ Cronômetro PICK</button>
 
 
@@ -2566,6 +2567,9 @@ function atualizarRodape(){
 setInterval(atualizarRodape, 1000);
 atualizarRodape();
 
+    function abrirEscala(){
+  window.open("https://escalaoperacionalcoi-ese.netlify.app/", "_blank");
+}
 
 
 </script>
