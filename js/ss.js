@@ -24,17 +24,15 @@ function gerarSSWhats(){
     ? `ID: ${ss_id.value}`
     : "-";
 
-  const texto =
-`🧾 SS
-
+ const texto =
+`🧾 SS :
+SERVIÇO: ${ss_servico.value || "-"}
 REGIONAL: ${ss_regional.value || "-"}
 ABRANGÊNCIA: ${ss_abrangencia.value || "-"}
 EQUIPE: ${ss_equipe.value || "-"}
 ACESSO: ${ss_acesso.value || "-"}
 REF. ELÉTRICA: ${ref}
-
 ${id}
-SERVIÇO: ${ss_servico.value || "-"}
 ENDEREÇO: ${ss_endereco.value || "-"}
 COORDENADAS: ${ss_coord.value || "-"}
 OBS: ${ss_obs.value || "-"}`;
