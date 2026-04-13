@@ -74,7 +74,7 @@ function gerarSSPadrao(){
 - REGIONAL: ${ss_regional.value || "-"}
 - ABRANGÊNCIA: ${ss_abrangencia.value || "-"}
 - EQUIPE: ${ss_equipe.value || "-"}
-- ACESSO: ${ss_acesso.value || "-"}
+- ACESSO CAMINHÃO: ${ss_acesso.value || "-"}
 - REF.ELÉTRICA: ${ref}
 - ${id}
 - ENDEREÇO: ${ss_endereco.value || "-"}
