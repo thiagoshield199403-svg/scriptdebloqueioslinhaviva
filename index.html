@@ -1412,24 +1412,38 @@ h2 {
 </div>
 </div>
 
-<!-- CALLBACK -->
+<!--////////////// CALLBACK /////////////// -->
 <div id="callback" class="module">
 <div class="container">
-<h2>CALLBACK</h2>
+<h2> SCRIPT CALLBACK</h2>
 
-<label>Data / Hora:</label>
-<input id="dataHora" readonly>
+<!-- 1 LINHA -->
+<div class="linha-2">
+  <div>
+    <label>Data / Hora:</label>
+    <input id="dataHora" readonly>
+  </div>
 
-<div class="linha-3">
-<div><label>Operador:</label><input id="operador"></div>
-<div><label>Telefone:</label><input id="telefone"></div>
-<div><label>Ramal:</label><input id="ramal"></div>
+  <div>
+    <label>Operador:</label>
+    <input id="operador">
+  </div>
 </div>
 
-<div class="callback-linha">
+<!-- 2 LINHA -->
+<div class="linha-3">
+  <div>
+    <label>Telefone:</label>
+    <input id="telefone">
+  </div>
+
+  <div>
+    <label>Ramal:</label>
+    <input id="ramal">
+  </div>
 
   <div class="atuacao-box">
-    <label>Atuação via</label>
+    <label>Atuação via:</label>
     <div class="opcoes compact">
       <input type="radio" name="atuacao" id="celular">
       <label for="celular" class="card">Celular</label>
@@ -1438,7 +1452,10 @@ h2 {
       <label for="ramalRadio" class="card">Ramal</label>
     </div>
   </div>
+</div>
 
+<!-- 3 LINHA -->
+<div class="linha-3">
   <div>
     <label>Cliente Reincidente?</label>
     <select id="reincidente">
@@ -1456,32 +1473,50 @@ h2 {
       <option>Telefone incorreto</option>
       <option>Cliente desligou</option>
       <option>Telefone não cadastrado</option>
-      <option>Cliente não atende o telefone </option>
+      <option>Cliente não atende o telefone</option>
       <option>Outros</option>
     </select>
   </div>
 
+  <div>
+    <label>Situação:</label>
+    <select id="situacao">
+      <option>Isolada</option>
+      <option>Coletiva</option>
+    </select>
+  </div>
 </div>
 
+<!-- 4 LINHA -->
+<div class="linha-2">
+  <div>
+    <label>Conjunto Crítico?</label>
+    <select id="cj">
+      <option>Não</option>
+      <option>Sim</option>
+    </select>
+  </div>
 
-<div class="linha-3">
-<div><label>Situação:</label><select id="situacao"><option>Isolada</option><option>Coletiva</option></select></div>
-<div><label>Conjunto Crítico?</label><select id="cj"><option>Não</option><option>Sim</option></select></div>
-<div><label>Risco de Vida?</label><select id="risco"><option>Não</option><option>Sim</option></select></div>
+  <div>
+    <label>Risco de Vida?</label>
+    <select id="risco">
+      <option>Não</option>
+      <option>Sim</option>
+    </select>
+  </div>
 </div>
 
-<label>Observações</label>
+<!-- 5 LINHA -->
+<label>Observações:</label>
 <textarea id="observacoes"></textarea>
 
-<button onclick="gerarTexto()">Gerar Texto Ocorrência</button>
-<button class="sec" onclick="limparCallback()">Limpar</button>
-
-<label>Texto Gerado</label>
-<textarea id="resultadoCallback" readonly></textarea>
+<!-- 6 LINHA BOTÕES -->
+<div class="linha-3">
+  <button onclick="gerarTexto()">Gerar Texto Ocorrência</button>
+  <button class="sec" onclick="limparCallback()">Limpar</button>
+  <button class="sec" onclick="limparObs()">🧹 Limpar Observações</button>
 </div>
-</div>
-
-<!-- EQUIPES DE CAMPO -->
+<!--///////////////////// EQUIPES DE CAMPO///////////////////// -->
 <div id="equipes" class="module equipes-sistema">
 <div class="container">
 
