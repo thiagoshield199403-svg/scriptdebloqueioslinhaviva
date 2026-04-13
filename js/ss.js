@@ -69,8 +69,18 @@ function gerarSSPadrao(){
     ? `ID:${ss_id.value}`
     : "-";
 
-  const texto =
-`REGIONAL:${ss_regional.value || "-"} | ABRANGÊNCIA:${ss_abrangencia.value || "-"} | EQUIPE:${ss_equipe.value || "-"} | ACESSO:${ss_acesso.value || "-"} | REF.ELÉTRICA:${ref} | ${id} | SERVIÇO:${ss_servico.value || "-"} | ENDEREÇO:${ss_endereco.value || "-"} | COORD:${ss_coord.value || "-"} | OBS:${ss_obs.value || "-"}`;
+ const texto = 
+`- SERVIÇO: ${ss_servico.value || "-"}
+- REGIONAL: ${ss_regional.value || "-"}
+- ABRANGÊNCIA: ${ss_abrangencia.value || "-"}
+- EQUIPE: ${ss_equipe.value || "-"}
+- ACESSO CAMINHÃO: ${ss_acesso.value || "-"}
+- REF.ELÉTRICA: ${ref}
+- ${id}
+- ENDEREÇO: ${ss_endereco.value || "-"}
+- COORDENADAS: ${ss_coord.value || "-"}
+- OBS: ${ss_obs.value || "-"}`;
+
 
   ss_resultado.value = texto;
   navigator.clipboard.writeText(texto);
