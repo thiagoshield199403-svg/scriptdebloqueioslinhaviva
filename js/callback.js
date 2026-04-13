@@ -16,7 +16,7 @@ function gerarTexto(){
   const t =
 `Data/Hora: ${dataHora.value} # ` +
 `Operador: ${operador.value} # ` +
-`Atuação: ${atuacao} # ` +
+`Atuação Via: ${atuacao} # ` +
 `CL Reincidente: ${reincidente.value} # ` +
 `Ligação: ${ligacao.value} # ` +
 `Situação: ${situacao.value} # ` +
@@ -38,4 +38,6 @@ function limparCallback(){
 
   atualizarDataHora();
 }
-
+function limparObs(){
+  document.getElementById("observacoes").value = "";
+}
