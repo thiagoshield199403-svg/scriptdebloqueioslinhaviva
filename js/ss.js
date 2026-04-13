@@ -48,6 +48,7 @@ OBS: ${ss_obs.value || "-"}`;
 }
 
 function gerarSSPadrao(){
+  const ss_servico    = document.getElementById("ss_servico");
   const ss_regional   = document.getElementById("ss_regional");
   const ss_abrangencia= document.getElementById("ss_abrangencia");
   const ss_equipe     = document.getElementById("ss_equipe");
@@ -55,7 +56,6 @@ function gerarSSPadrao(){
   const ss_ref        = document.getElementById("ss_ref");
   const ss_num        = document.getElementById("ss_num");
   const ss_id         = document.getElementById("ss_id");
-  const ss_servico    = document.getElementById("ss_servico");
   const ss_endereco   = document.getElementById("ss_endereco");
   const ss_coord      = document.getElementById("ss_coord");
   const ss_obs        = document.getElementById("ss_obs");
@@ -74,15 +74,15 @@ function gerarSSPadrao(){
 - REGIONAL: ${ss_regional.value || "-"}
 - ABRANGÊNCIA: ${ss_abrangencia.value || "-"}
 - EQUIPE: ${ss_equipe.value || "-"}
-- ACESSO CAMINHÃO: ${ss_acesso.value || "-"}
+- ACESSO: ${ss_acesso.value || "-"}
 - REF.ELÉTRICA: ${ref}
 - ${id}
 - ENDEREÇO: ${ss_endereco.value || "-"}
 - COORDENADAS: ${ss_coord.value || "-"}
 - OBS: ${ss_obs.value || "-"}`;
 
+ss_resultado.value = texto;
 
-  ss_resultado.value = texto;
   navigator.clipboard.writeText(texto);
 
   if (typeof showToast === "function") {
