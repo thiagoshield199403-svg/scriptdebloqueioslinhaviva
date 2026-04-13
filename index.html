@@ -790,6 +790,17 @@ input:focus, select:focus, textarea:focus{
   grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 }
+.linha-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.linha-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
 /* ===== BOTÃO UTILITÁRIOS COI ===== */
 .btn-utilitarios{
   background: linear-gradient(135deg,#ffffff,#e6f2ff);
@@ -1412,10 +1423,10 @@ h2 {
 </div>
 </div>
 
-<!--////////////// CALLBACK /////////////// -->
+<!-- ///////////////CALLBACK///////////////////////// -->
 <div id="callback" class="module">
 <div class="container">
-<h2> SCRIPT CALLBACK</h2>
+<h2>CALLBACK</h2>
 
 <!-- 1 LINHA -->
 <div class="linha-2">
@@ -1516,7 +1527,13 @@ h2 {
   <button class="sec" onclick="limparCallback()">Limpar</button>
   <button class="sec" onclick="limparObs()">🧹 Limpar Observações</button>
 </div>
-<!--///////////////////// EQUIPES DE CAMPO///////////////////// -->
+
+<label>Texto Gerado</label>
+<textarea id="resultadoCallback" readonly></textarea>
+
+</div>
+</div>
+<!-- //////////////////EQUIPES DE CAMPO //////////////////-->
 <div id="equipes" class="module equipes-sistema">
 <div class="container">
 
