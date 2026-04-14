@@ -232,27 +232,29 @@ ${v("tf_obs")}`;
    ========================================= */
 
 function copiarTexto(texto){
-    navigator.clipboard.writeText(texto)
-        .catch(() => showToast("Erro ao copiar"));
+
+    try{
+        navigator.clipboard.writeText(texto)
+            .then(() => showToast("Copiado!"))
+            .catch(() => fallbackCopy(texto));
+    }catch(e){
+        fallbackCopy(texto);
+    }
 }
 
-/* =========================================
-   LIMPAR
-   ========================================= */
+function fallbackCopy(texto){
+    const area = document.createElement("textarea");
+    area.value = texto;
 
-function limparTrafo(){
+    document.body.appendChild(area);
+    area.select();
 
-    document.querySelectorAll("#trafo input, #trafo select, #trafo textarea")
-        .forEach(c=>{
-            if(c.tagName === "SELECT"){
-                c.selectedIndex = 0;
-            }else{
-                c.value = "";
-            }
-            c.style.border = "";
-        });
+    try{
+        document.execCommand("copy");
+        showToast("Copiado (modo compatível)");
+    }catch{
+        showToast("Erro ao copiar");
+    }
 
-    document.getElementById("tf_resultado").value = "";
-
-    limparObrigatoriosTrafo();
+    document.body.removeChild(area);
 }
