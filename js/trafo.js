@@ -4,9 +4,14 @@
 
 /* ===== FUNÇÃO SEGURA ===== */
 function v(id){
-    const el = document.getElementById(id);
-    if(!el) return "NA";
-    return el.value || "NA";
+    const el = document.querySelector(`#trafo #${id}`);
+    
+    if(!el){
+        console.warn("Campo não encontrado:", id);
+        return "";
+    }
+
+    return el.value?.trim() || "";
 }
 
 document.addEventListener("DOMContentLoaded", function(){
