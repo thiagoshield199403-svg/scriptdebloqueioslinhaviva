@@ -4,14 +4,9 @@
 
 /* ===== FUNÇÃO SEGURA ===== */
 function v(id){
-    const el = document.querySelector(`#trafo #${id}`);
-    
-    if(!el){
-        console.warn("Campo não encontrado:", id);
-        return "";
-    }
-
-    return el.value?.trim() || "";
+    const el = document.getElementById(id);
+    if(!el) return "NA";
+    return el.value || "NA";
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -237,29 +232,27 @@ ${v("tf_obs")}`;
    ========================================= */
 
 function copiarTexto(texto){
-
-    try{
-        navigator.clipboard.writeText(texto)
-            .then(() => showToast("Copiado!"))
-            .catch(() => fallbackCopy(texto));
-    }catch(e){
-        fallbackCopy(texto);
-    }
+    navigator.clipboard.writeText(texto)
+        .catch(() => showToast("Erro ao copiar"));
 }
 
-function fallbackCopy(texto){
-    const area = document.createElement("textarea");
-    area.value = texto;
+/* =========================================
+   LIMPAR
+   ========================================= */
 
-    document.body.appendChild(area);
-    area.select();
+function limparTrafo(){
 
-    try{
-        document.execCommand("copy");
-        showToast("Copiado (modo compatível)");
-    }catch{
-        showToast("Erro ao copiar");
-    }
+    document.querySelectorAll("#trafo input, #trafo select, #trafo textarea")
+        .forEach(c=>{
+            if(c.tagName === "SELECT"){
+                c.selectedIndex = 0;
+            }else{
+                c.value = "";
+            }
+            c.style.border = "";
+        });
 
-    document.body.removeChild(area);
+    document.getElementById("tf_resultado").value = "";
+
+    limparObrigatoriosTrafo();
 }
