@@ -2,14 +2,18 @@
    FUNÇÃO UNIVERSAL (SEGURA)
 ============================================ */
 function v(id){
-  const el = document.querySelector(`#substituicao_poste #${id}`);
-  if(!el) {
-    console.warn("NÃO ENCONTROU:", id);
-    return "";
-  }
-  return (el.value || "").trim();
-}
+    let el =
+        document.querySelector("#trafo #" + id) ||
+        document.querySelector("#substituicao_poste #" + id) ||
+        document.getElementById(id);
 
+    if(!el){
+        console.warn("NÃO ENCONTROU:", id);
+        return "";
+    }
+
+    return (el.value || "").trim();
+}
 /* ============================================
    REGRAS (SEM APAGAR VALOR)
 ============================================ */
