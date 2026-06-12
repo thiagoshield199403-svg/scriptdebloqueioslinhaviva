@@ -20,19 +20,19 @@ function gerarRelatorio(){
   const obs = document.getElementById("obsRel").value || "-";
 
   const texto =
-`RESPONSÁVEL: ${resp}
-EQUIPE: ${eq}
-CONTATO: ${tel}
-VIATURA: ${viatura}
-RÁDIO: ${radio}
-TESTE RÁDIO: ${testeRadio}
-REFERÊNCIA ELÉTRICA: ${referencia}
-TIPO CONDUTOR: ${tipoCondutor}
-ÁREA DE MARESIA: ${maresia}
-SELF-HEALING: ${self}
-DESATIVOU SELF-HEALING: ${desativou}
-TIPO DO SERVIÇO: ${servico}
-OBSERVAÇÃO: ${obs}`;
+`-Responsável: ${resp}
+-Equipe: ${eq}
+-Contato: ${tel}
+-Viatura: ${viatura}
+-Rádio: ${radio}
+-Teste Rádio: ${testeRadio}
+-Ref.Elétrica: ${referencia}
+-Tipo Condutor: ${tipoCondutor}
+-Área de maresia?: ${maresia}
+-Self/Healing: ${self}
+-Desativou Self/Healing? ${desativou}
+-serviço: ${servico}
+-OBS: ${obs}`;
 
   document.getElementById("resultado").value = texto;
 
